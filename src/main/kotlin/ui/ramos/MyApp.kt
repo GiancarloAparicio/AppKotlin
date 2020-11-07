@@ -1,5 +1,6 @@
 import tornadofx.*
-import views.Login
+import ui.ramos.views.Login
+
 
 class MyApp: App(Login::class) {
     fun main(args: Array<String>){

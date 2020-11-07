@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+
+
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.ramos.views.LoginView">
+   <center>
+      <Button mnemonicParsing="false" text="Button" BorderPane.alignment="CENTER" />
+   </center>
+   <bottom>
+      <Button mnemonicParsing="false" text="Button" BorderPane.alignment="CENTER" />
+   </bottom>
+   <left>
+      <Button mnemonicParsing="false" text="Button" BorderPane.alignment="CENTER" />
+   </left>
+   <top>
+      <Button mnemonicParsing="false" text="Button" BorderPane.alignment="CENTER" />
+   </top>
+   <right>
+      <Button mnemonicParsing="false" text="Button" BorderPane.alignment="CENTER" />
+   </right>
+</BorderPane>

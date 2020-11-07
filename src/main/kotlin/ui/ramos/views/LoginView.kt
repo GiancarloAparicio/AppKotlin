@@ -1,4 +1,4 @@
-package views
+package ui.ramos.views
 
 import tornadofx.View
 import tornadofx.button
