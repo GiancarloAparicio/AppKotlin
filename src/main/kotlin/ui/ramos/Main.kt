@@ -1,7 +1,5 @@
 package ui.ramos
 
-import MyApp
-
 class Main {
     companion object{
         @JvmStatic

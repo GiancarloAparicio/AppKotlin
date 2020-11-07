@@ -1,8 +1,10 @@
+package ui.ramos
+
 import tornadofx.*
-import ui.ramos.views.Login
+import ui.ramos.views.LoginView
 
 
-class MyApp: App(Login::class) {
+class MyApp: App(LoginView::class) {
     fun main(args: Array<String>){
         launch<MyApp>(args)
     }
