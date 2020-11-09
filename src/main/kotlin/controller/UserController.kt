@@ -1,13 +1,12 @@
 package controller
 
-class UserController(var email: String,var password:String){
+import repositories.SqlServer
+
+class UserController(private val email: String, private val password:String){
     init {
-        println("Login success")
+        var DB=SqlServer()
         println(email)
         println(password)
     }
 
-    fun login(){
-        print("hello")
-    }
 }
