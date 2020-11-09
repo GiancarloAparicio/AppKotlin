@@ -1,4 +1,15 @@
-package ui.ramos.views
+package view
+
+//  FXML
+import javafx.scene.layout.BorderPane
+import tornadofx.View
+
+class LoginView: View(){
+    override val root : BorderPane by fxml()
+}
+
+
+/*
 import tornadofx.View
 
 import tornadofx.button
@@ -10,17 +21,5 @@ class LoginView: View(){
         button("Login")
         label("Hello Work")
     }
-}
-
-//  FXML
-
-/*
-package ui.ramos.views
-
-import javafx.scene.layout.BorderPane
-import tornadofx.View
-
-class LoginView: View(){
-    override val root : BorderPane by fxml()
 }
 */

@@ -1,7 +1,5 @@
-package ui.ramos
-
 import tornadofx.*
-import ui.ramos.views.LoginView
+import view.LoginView
 
 
 class MyApp: App(LoginView::class) {

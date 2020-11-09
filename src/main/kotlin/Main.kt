@@ -1,5 +1,3 @@
-package ui.ramos
-
 class Main {
     companion object{
         @JvmStatic
