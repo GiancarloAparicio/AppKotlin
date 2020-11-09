@@ -97,7 +97,7 @@
                         <Font size="12.0" />
                      </font>
                   </Label>
-                  <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="112.0" style="-fx-background-color: #EE254F;" text="Login" textFill="WHITE">
+                  <Button mnemonicParsing="false" onAction="#login" prefHeight="33.0" prefWidth="112.0" style="-fx-background-color: #EE254F;" text="Login" textFill="WHITE">
                      <font>
                         <Font name="Carlito Bold" size="17.0" />
                      </font>
@@ -160,6 +160,9 @@
                            <image>
                               <Image url="@../images/client-icon.png" />
                            </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </ImageView>
                         <Label prefHeight="16.0" prefWidth="61.0" text="Client" textFill="#ff0606">
                            <font>
@@ -173,6 +176,9 @@
                            <image>
                               <Image url="@../images/provider-icon.png" />
                            </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </ImageView>
                         <Label prefHeight="16.0" prefWidth="61.0" text="Provider" textFill="RED">
                            <font>
