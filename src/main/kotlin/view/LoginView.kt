@@ -1,10 +1,10 @@
 package view
 
-//  FXML
 import javafx.scene.layout.BorderPane
 import tornadofx.View
 
 class LoginView: View(){
+
     override val root : BorderPane by fxml()
 }
 
