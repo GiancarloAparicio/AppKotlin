@@ -18,181 +18,181 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="400.0" prefWidth="768.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <center>
-      <GridPane BorderPane.alignment="CENTER">
-        <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="376.0" minWidth="10.0" prefWidth="109.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="376.0" minWidth="10.0" prefWidth="337.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="598.0" minWidth="10.0" prefWidth="328.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <SplitPane GridPane.columnIndex="1">
-               <items>
-                  <VBox alignment="CENTER" prefHeight="202.0" prefWidth="335.0" style="-fx-background-color: #EE254F;">
-                     <children>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/icon-cake.png" />
-                           </image>
+    <center>
+        <GridPane BorderPane.alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="376.0" minWidth="10.0" prefWidth="109.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="376.0" minWidth="10.0" prefWidth="337.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="598.0" minWidth="10.0" prefWidth="328.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <SplitPane GridPane.columnIndex="1">
+                    <items>
+                        <VBox alignment="CENTER" prefHeight="202.0" prefWidth="335.0" style="-fx-background-color: #EE254F;">
+                            <children>
+                                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/icon-cake.png" />
+                                    </image>
+                                </ImageView>
+                                <Label style="-fx-padding: 20px;" text="Cake Delivery" textFill="WHITE">
+                                    <font>
+                                        <Font name="Carlito Bold Italic" size="28.0" />
+                                    </font>
+                                </Label>
+                                <Label text="Nunca es tarde para un pastel :)" textFill="WHITE">
+                                    <font>
+                                        <Font name="Carlito Italic" size="15.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+                    </items>
+                </SplitPane>
+                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF;" GridPane.columnIndex="2">
+                    <children>
+                        <ImageView fitHeight="82.0" fitWidth="103.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/user.png" />
+                            </image>
+                            <VBox.margin>
+                                <Insets top="5.0" />
+                            </VBox.margin>
                         </ImageView>
-                        <Label style="-fx-padding: 20px;" text="Cake Delivery" textFill="WHITE">
-                           <font>
-                              <Font name="Carlito Bold Italic" size="28.0" />
-                           </font>
+                        <TextField fx:id="email" promptText="Email" style="-fx-max-width: 200px; -fx-background-color: #FFFFFF; -fx-border-radius: 50px; -fx-border-width: 1px; -fx-border-color: #C8C8C8;">
+                            <opaqueInsets>
+                                <Insets />
+                            </opaqueInsets>
+                            <cursor>
+                                <Cursor fx:constant="TEXT" />
+                            </cursor>
+                            <VBox.margin>
+                                <Insets top="15.0" />
+                            </VBox.margin>
+                            <padding>
+                                <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                            </padding>
+                        </TextField>
+                        <Label fx:id="emailError" prefHeight="16.0" prefWidth="180.0" textFill="RED">
+                            <font>
+                                <Font size="12.0" />
+                            </font>
                         </Label>
-                        <Label text="Nunca es tarde para un pastel :)" textFill="WHITE">
-                           <font>
-                              <Font name="Carlito Italic" size="15.0" />
-                           </font>
+                        <PasswordField fx:id="password" promptText="Password" style="-fx-border-color: #C8C8C8; -fx-border-radius: 50px; -fx-max-width: 200px; -fx-background-color: #FFFFFF; -fx-border-width: 1px;">
+                            <cursor>
+                                <Cursor fx:constant="TEXT" />
+                            </cursor>
+                            <VBox.margin>
+                                <Insets top="5.0" />
+                            </VBox.margin>
+                            <padding>
+                                <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                            </padding>
+                        </PasswordField>
+                        <Label fx:id="passwordError" prefHeight="16.0" prefWidth="176.0" textFill="RED">
+                            <font>
+                                <Font size="12.0" />
+                            </font>
                         </Label>
-                     </children>
-                  </VBox>
-               </items>
-            </SplitPane>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF;" GridPane.columnIndex="2">
-               <children>
-                  <ImageView fitHeight="82.0" fitWidth="103.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/user.png" />
-                     </image>
-                     <VBox.margin>
-                        <Insets top="5.0" />
-                     </VBox.margin>
-                  </ImageView>
-                  <TextField fx:id="email" promptText="Email" style="-fx-max-width: 200px; -fx-background-color: #FFFFFF; -fx-border-radius: 50px; -fx-border-width: 1px; -fx-border-color: #C8C8C8;">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <cursor>
-                        <Cursor fx:constant="TEXT" />
-                     </cursor>
-                     <VBox.margin>
-                        <Insets top="15.0" />
-                     </VBox.margin>
-                     <padding>
-                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-                     </padding>
-                  </TextField>
-                  <Label fx:id="emailError" prefHeight="16.0" prefWidth="180.0" textFill="RED">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </Label>
-                  <PasswordField fx:id="password" promptText="Password" style="-fx-border-color: #C8C8C8; -fx-border-radius: 50px; -fx-max-width: 200px; -fx-background-color: #FFFFFF; -fx-border-width: 1px;">
-                     <cursor>
-                        <Cursor fx:constant="TEXT" />
-                     </cursor>
-                     <VBox.margin>
-                        <Insets top="5.0" />
-                     </VBox.margin>
-                     <padding>
-                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-                     </padding>
-                  </PasswordField>
-                  <Label fx:id="passwordError" prefHeight="16.0" prefWidth="176.0" textFill="RED">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </Label>
-                  <Button mnemonicParsing="false" onAction="#login" prefHeight="33.0" prefWidth="112.0" style="-fx-background-color: #EE254F;" text="Login" textFill="WHITE">
-                     <font>
-                        <Font name="Carlito Bold" size="17.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Label text="OR" textFill="#c8c8c8">
-                     <VBox.margin>
-                        <Insets bottom="5.0" left="15.0" right="5.0" top="15.0" />
-                     </VBox.margin>
-                  </Label>
-                  <HBox alignment="CENTER" prefHeight="80.0" prefWidth="200.0">
-                     <children>
-                        <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/google-icon.png" />
-                           </image>
-                           <HBox.margin>
-                              <Insets left="10.0" right="10.0" />
-                           </HBox.margin>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </ImageView>
-                        <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/facebook-icon.png" />
-                           </image>
-                           <HBox.margin>
-                              <Insets left="10.0" right="10.0" />
-                           </HBox.margin>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </ImageView>
-                        <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/twitter-icon.png" />
-                           </image>
-                           <HBox.margin>
-                              <Insets left="10.0" right="10.0" />
-                           </HBox.margin>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </ImageView>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-            <SplitPane orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
-               <items>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <ImageView fitHeight="46.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/client-icon.png" />
-                           </image>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </ImageView>
-                        <Label prefHeight="16.0" prefWidth="61.0" text="Client" textFill="#ff0606">
-                           <font>
-                              <Font name="Carlito Bold" size="16.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets bottom="25.0" top="5.0" />
-                           </VBox.margin>
+                        <Button mnemonicParsing="false" onAction="#login" prefHeight="33.0" prefWidth="112.0" style="-fx-background-color: #EE254F;" text="Login" textFill="WHITE">
+                            <font>
+                                <Font name="Carlito Bold" size="17.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets top="10.0" />
+                            </VBox.margin>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </Button>
+                        <Label text="OR" textFill="#c8c8c8">
+                            <VBox.margin>
+                                <Insets bottom="5.0" left="15.0" right="5.0" top="15.0" />
+                            </VBox.margin>
                         </Label>
-                        <ImageView fitHeight="46.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/provider-icon.png" />
-                           </image>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </ImageView>
-                        <Label prefHeight="16.0" prefWidth="61.0" text="Provider" textFill="RED">
-                           <font>
-                              <Font name="Carlito Bold" size="16.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets bottom="25.0" top="5.0" />
-                           </VBox.margin>
-                        </Label>
-                     </children>
-                  </VBox>
-               </items>
-            </SplitPane>
-         </children>
-      </GridPane>
-   </center>
+                        <HBox alignment="CENTER" prefHeight="80.0" prefWidth="200.0">
+                            <children>
+                                <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/google-icon.png" />
+                                    </image>
+                                    <HBox.margin>
+                                        <Insets left="10.0" right="10.0" />
+                                    </HBox.margin>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </ImageView>
+                                <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/facebook-icon.png" />
+                                    </image>
+                                    <HBox.margin>
+                                        <Insets left="10.0" right="10.0" />
+                                    </HBox.margin>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </ImageView>
+                                <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/twitter-icon.png" />
+                                    </image>
+                                    <HBox.margin>
+                                        <Insets left="10.0" right="10.0" />
+                                    </HBox.margin>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </ImageView>
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+                <SplitPane orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+                    <items>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                            <children>
+                                <ImageView fitHeight="46.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/client-icon.png" />
+                                    </image>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </ImageView>
+                                <Label prefHeight="16.0" prefWidth="61.0" text="Client" textFill="#ff0606">
+                                    <font>
+                                        <Font name="Carlito Bold" size="16.0" />
+                                    </font>
+                                    <VBox.margin>
+                                        <Insets bottom="25.0" top="5.0" />
+                                    </VBox.margin>
+                                </Label>
+                                <ImageView fitHeight="46.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/provider-icon.png" />
+                                    </image>
+                                    <cursor>
+                                        <Cursor fx:constant="HAND" />
+                                    </cursor>
+                                </ImageView>
+                                <Label prefHeight="16.0" prefWidth="61.0" text="Provider" textFill="RED">
+                                    <font>
+                                        <Font name="Carlito Bold" size="16.0" />
+                                    </font>
+                                    <VBox.margin>
+                                        <Insets bottom="25.0" top="5.0" />
+                                    </VBox.margin>
+                                </Label>
+                            </children>
+                        </VBox>
+                    </items>
+                </SplitPane>
+            </children>
+        </GridPane>
+    </center>
 </BorderPane>

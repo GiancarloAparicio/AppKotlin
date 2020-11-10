@@ -1,8 +1,9 @@
 import tornadofx.*
-import view.LoginView
+import view.MainView
 
 
-class MyApp: App(LoginView::class) {
+class MyApp: App(MainView::class) {
+
     fun main(args: Array<String>){
         launch<MyApp>(args)
     }

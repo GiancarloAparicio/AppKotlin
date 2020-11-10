@@ -16,16 +16,13 @@ class SqlServer() : SqlDB() {
         val url="jdbc:sqlserver://${host}:${port};databaseName=${database}"
         val connection: Connection
         try {
-            println(1)
+            DriverManager.registerDriver(SQLServerDriver())
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver")
-            println(url)
             connection = DriverManager.getConnection(url,user,password)
-             println("success")
+            println("Success")
+
         }catch(e:Error){
             println("Error: ${e.message}")
-            println(e.cause)
-            println(e.localizedMessage)
-            println(e.suppressed)
         }
 
     }
