@@ -1,12 +1,10 @@
 package view
 
-import javafx.scene.Parent
+import javafx.scene.layout.BorderPane
 import tornadofx.View
-import tornadofx.borderpane
 
 class HomeView() : View(){
 
-    override val root = borderpane {}
-
+    override val root : BorderPane by fxml()
 
 }

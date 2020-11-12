@@ -1,6 +1,5 @@
 package view
 
-
 import tornadofx.View
 import tornadofx.borderpane
 

@@ -6,6 +6,8 @@ import javafx.scene.control.PasswordField
 import javafx.scene.control.TextField
 import javafx.scene.layout.BorderPane
 import tornadofx.View
+import tornadofx.ViewTransition
+import tornadofx.seconds
 
 class LoginView: View(){
     override val root : BorderPane by fxml()
@@ -23,9 +25,12 @@ class LoginView: View(){
 
        if(email.text != "" && password.text != ""){
            val user=UserController(email.text,password.text)
+           replaceWith(HomeView::class, ViewTransition.Slide(0.4.seconds, ViewTransition.Direction.LEFT));
        }
 
     }
+
+
 
 }
 
