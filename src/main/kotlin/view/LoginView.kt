@@ -1,5 +1,6 @@
 package view
 
+import controller.AuthController
 import controller.UserController
 import helpers.encrypt
 import javafx.scene.control.Label
@@ -25,16 +26,20 @@ class LoginView: View(){
         passwordError.text= if(password.text=="") "Password invalid" else ""
 
        if(email.text != "" && password.text != ""){
-           println(encrypt("admin"))
-           println(encrypt("user"))
 
-           val user=UserController(email.text,password.text)
-           replaceWith(HomeView::class, ViewTransition.Slide(0.4.seconds, ViewTransition.Direction.LEFT));
+           val status=AuthController.login(email.text,password.text)
+
+            if(status){
+                replaceWith(HomeView::class, ViewTransition.Slide(0.4.seconds, ViewTransition.Direction.LEFT));
+            }else{
+                emailError.text=  "Email or password invalid"
+            }
+
+
+
        }
 
     }
-
-
 
 }
 

@@ -16,8 +16,8 @@ fun encrypt(message:String):String?{
             hash = "0$hash"
         }
         hash
-    } catch (ex: NoSuchAlgorithmException) {
-        println("Exception: ${ex.message}")
+    } catch (e: NoSuchAlgorithmException) {
+        println("Exception: ${e.message}")
         null
     }
 
