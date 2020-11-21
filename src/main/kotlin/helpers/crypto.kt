@@ -6,12 +6,12 @@ import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 
 
-fun encrypt(secret:String):String?{
+fun encrypt(message:String):String?{
     return try {
-        val md = MessageDigest.getInstance("SHA-256")
-        val messageDigest = md.digest(secret.toByteArray())
-        val num = BigInteger(1, messageDigest)
-        var hash = num.toString(16)
+        val algorithm = MessageDigest.getInstance("SHA-256")
+        val messageSecret = algorithm.digest(message.toByteArray())
+        var hash = BigInteger(1, messageSecret).toString(16)
+
         while (hash.length < 32) {
             hash = "0$hash"
         }

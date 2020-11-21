@@ -9,7 +9,7 @@ import java.sql.Statement
 class SqlServer() : SqlDB() {
     override val host:String="localhost"
     override val port:Int=1433
-    override val database: String="cake" //CakeDelivery
+    override val database: String="cake_delivery" //CakeDelivery
     override val user:String="SA"
     override val password:String="123456789segura"
 

@@ -1,6 +1,7 @@
 package view
 
 import controller.UserController
+import helpers.encrypt
 import javafx.scene.control.Label
 import javafx.scene.control.PasswordField
 import javafx.scene.control.TextField
@@ -24,6 +25,9 @@ class LoginView: View(){
         passwordError.text= if(password.text=="") "Password invalid" else ""
 
        if(email.text != "" && password.text != ""){
+           println(encrypt("admin"))
+           println(encrypt("user"))
+
            val user=UserController(email.text,password.text)
            replaceWith(HomeView::class, ViewTransition.Slide(0.4.seconds, ViewTransition.Direction.LEFT));
        }

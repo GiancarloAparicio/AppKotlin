@@ -21,7 +21,7 @@ BEGIN
     CREATE TABLE users (
       id INT NOT NULL IDENTITY(1,1),
       email VARCHAR(100) NOT NULL CHECK (email LIKE '_%@__%.__%')  UNIQUE,
-      password VARCHAR(32),
+      password VARCHAR(64) NOT NULL,
       name VARCHAR(40),
       last_name VARCHAR(40),
       create_at DATE DEFAULT GETDATE(),
@@ -172,8 +172,8 @@ BEGIN
       company VARCHAR(40) NOT NULL,
       ruc VARCHAR(11) NOT NULL CHECK (LEN(ruc)=11),
       create_at DATE DEFAULT GETDATE(),
-      update_at DATE NOT NULL,
-      delete_at DATE NOT NULL,
+      update_at DATE NULL,
+      delete_at DATE NULL,
       PRIMARY KEY (id)
     );
 END;
