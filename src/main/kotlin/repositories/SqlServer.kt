@@ -48,9 +48,8 @@ class SqlServer() : DataBase() {
             for ((index,param) in params.withIndex()){
                 procedure.setString(index+1,param)
             }
-            val response: ResultSet? = procedure.executeQuery()
+            procedure.executeQuery()
 
-            response
         }catch (e:Error){
             println("Error storeProcedure: ${e.message}")
             null

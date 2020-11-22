@@ -29,7 +29,7 @@
          <children>
             <VBox alignment="CENTER" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="1">
                <children>
-                  <Button alignment="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="305.0" style="-fx-background-color: #FFFFFF;" text="Home" textFill="#374b66">
+                  <Button alignment="CENTER" mnemonicParsing="false" onDragEntered="#hoverButton" prefHeight="26.0" prefWidth="305.0" stylesheets="@../styles/main.css" text="Home" textFill="#374b66">
                      <font>
                         <Font name="Carlito Bold" size="17.0" />
                      </font>

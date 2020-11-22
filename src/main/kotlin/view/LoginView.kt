@@ -14,6 +14,7 @@ import tornadofx.seconds
 class LoginView: View(){
     override val root : BorderPane by fxml()
 
+
     private val email : TextField by fxid()
     private val password : PasswordField by fxid()
 
@@ -26,7 +27,6 @@ class LoginView: View(){
         passwordError.text= if(password.text=="") "Password invalid" else ""
 
        if(email.text != "" && password.text != ""){
-
            val status=AuthController.login(email.text,password.text)
 
             if(status){
@@ -34,27 +34,7 @@ class LoginView: View(){
             }else{
                 emailError.text=  "Email or password invalid"
             }
-
-
-
        }
-
     }
 
 }
-
-
-/*
-import tornadofx.View
-
-import tornadofx.button
-import tornadofx.label
-import tornadofx.vbox
-
-class LoginView: View(){
-    override val root = vbox {
-        button("Login")
-        label("Hello Work")
-    }
-}
-*/
