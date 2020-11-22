@@ -40,7 +40,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button alignment="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="305.0" style="-fx-background-color: #FFFFFF;" text="Delivery" textFill="#374b66">
+                  <Button alignment="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="305.0" stylesheets="@../styles/main.css" text="Delivery" textFill="#374b66">
                      <font>
                         <Font name="Carlito Bold" size="17.0" />
                      </font>
@@ -51,7 +51,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button alignment="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="305.0" style="-fx-background-color: #FFFFFF;" text="History" textFill="#374b66">
+                  <Button alignment="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="305.0" stylesheets="@../styles/main.css" text="History" textFill="#374b66">
                      <font>
                         <Font name="Carlito Bold" size="17.0" />
                      </font>
@@ -62,7 +62,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button alignment="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="305.0" style="-fx-background-color: #FFFFFF;" text="Settings" textFill="#374b66">
+                  <Button alignment="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="305.0" stylesheets="@../styles/main.css" text="Settings" textFill="#374b66">
                      <font>
                         <Font name="Carlito Bold" size="17.0" />
                      </font>
@@ -124,7 +124,7 @@
                               <Insets left="10.0" right="10.0" />
                            </HBox.margin>
                            <image>
-                              <Image url="@../pictures/images/login.png" />
+                              <Image url="@../pictures/icons/search.png" />
                            </image>
                         </ImageView>
                      </children>
