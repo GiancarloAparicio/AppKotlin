@@ -108,7 +108,7 @@
                               <Insets left="15.0" right="20.0" />
                            </HBox.margin>
                            <image>
-                              <Image url="@../images/user.png" />
+                              <Image url="@../pictures/avatars/user.png" />
                            </image>
                            <cursor>
                               <Cursor fx:constant="HAND" />
@@ -124,7 +124,7 @@
                               <Insets left="10.0" right="10.0" />
                            </HBox.margin>
                            <image>
-                              <Image url="@../images/login.png" />
+                              <Image url="@../pictures/images/login.png" />
                            </image>
                         </ImageView>
                      </children>
