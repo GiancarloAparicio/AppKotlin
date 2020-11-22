@@ -1,6 +1,6 @@
-package repositories
+package database
 
-import repositories.abstract.DataBase
+import database.abstract.DataBase
 import com.microsoft.sqlserver.jdbc.SQLServerDriver;
 import java.sql.CallableStatement
 import java.sql.Connection

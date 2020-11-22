@@ -1,8 +1,6 @@
 package view
 
 import controller.AuthController
-import controller.UserController
-import helpers.encrypt
 import javafx.scene.control.Label
 import javafx.scene.control.PasswordField
 import javafx.scene.control.TextField
@@ -27,7 +25,7 @@ class LoginView: View(){
         passwordError.text= if(password.text=="") "Password invalid" else ""
 
        if(email.text != "" && password.text != ""){
-           val status=AuthController.login(email.text,password.text)
+           val status=AuthController.verify(email.text,password.text)
 
             if(status){
                 replaceWith(HomeView::class, ViewTransition.Slide(0.4.seconds, ViewTransition.Direction.LEFT));

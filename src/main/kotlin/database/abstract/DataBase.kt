@@ -1,4 +1,4 @@
-package repositories.abstract
+package database.abstract
 
 import java.sql.Connection
 
