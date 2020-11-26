@@ -12,7 +12,6 @@ import tornadofx.seconds
 class LoginView: View(){
     override val root : BorderPane by fxml()
 
-
     private val email : TextField by fxid()
     private val password : PasswordField by fxid()
 
