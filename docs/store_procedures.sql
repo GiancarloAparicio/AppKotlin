@@ -123,12 +123,12 @@ AS BEGIN
         VALUES (@expires,@quantity,@warehouse);
 END;
 
-CREATE PROC createSupplies(@name VARCHAR(30), @category_id INT, @warehouse_id INT)
+CREATE PROC createSupplies(@name VARCHAR(30), @category_id INT, @lot_id INT)
 AS BEGIN
-    INSERT INTO supplies (name,category_supply_id,warehouse_id)
-        VALUES (@name, @category_id, @warehouse_id);
+    INSERT INTO supplies (name,category_supply_id,lot_id)
+        VALUES (@name, @category_id, @lot_id);
 
-    SELECT * FROM supplies WHERE name = @name AND category_supply_id = @category_id AND warehouse_id = @warehouse_id;
+    SELECT * FROM supplies WHERE name = @name AND category_supply_id = @category_id AND lot_id = @lot_id;
 END
 
 CREATE PROC createPurchase(

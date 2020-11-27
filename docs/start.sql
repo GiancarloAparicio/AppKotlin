@@ -65,6 +65,13 @@ INSERT INTO role_user (role_id,user_id)
 {CALL createProduct('Pastel de fresa', 50.0, 1 ,1)}
 {CALL createProduct('Pastel de chocolate', 60.0, 1 ,1)};
 
+/*Orders*/
+
+{CALL createOrder(1, 'Compra test')};
+
+{CALL createOrderDetails(1, 10, 1};
+{CALL createOrderDetails(2, 5, 1};
+
 
 /*Supplies*/
 {CALL createCategorySupply('harina')};

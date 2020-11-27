@@ -128,7 +128,7 @@ BEGIN
       name VARCHAR(30) NOT NULL,
       price MONEY NOT NULL CHECK (0<price),
       category_product_id INT NOT NULL FOREIGN KEY REFERENCES categories_products(id),
-      lot_id INT NOT NULL FOREIGN KEY REFERENCES lots(id),
+      lot_id INT NOT NULL FOREIGN KEY REFERENCES products_lots(id),
       PRIMARY KEY (id)
     );
 END;
@@ -143,11 +143,6 @@ BEGIN
       product_id INT NOT NULL FOREIGN KEY REFERENCES products(id)
     );
 END;
-
-
-
-
-
 
 
 IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='address' AND xtype='U' )
@@ -194,7 +189,6 @@ BEGIN
 END;
 
 
-
 IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='purchases' AND xtype='U' )
 BEGIN
     CREATE TABLE purchases (
@@ -208,6 +202,8 @@ BEGIN
     );
 END;
 
+
+
 IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='supplies_lots' AND xtype='U' )
 BEGIN
     CREATE TABLE supplies_lots (
@@ -220,6 +216,15 @@ BEGIN
 END;
 
 
+IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='categories_supplies' AND xtype='U' )
+BEGIN
+    CREATE TABLE categories_supplies (
+      id INT NOT NULL IDENTITY(1,1),
+      category_supply VARCHAR(30) NOT NULL,
+      PRIMARY KEY (id)
+    );
+END;
+
 
 IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='supplies' AND xtype='U' )
 BEGIN
@@ -227,7 +232,7 @@ BEGIN
       id INT NOT NULL IDENTITY(1,1),
       name VARCHAR(30) NOT NULL,
       category_supply_id INT NOT NULL  FOREIGN KEY REFERENCES categories_supplies(id),
-      supply_lot INT NOT NULL  FOREIGN KEY REFERENCES supplies_lots(id),
+      lot_id INT NOT NULL  FOREIGN KEY REFERENCES supplies_lots(id),
       PRIMARY KEY (id)
     );
 END;
@@ -239,15 +244,5 @@ BEGIN
       quantity SMALLINT NOT NULL CHECK (0<quantity),
       purchase_id INT NOT NULL FOREIGN KEY REFERENCES purchases(id),
       supply_id INT NOT NULL FOREIGN KEY REFERENCES supplies(id),
-    );
-END;
-
-
-IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='categories_supplies' AND xtype='U' )
-BEGIN
-    CREATE TABLE categories_supplies (
-      id INT NOT NULL IDENTITY(1,1),
-      category_supply VARCHAR(30) NOT NULL,
-      PRIMARY KEY (id)
     );
 END;
