@@ -66,8 +66,8 @@ END;
 
 CREATE PROC createLotProduct(@expires DATE,@warehouse INT,@quantity SMALLINT)
 AS BEGIN
-    INSERT INTO lots (expires_at, quantity, warehouse_id)
-        VALUES (@expires,@warehouse,@quantity);
+    INSERT INTO products_lots (expires_at, quantity, warehouse_id)
+        VALUES (@expires,@quantity,@warehouse);
 
 END;
 
@@ -109,6 +109,27 @@ AS BEGIN
         VALUES (@company , @ruc );
 END
 
+CREATE PROC createCategorySupply(@category VARCHAR(30))
+AS BEGIN
+    INSERT INTO categories_supplies (category_supply)
+        VALUES (@category);
+
+    SELECT * FROM categories_supplies WHERE category_supply = @category;
+END
+
+CREATE PROC createLotSupply(@expires DATE,@warehouse INT,@quantity SMALLINT)
+AS BEGIN
+    INSERT INTO supplies_lots (expires_at, quantity, warehouse_id)
+        VALUES (@expires,@quantity,@warehouse);
+END;
+
+CREATE PROC createSupplies(@name VARCHAR(30), @category_id INT, @warehouse_id INT)
+AS BEGIN
+    INSERT INTO supplies (name,category_supply_id,warehouse_id)
+        VALUES (@name, @category_id, @warehouse_id);
+
+    SELECT * FROM supplies WHERE name = @name AND category_supply_id = @category_id AND warehouse_id = @warehouse_id;
+END
 
 CREATE PROC createPurchase(
     @provider_id INT,
@@ -125,29 +146,10 @@ AS BEGIN
 
 END;
 
-
 CREATE PROC createPurchaseDetails(@purchase_id INT, @quantity SMALLINT, @supply_id INT)
 AS BEGIN
     INSERT INTO purchase_supply (quantity,purchase_id,supply_id)
         VALUES (@quantity,@purchase_id,@supply_id);
 
 END;
-
-
-CREATE PROC createSupplies(@name VARCHAR(30), @category_id INT, @warehouse_id INT)
-AS BEGIN
-    INSERT INTO supplies (name,category_supply_id,warehouse_id)
-        VALUES (@name, @category_id, @warehouse_id);
-
-    SELECT * FROM supplies WHERE name = @name AND category_supply_id = @category_id AND warehouse_id = @warehouse_id;
-END
-
-CREATE PROC createCategorySupply(@category VARCHAR(30))
-AS BEGIN
-    INSERT INTO categories_supplies (category_supply)
-        VALUES (@category);
-
-    SELECT * FROM categories_supplies WHERE category_supply = @category;
-END
-
 
