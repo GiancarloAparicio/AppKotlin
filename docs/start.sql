@@ -1,8 +1,76 @@
+
+{CALL createPermit('create user')};
+{CALL createPermit('read user')};
+{CALL createPermit('update user')};
+{CALL createPermit('delete user')};
+
+{CALL createPermit('create product')};
+{CALL createPermit('read product')};
+{CALL createPermit('update product')};
+{CALL createPermit('delete product')};
+
+{CALL createPermit('create order')};
+{CALL createPermit('read order')};
+{CALL createPermit('update order')};
+{CALL createPermit('delete order')};
+
+{CALL createPermit('create purchase')};
+{CALL createPermit('read purchase')};
+{CALL createPermit('update purchase')};
+{CALL createPermit('delete purchase')};
+
+{CALL createRole('admin','admin for the app')};
+{CALL createRole('provider', 'supply provider')};
+{CALL createRole('user', 'standard user')};
+
+{CALL assignPermitToRoles('admin',1)}; /*create user */
+{CALL assignPermitToRoles('admin',2)}; /*read user   */
+{CALL assignPermitToRoles('admin',3)}; /*update user */
+{CALL assignPermitToRoles('admin',4)}; /*delete user */
+
+{CALL assignPermitToRoles('admin',5)}; /*create product */
+{CALL assignPermitToRoles('admin',6)}; /*read product   */
+{CALL assignPermitToRoles('admin',7)}; /*update product */
+{CALL assignPermitToRoles('admin',8)}; /*delete product */
+
+{CALL assignPermitToRoles('admin',9)};  /*create purchase */
+{CALL assignPermitToRoles('admin',10)}; /*read purchase   */
+{CALL assignPermitToRoles('admin',11)}; /*update purchase */
+{CALL assignPermitToRoles('admin',12)}; /*delete purchase */
+
+/* TODO: Agregar permisos en el futuro
+{CALL assignPermitToRoles('provider',)};
+{CALL assignPermitToRoles('user',)};
+*/
+
+{CALL createUser('email','encryptPassword','name','last-name')};
+
+/*   ADMIN erick@admin.com - admin    */
 INSERT INTO users (email,password,name,last_name)
        VALUES ('erick@admin.com','8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918','erick','giancarlo');
-
 INSERT INTO role_user (role_id,user_id)
        VALUES ('admin','erick@admin.com');
 
-select * from users;
-select * from role_user;
+/*Products*/
+{CALL createCategoryProduct('pasteles')}
+{CALL createCategoryProduct('galletas')}
+{CALL createCategoryProduct('postres')}
+{CALL createCategoryProduct('panes')}
+
+{CALL createWarehouse('almacen1')}
+{CALL createWarehouse('almacen2')}
+
+
+/*Supplies*/
+{CALL createCategorySupply('harina')};
+{CALL createCategorySupply('mantequilla')};
+{CALL createCategorySupply('chocolate')};
+{CALL createCategorySupply('vainilla')};
+{CALL createCategorySupply('huevos')};
+
+/*Providers*/
+{CALL createProvider('Gloria' ,'12345678902')}
+{CALL createProvider('Nestle' ,'12345678901')}
+
+EXEC createPurchase 2, 'Orden de Gloria';
+EXEC createPurchase 3, 'Orden de Nestle';

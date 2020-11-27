@@ -1,6 +1,5 @@
 /**USER***AUTH**/
 
-
 CREATE PROC createPermit(@accion VARCHAR(30))
 AS BEGIN
     INSERT INTO permits (accion)
@@ -26,7 +25,7 @@ END;
 
 CREATE PROC createUser(
     @email VARCHAR(100),
-    @password VARCHAR(32),
+    @password VARCHAR(64),
     @name VARCHAR(40),
     @last_name VARCHAR(40)
     )
@@ -57,18 +56,18 @@ AS BEGIN
     SELECT * FROM categories_products;
 END;
 
-CREATE PROC createWharehouse(@name VARCHAR(30))
+CREATE PROC createWarehouse(@name VARCHAR(30))
 AS BEGIN
-    INSERT INTO wharehouses (name)
+    INSERT INTO warehouses (name)
         VALUES (@name);
     
-    SELECT * FROM wharehouses;
+    SELECT * FROM warehouses;
 END;
 
-CREATE PROC createLot(@expires DATE,@wharehouse INT )
+CREATE PROC createLot(@expires DATE,@warehouse INT )
 AS BEGIN
-    INSERT INTO lots (expires_at, wharehouse_id)
-        VALUES (@expires,@wharehouse);
+    INSERT INTO lots (expires_at, warehouse_id)
+        VALUES (@expires,@warehouse);
 
 END;
 
@@ -81,7 +80,6 @@ END;
 
 
 /**ORDERS**/
-
 
 CREATE PROC createOrder(@user_id VARCHAR(100), @description VARCHAR(100))
 AS BEGIN
@@ -103,36 +101,7 @@ AS BEGIN
 END;
 
 
-CREATE PROC createPurcharse(
-    @provider_id INT,
-    @description VARCHAR(100)
- )
-AS BEGIN
-    DECLARE @identity INT;
-    INSERT INTO purcharses (provider_id  ,description)
-        VALUES (@provider_id, @description );
-
-    SET @identity = SCOPE_IDENTITY();
-
-    SELECT * from purcharses WHERE id = @identity;
-
-END;
-
-
-CREATE PROC createPurcharseDetails(@purcharse_id INT, @quantity SMALLINT, @supply_id INT)
-AS BEGIN
-    INSERT INTO purcharse_supply (quantity,purcharse_id,supply_id)
-        VALUES (@quantity,@purcharse_id,@supply_id);
-
-END;
-
-
-CREATE PROC createSupplies(@name VARCHAR(30), @category_id INT, @wharehouse_id INT)
-AS BEGIN
-    INSERT INTO supplies (name,category_supply_id,wharehouse_id)
-        VALUES (@name, @category_id, @wharehouse_id);
-END
-
+/**PURCHASES**/
 
 CREATE PROC createProvider(@company VARCHAR(40), @ruc VARCHAR(11))
 AS BEGIN
@@ -141,58 +110,44 @@ AS BEGIN
 END
 
 
+CREATE PROC createPurchase(
+    @provider_id INT,
+    @description VARCHAR(100)
+ )
+AS BEGIN
+    DECLARE @identity INT;
+    INSERT INTO purchases (provider_id  ,description)
+        VALUES (@provider_id, @description );
 
-/******EXEC*****/
+    SET @identity = SCOPE_IDENTITY();
 
-EXEC createPermit 'create products'; 
-EXEC createPermit 'read products'; 
-EXEC createPermit 'update products'; 
-EXEC createPermit 'delete products';
-EXEC createPermit 'delete users'; 
-EXEC createPermit 'buy products'; 
+    SELECT * from purchases WHERE id = @identity;
 
-
-EXEC createRole 'admin', 'administrador de la app'; 
-EXEC createRole 'user', 'usuario consumidor' ;
-
-
-EXEC assignPermitToRoles 'admin' , 1;
-EXEC assignPermitToRoles 'admin' , 2;
-EXEC assignPermitToRoles 'admin' , 3;
-EXEC assignPermitToRoles 'admin' , 4;
-EXEC assignPermitToRoles 'admin' , 5;
-EXEC assignPermitToRoles 'user' , 2;
+END;
 
 
-EXEC createUser 'user@user.com', 'secret', 'Erick', 'Giancarlo' 
-EXEC createUser 'user2@user.com', 'secret2', 'Erick2', 'Giancarlo2'
+CREATE PROC createPurchaseDetails(@purchase_id INT, @quantity SMALLINT, @supply_id INT)
+AS BEGIN
+    INSERT INTO purchase_supply (quantity,purchase_id,supply_id)
+        VALUES (@quantity,@purchase_id,@supply_id);
+
+END;
 
 
+CREATE PROC createSupplies(@name VARCHAR(30), @category_id INT, @warehouse_id INT)
+AS BEGIN
+    INSERT INTO supplies (name,category_supply_id,warehouse_id)
+        VALUES (@name, @category_id, @warehouse_id);
+
+    SELECT * FROM supplies WHERE name = @name AND category_supply_id = @category_id AND warehouse_id = @warehouse_id;
+END
+
+CREATE PROC createCategorySupply(@category VARCHAR(30))
+AS BEGIN
+    INSERT INTO categories_supplies (category_supply)
+        VALUES (@category);
+
+    SELECT * FROM categories_supplies WHERE category_supply = @category;
+END
 
 
-
-EXEC createWharehouse 'almacen1';
-EXEC createWharehouse 'almacen2';
-
-
-EXEC createCategoryProduct 'pasteles';
-EXEC createCategoryProduct 'panes';
-EXEC createCategoryProduct 'galletas';
-EXEC createCategoryProduct 'postres';
-
-EXEC createLot '2020-12-12', 1 ;
-
-EXEC createProduct 'Pastel chocolate', 200.00 , 1, 1 ;
-EXEC createProduct 'Pastel fresa', 180.00 , 2, 1 ;
-
-
-
-
-
-
-EXEC createProvider 'gloria' ,'123456789123';
-EXEC createProvider 'Nestle' ,'12345678913';
-
-
-EXEC createPurcharse 2, 'Oden de Gloria'; 
-EXEC createPurcharse 3, 'Oden de Nestle';

@@ -90,9 +90,9 @@ END;
 
 
 
-IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='wharehouses' AND xtype='U' )
+IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='warehouses' AND xtype='U' )
 BEGIN
-    CREATE TABLE wharehouses (
+    CREATE TABLE warehouses (
       id INT NOT NULL IDENTITY(1,1),
       name VARCHAR(30) NOT NULL,
       PRIMARY KEY (id)
@@ -106,7 +106,7 @@ BEGIN
     CREATE TABLE lots (
       id INT NOT NULL IDENTITY(1,1),
       expires_at DATE NOT NULL,
-      wharehouse_id INT NOT NULL FOREIGN KEY REFERENCES wharehouses(id),
+      warehouse_id INT NOT NULL FOREIGN KEY REFERENCES warehouses(id),
       PRIMARY KEY (id)
     );
 END;
@@ -196,9 +196,9 @@ END;
 
 
 
-IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='purcharses' AND xtype='U' )
+IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='purchases' AND xtype='U' )
 BEGIN
-    CREATE TABLE purcharses (
+    CREATE TABLE purchases (
       id INT NOT NULL IDENTITY(1,1),
       provider_id INT NOT NULL FOREIGN KEY REFERENCES providers(id),
       description VARCHAR(100) NOT NULL,
@@ -217,18 +217,18 @@ BEGIN
       id INT NOT NULL IDENTITY(1,1),
       name VARCHAR(30) NOT NULL,
       category_supply_id INT NOT NULL  FOREIGN KEY REFERENCES categories_supplies(id),
-      wharehouse_id INT NOT NULL  FOREIGN KEY REFERENCES wharehouses(id),
+      warehouse_id INT NOT NULL  FOREIGN KEY REFERENCES warehouses(id),
       PRIMARY KEY (id)
     );
 END;
 
 
 
-IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='purcharse_supply' AND xtype='U' )
+IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='purchase_supply' AND xtype='U' )
 BEGIN
-    CREATE TABLE purcharse_supply (
+    CREATE TABLE purchase_supply (
       quantity SMALLINT NOT NULL CHECK (0<quantity),
-      purcharse_id INT NOT NULL FOREIGN KEY REFERENCES purcharses(id),
+      purchase_id INT NOT NULL FOREIGN KEY REFERENCES purchases(id),
       supply_id INT NOT NULL FOREIGN KEY REFERENCES supplies(id),
     );
 END;

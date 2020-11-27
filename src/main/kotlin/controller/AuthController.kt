@@ -18,8 +18,8 @@ class AuthController {
             val data:ResultSet?= dataBase.execStoreProcedure(storeProcedure,params)
 
             if (data != null && data.next()) {
+                //TODO: Refactor for SessionStart()
                 User.setInstance(data)
-
                 return true
             }
 

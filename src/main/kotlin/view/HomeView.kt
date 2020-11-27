@@ -15,17 +15,13 @@ class HomeView() : View(){
     private val history : BorderPane by fxml("/view/dashboard/History.fxml")
     private val settings : BorderPane by fxml("/view/dashboard/Settings.fxml")
 
-
-     //private val dashBoard : BorderPane by fxid()
     @FXML
     lateinit var dashBoard: BorderPane
-    //private val dashBoard by fxid<BorderPane>()
+    //private val dashBoard : BorderPane by fxid()  /*Por alguna razon falla :(, no usar esta linea*/
 
     fun setScene(event:Event){
         val buttonPressed=event.target.toString()
         val buttonName:String= buttonPressed.substring(buttonPressed.indexOf("'")+1,buttonPressed.length-1)
-
-
 
         when (buttonName) {
             "Home"-> dashBoard.center = home.root
