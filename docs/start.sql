@@ -52,13 +52,18 @@ INSERT INTO role_user (role_id,user_id)
        VALUES ('admin','erick@admin.com');
 
 /*Products*/
-{CALL createCategoryProduct('pasteles')}
-{CALL createCategoryProduct('galletas')}
-{CALL createCategoryProduct('postres')}
-{CALL createCategoryProduct('panes')}
+{CALL createCategoryProduct('pasteles')};
+{CALL createCategoryProduct('galletas')};
+{CALL createCategoryProduct('postres')};
+{CALL createCategoryProduct('panes')};
 
-{CALL createWarehouse('almacen1')}
-{CALL createWarehouse('almacen2')}
+{CALL createWarehouse('almacen1')};
+{CALL createWarehouse('almacen2')};
+
+{CALL createLot('2021-05-05',1)};
+
+{CALL createProduct('Pastel de fresa', 50.0, 1 ,1)}
+{CALL createProduct('Pastel de chocolate', 60.0, 1 ,1)};
 
 
 /*Supplies*/

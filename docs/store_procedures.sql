@@ -64,10 +64,10 @@ AS BEGIN
     SELECT * FROM warehouses;
 END;
 
-CREATE PROC createLot(@expires DATE,@warehouse INT )
+CREATE PROC createLotProduct(@expires DATE,@warehouse INT,@quantity SMALLINT)
 AS BEGIN
-    INSERT INTO lots (expires_at, warehouse_id)
-        VALUES (@expires,@warehouse);
+    INSERT INTO lots (expires_at, quantity, warehouse_id)
+        VALUES (@expires,@warehouse,@quantity);
 
 END;
 

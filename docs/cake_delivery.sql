@@ -14,8 +14,6 @@ USE cake_delivery;
 
 
 
-
-
 IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='users' AND xtype='U' )
 BEGIN
     CREATE TABLE users (
@@ -101,11 +99,12 @@ END;
 
 
 
-IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='lots' AND xtype='U' )
+IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='products_lots' AND xtype='U' )
 BEGIN
-    CREATE TABLE lots (
+    CREATE TABLE products_lots (
       id INT NOT NULL IDENTITY(1,1),
       expires_at DATE NOT NULL,
+      quantity SMALLINT CHECK (0<quantity),
       warehouse_id INT NOT NULL FOREIGN KEY REFERENCES warehouses(id),
       PRIMARY KEY (id)
     );
@@ -209,6 +208,17 @@ BEGIN
     );
 END;
 
+IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='supplies_lots' AND xtype='U' )
+BEGIN
+    CREATE TABLE supplies_lots (
+      id INT NOT NULL IDENTITY(1,1),
+      expires_at DATE NOT NULL,
+      quantity SMALLINT CHECK (0<quantity),
+      warehouse_id INT NOT NULL FOREIGN KEY REFERENCES warehouses(id),
+      PRIMARY KEY (id)
+    );
+END;
+
 
 
 IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='supplies' AND xtype='U' )
@@ -217,11 +227,10 @@ BEGIN
       id INT NOT NULL IDENTITY(1,1),
       name VARCHAR(30) NOT NULL,
       category_supply_id INT NOT NULL  FOREIGN KEY REFERENCES categories_supplies(id),
-      warehouse_id INT NOT NULL  FOREIGN KEY REFERENCES warehouses(id),
+      supply_lot INT NOT NULL  FOREIGN KEY REFERENCES supplies_lots(id),
       PRIMARY KEY (id)
     );
 END;
-
 
 
 IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='purchase_supply' AND xtype='U' )
@@ -232,7 +241,6 @@ BEGIN
       supply_id INT NOT NULL FOREIGN KEY REFERENCES supplies(id),
     );
 END;
-
 
 
 IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='categories_supplies' AND xtype='U' )
