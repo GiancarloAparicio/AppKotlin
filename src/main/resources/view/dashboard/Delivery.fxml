@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -45,29 +46,50 @@
                   </Label>
                   <HBox alignment="CENTER" prefHeight="157.0" prefWidth="570.0">
                      <children>
-                        <ComboBox nodeOrientation="LEFT_TO_RIGHT" prefWidth="150.0" promptText="Product" style="-fx-background-color: #1BA0EB; -fx-font-weight: bold;" />
+                        <ComboBox nodeOrientation="LEFT_TO_RIGHT" prefWidth="150.0" promptText="Product" style="-fx-background-color: #1BA0EB; -fx-font-weight: bold;">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></ComboBox>
                         <TextField maxWidth="100.0" minWidth="50.0" promptText="Quantity">
                            <HBox.margin>
                               <Insets left="20.0" right="20.0" />
                            </HBox.margin></TextField>
-                        <Button maxWidth="150.0" minWidth="100.0" mnemonicParsing="false" style="-fx-background-color: #2FA14C;" text="Add" textFill="WHITE">
+                        <Button maxWidth="150.0" minWidth="100.0" mnemonicParsing="false" style="-fx-background-color: #EBAE1B;" text="Add" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="13.0" />
-                           </font></Button>
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
+                        <Button maxWidth="150.0" minWidth="100.0" mnemonicParsing="false" style="-fx-background-color: #2FA14C;" text="Generate order" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="20.0" right="20.0" />
+                           </HBox.margin>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
                      </children>
                   </HBox>
                </children>
             </VBox>
-            <TableView prefHeight="200.0" prefWidth="200.0" stylesheets="@../../styles/table-view.css" GridPane.columnIndex="1" GridPane.rowIndex="2">
-              <columns>
-                <TableColumn maxWidth="1.7976931348623157E308" prefWidth="75.0" style="-fx-font-weight: bold; -fx-background-color: #1BA0EB;" text="#" />
-                <TableColumn maxWidth="1.7976931348623157E308" prefWidth="75.0" style="-fx-background-color: #1BA0EB; -fx-font-weight: bold;" text="Product" />
-                  <TableColumn maxWidth="1.7976931348623157E308" prefWidth="75.0" style="-fx-background-color: #1BA0EB; -fx-font-weight: bold;" text="Quantity" />
-                  <TableColumn maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="75.0" style="-fx-background-color: #1BA0EB; -fx-font-weight: bold;" text="Price" />
-                  <TableColumn maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="75.0" style="-fx-background-color: #1BA0EB; -fx-font-weight: bold;" text="Total" />
-                  <TableColumn maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="144.0" style="-fx-background-color: #1BA0EB; -fx-font-weight: bold;" text="Actions" />
-              </columns>
-            </TableView>
+            <VBox style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                  <TableView prefHeight="200.0" prefWidth="200.0" stylesheets="@../../styles/table-view.css">
+                    <columns>
+                      <TableColumn maxWidth="100.0" minWidth="50.0" prefWidth="75.0" style="-fx-font-weight: bold; -fx-background-color: #1BA0EB;" text="#" />
+                      <TableColumn maxWidth="200.0" minWidth="50.0" prefWidth="75.0" style="-fx-background-color: #1BA0EB; -fx-font-weight: bold;" text="Product" />
+                        <TableColumn maxWidth="200.0" minWidth="50.0" prefWidth="75.0" style="-fx-background-color: #1BA0EB; -fx-font-weight: bold;" text="Quantity" />
+                        <TableColumn maxWidth="200.0" minWidth="50.0" prefWidth="75.0" style="-fx-background-color: #1BA0EB; -fx-font-weight: bold;" text="Price" />
+                        <TableColumn maxWidth="200.0" minWidth="50.0" prefWidth="75.0" style="-fx-background-color: #1BA0EB; -fx-font-weight: bold;" text="Total" />
+                        <TableColumn maxWidth="200.0" minWidth="50.0" prefWidth="194.0" style="-fx-background-color: #1BA0EB; -fx-font-weight: bold;" text="Actions" />
+                    </columns>
+                  </TableView>
+               </children>
+            </VBox>
          </children>
       </GridPane>
    </center>

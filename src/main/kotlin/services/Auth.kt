@@ -1,29 +1,28 @@
-package controller
+package services
 
 import helpers.encrypt
 import database.SqlServer
 import models.User
 import java.sql.ResultSet
 
-class AuthController {
+class Auth {
 
     companion object {
         var dataBase = SqlServer()
 
-        fun verify( email: String, password:String) : Boolean{
-
+        fun verifyAndReturnUser( email: String, password:String) : User?{
             //TODO: Refactor the code into a DAO class
             val storeProcedure="{CALL loginUser(?,?)}"
             val params=arrayOf(email,encrypt(password))
             val data:ResultSet?= dataBase.execStoreProcedure(storeProcedure,params)
 
             if (data != null && data.next()) {
-                //TODO: Refactor for SessionStart()
+
                 User.setInstance(data)
-                return true
+                return User.getInstance()
             }
 
-            return false
+            return null
         }
     }
 
