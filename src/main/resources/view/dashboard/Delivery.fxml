@@ -46,22 +46,22 @@
                   </Label>
                   <HBox alignment="CENTER" prefHeight="157.0" prefWidth="570.0">
                      <children>
-                        <ComboBox nodeOrientation="LEFT_TO_RIGHT" prefWidth="150.0" promptText="Product" style="-fx-background-color: #1BA0EB; -fx-font-weight: bold;">
+                        <ComboBox fx:id="comboBoxProduct" maxWidth="250.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="150.0" promptText="Product" style="-fx-background-color: #1BA0EB; -fx-font-weight: bold;">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></ComboBox>
-                        <TextField maxWidth="100.0" minWidth="50.0" promptText="Quantity">
+                        <TextField fx:id="inputQuantity" maxWidth="100.0" minWidth="50.0" onKeyReleased="#setQuantity" promptText="Quantity">
                            <HBox.margin>
                               <Insets left="20.0" right="20.0" />
                            </HBox.margin></TextField>
-                        <Button maxWidth="150.0" minWidth="100.0" mnemonicParsing="false" style="-fx-background-color: #EBAE1B;" text="Add" textFill="WHITE">
+                        <Button fx:id="buttonAddProduct" maxWidth="150.0" minWidth="100.0" mnemonicParsing="false" style="-fx-background-color: #EBAE1B;" text="Add" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></Button>
-                        <Button maxWidth="150.0" minWidth="100.0" mnemonicParsing="false" style="-fx-background-color: #2FA14C;" text="Generate order" textFill="WHITE">
+                        <Button fx:id="buttonGenerateOrder" maxWidth="150.0" minWidth="100.0" mnemonicParsing="false" style="-fx-background-color: #2FA14C;" text="Generate order" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>

@@ -98,7 +98,7 @@
                <children>
                   <HBox alignment="CENTER_RIGHT" minHeight="50.0" GridPane.columnIndex="1">
                      <children>
-                        <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="23.0" prefWidth="162.0" text="Erick Giancarlo" textAlignment="RIGHT" textFill="WHITE">
+                        <Label fx:id="labelNameUser" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="23.0" prefWidth="162.0" text="User default" textAlignment="RIGHT" textFill="WHITE">
                            <font>
                               <Font name="Carlito Bold" size="15.0" />
                            </font>

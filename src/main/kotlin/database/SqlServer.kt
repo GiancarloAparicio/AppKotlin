@@ -2,10 +2,7 @@ package database
 
 import database.abstract.DataBase
 import com.microsoft.sqlserver.jdbc.SQLServerDriver;
-import java.sql.CallableStatement
-import java.sql.Connection
-import java.sql.DriverManager
-import java.sql.ResultSet
+import java.sql.*
 
 
 class SqlServer() : DataBase() {
@@ -42,17 +39,37 @@ class SqlServer() : DataBase() {
         }
     }
 
-    fun execStoreProcedure(storeProcedure: String, params: Array<String?>) : ResultSet? {
-        return try {
+    fun execStoreProcedure(storeProcedure: String, params: Array<Any>) : ResultSet? {
+        try {
             val procedure: CallableStatement = this.getConnection().prepareCall(storeProcedure)
-            for ((index,param) in params.withIndex()){
-                procedure.setString(index+1,param)
+
+            for ( (index,param) in params.withIndex() ){
+                when( param ){
+                    is String -> procedure.setString(index+1 , param )
+                    is Int    -> procedure.setInt(index+1 , param )
+                    is Double -> procedure.setDouble(index+1 , param )
+                    is Date   -> procedure.setDate(index+1 , param )
+                }
             }
-            procedure.executeQuery()
+
+            return procedure.executeQuery()
 
         }catch (e:Error){
             println("Error storeProcedure: ${e.message}")
-            null
+            return null
+        }
+    }
+
+
+    fun execStoreProcedure(storeProcedure: String) : ResultSet? {
+        try {
+            val procedure: CallableStatement = this.getConnection().prepareCall(storeProcedure)
+
+            return procedure.executeQuery()
+
+        }catch (e:Error){
+            println("Error storeProcedure: ${e.message}")
+            return null
         }
     }
 

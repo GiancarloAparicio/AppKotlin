@@ -8,7 +8,7 @@ class Session {
     companion object {
 
         fun start( user:User ){
-            print("Save user: ${user.email}")
+            println("Save user: ${user.email}")
         }
 
     }

@@ -2,7 +2,11 @@ package view
 
 import javafx.event.Event
 import javafx.fxml.FXML
+import javafx.scene.control.Label
 import javafx.scene.layout.BorderPane
+import models.Product
+import models.User
+import repositories.ProductRepository
 import tornadofx.*
 import view.dashboard.Delivery
 import view.dashboard.History
@@ -19,11 +23,18 @@ class HomeView() : View(){
     private val settings : Settings by inject()
 
     @FXML
+    lateinit var labelNameUser : Label
+
+    @FXML
     lateinit var dashBoard: BorderPane
-    //private val dashBoard : BorderPane by fxid() /*Por alguna razon falla :(, no usar esta linea*/
+    //private val dashBoard : BorderPane by fxid() /*TODO: Por alguna razon falla :(, no usar esta linea*/
+
+
+    private val currentUser : User = User.getInstance()
 
     init{
         dashBoard.center = home.root
+        initializeUserData()
     }
 
     fun setScene(event:Event){
@@ -40,5 +51,9 @@ class HomeView() : View(){
                 println("Error: scene not found")
             }
         }
+    }
+
+    private fun initializeUserData(){
+        labelNameUser.text = currentUser.name
     }
 }

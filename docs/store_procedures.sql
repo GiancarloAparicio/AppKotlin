@@ -78,6 +78,18 @@ AS BEGIN
 
 END;
 
+CREATE PROC getAllProducts
+AS BEGIN
+    SELECT products.id,
+           products.name,
+           products.price,
+           categories_products.category_product,
+           products_lots.quantity,
+           products_lots.expires_at
+    	FROM products JOIN categories_products ON products.category_product_id = categories_products.id
+    	              JOIN products_lots ON products_lots.id = products.lot_id;
+END;
+
 
 /**ORDERS**/
 

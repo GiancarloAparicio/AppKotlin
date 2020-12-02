@@ -21,20 +21,20 @@ class LoginView: View(){
     private val labelPasswordError : Label by fxid()
 
     fun login(){
-        val email= inputEmail.text
-        val password= inputPassword.text
+        val email = inputEmail.text
+        val password = inputPassword.text
 
-        labelEmailError.text= if( email == "" ) "Email invalid" else ""
-        labelPasswordError.text= if( password == "" ) "Password invalid" else ""
+        labelEmailError.text = if( email == "" ) "Email invalid" else ""
+        labelPasswordError.text = if( password == "" ) "Password invalid" else ""
 
-       if( email != "" && password!= "" ){
-            val currentUser: User? = Auth.verifyAndReturnUser(email,password)
+       if( email != "" && password != "" ){
+            val currentUser: User? = Auth.verifyAndReturnUser( email,password )
 
             if(currentUser != null){
-                Session.start(currentUser)
-                replaceWith(HomeView::class, ViewTransition.Slide(0.4.seconds, ViewTransition.Direction.LEFT));
+                Session.start( currentUser )
+                replaceWith( HomeView::class, ViewTransition.Slide(0.7.seconds, ViewTransition.Direction.LEFT) );
             }else{
-                labelEmailError.text=  "Email or password invalid"
+                labelEmailError.text =  "Email or password invalid"
             }
        }
     }
