@@ -30,6 +30,8 @@ dependencies {
 
     implementation 'com.github.javafaker:javafaker:1.0.2'
 
+    compile 'com.jfoenix:jfoenix:9.0.10'
+
     compile group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '7.2.2.jre11'
 
 }

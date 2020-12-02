@@ -57,7 +57,8 @@ IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='permit_role' AND xtype='U' )
 BEGIN
     CREATE TABLE permit_role (
       permit_id INT NOT NULL FOREIGN KEY REFERENCES permits(id),
-      role_id VARCHAR(30) NOT NULL FOREIGN KEY REFERENCES roles(role)
+      role_id VARCHAR(30) NOT NULL FOREIGN KEY REFERENCES roles(role),
+      PRIMARY KEY (permit_id,role_id)
     );
 END;
 

@@ -60,17 +60,17 @@ INSERT INTO role_user (role_id,user_id)
 {CALL createWarehouse('almacen1')};
 {CALL createWarehouse('almacen2')};
 
-{CALL createLotProduct('2021-05-05',100,1)};
+{CALL createLotProduct('2021-05-05',1,100)};
 
-{CALL createProduct('Pastel de fresa', 50.0, 1 ,1)}
-{CALL createProduct('Pastel de chocolate', 60.0, 1 ,1)};
+{CALL createProduct('Pastel de fresa', 50.0, 1 ,5)}
+{CALL createProduct('Pastel de chocolate', 60.0, 1 ,5)};
 
 /*Orders*/
 
 {CALL createOrder(1, 'Compra test')};
 
-{CALL createOrderDetails(1, 10, 1};
-{CALL createOrderDetails(2, 5, 1};
+{CALL createOrderDetails(1, 10, 1)};
+{CALL createOrderDetails(2, 5, 1)};
 
 
 /*Supplies*/
@@ -80,7 +80,7 @@ INSERT INTO role_user (role_id,user_id)
 {CALL createCategorySupply('vainilla')};
 {CALL createCategorySupply('huevos')};
 
-{CALL createLotSupply('2021-02-05',100,1)};
+{CALL createLotSupply('2021-02-05',1,100)};
 
 {CALL createSupplies('harina blanca flor',1,1)}
 {CALL createSupplies('huevos calera',5,1)}
