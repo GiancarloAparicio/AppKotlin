@@ -54,7 +54,7 @@
                            <HBox.margin>
                               <Insets left="20.0" right="20.0" />
                            </HBox.margin></TextField>
-                        <Button fx:id="buttonAddProduct" maxWidth="150.0" minWidth="100.0" mnemonicParsing="false" style="-fx-background-color: #EBAE1B;" text="Add" textFill="WHITE">
+                        <Button fx:id="buttonAddProduct" maxWidth="150.0" minWidth="100.0" mnemonicParsing="false" onAction="#addProductToOrder" style="-fx-background-color: #EBAE1B;" text="Add" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
@@ -78,14 +78,14 @@
             </VBox>
             <VBox style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <TableView prefHeight="200.0" prefWidth="200.0" stylesheets="@../../styles/table-view.css">
+                  <TableView fx:id="tableViewProductsToOrder" prefHeight="200.0" prefWidth="200.0" stylesheets="@../../styles/table-view.css" tableMenuButtonVisible="true">
                     <columns>
-                      <TableColumn maxWidth="100.0" minWidth="50.0" prefWidth="75.0" style="-fx-font-weight: bold; -fx-background-color: #1BA0EB;" text="#" />
-                      <TableColumn maxWidth="200.0" minWidth="50.0" prefWidth="75.0" style="-fx-background-color: #1BA0EB; -fx-font-weight: bold;" text="Product" />
-                        <TableColumn maxWidth="200.0" minWidth="50.0" prefWidth="75.0" style="-fx-background-color: #1BA0EB; -fx-font-weight: bold;" text="Quantity" />
-                        <TableColumn maxWidth="200.0" minWidth="50.0" prefWidth="75.0" style="-fx-background-color: #1BA0EB; -fx-font-weight: bold;" text="Price" />
-                        <TableColumn maxWidth="200.0" minWidth="50.0" prefWidth="75.0" style="-fx-background-color: #1BA0EB; -fx-font-weight: bold;" text="Total" />
-                        <TableColumn maxWidth="200.0" minWidth="50.0" prefWidth="194.0" style="-fx-background-color: #1BA0EB; -fx-font-weight: bold;" text="Actions" />
+                      <TableColumn fx:id="columnID" editable="false" maxWidth="100.0" minWidth="50.0" prefWidth="75.0" style="-fx-font-weight: bold; -fx-background-color: #1BA0EB;" text="#" />
+                      <TableColumn fx:id="columnProduct" editable="false" maxWidth="200.0" minWidth="50.0" prefWidth="75.0" style="-fx-background-color: #1BA0EB; -fx-font-weight: bold;" text="Product" />
+                        <TableColumn fx:id="columnQuantity" editable="false" maxWidth="200.0" minWidth="50.0" prefWidth="75.0" style="-fx-background-color: #1BA0EB; -fx-font-weight: bold;" text="Quantity" />
+                        <TableColumn fx:id="columnPrice" editable="false" maxWidth="200.0" minWidth="50.0" prefWidth="75.0" style="-fx-background-color: #1BA0EB; -fx-font-weight: bold;" text="Price" />
+                        <TableColumn fx:id="columnSubTotal" editable="false" maxWidth="200.0" minWidth="50.0" prefWidth="94.0" style="-fx-background-color: #1BA0EB; -fx-font-weight: bold;" text="Sub-Total" />
+                        <TableColumn fx:id="columnActions" editable="false" maxWidth="200.0" minWidth="50.0" prefWidth="175.0" style="-fx-background-color: #1BA0EB; -fx-font-weight: bold;" text="Actions" />
                     </columns>
                   </TableView>
                </children>

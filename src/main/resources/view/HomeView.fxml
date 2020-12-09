@@ -62,6 +62,28 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#setScene" prefHeight="26.0" prefWidth="305.0" stylesheets="@../styles/button-menu.css" text="Products" textFill="#374b66">
+                     <font>
+                        <Font name="Carlito Bold" size="17.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="15.0" left="10.0" right="10.0" top="15.0" />
+                     </padding>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#setScene" prefHeight="26.0" prefWidth="305.0" stylesheets="@../styles/button-menu.css" text="Users" textFill="#374b66">
+                     <font>
+                        <Font name="Carlito Bold" size="17.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="15.0" left="10.0" right="10.0" top="15.0" />
+                     </padding>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
                   <Button alignment="CENTER" mnemonicParsing="false" onAction="#setScene" prefHeight="26.0" prefWidth="305.0" stylesheets="@../styles/button-menu.css" text="Settings" textFill="#374b66">
                      <font>
                         <Font name="Carlito Bold" size="17.0" />

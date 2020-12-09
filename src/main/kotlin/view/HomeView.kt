@@ -4,14 +4,9 @@ import javafx.event.Event
 import javafx.fxml.FXML
 import javafx.scene.control.Label
 import javafx.scene.layout.BorderPane
-import models.Product
 import models.User
-import repositories.ProductRepository
 import tornadofx.*
-import view.dashboard.Delivery
-import view.dashboard.History
-import view.dashboard.Home
-import view.dashboard.Settings
+import view.dashboard.*
 
 class HomeView() : View(){
 
@@ -21,6 +16,9 @@ class HomeView() : View(){
     private val delivery : Delivery by inject()
     private val history : History by inject()
     private val settings : Settings by inject()
+    private val users : Users by inject()
+    private val products : Products by inject()
+
 
     @FXML
     lateinit var labelNameUser : Label
@@ -46,6 +44,8 @@ class HomeView() : View(){
             "Delivery"-> dashBoard.center = delivery.root
             "History"-> dashBoard.center = history.root
             "Settings"-> dashBoard.center = settings.root
+            "Users"-> dashBoard.center = users.root
+            "Products"-> dashBoard.center = products.root
             else -> {
                 dashBoard.center = home.root
                 println("Error: scene not found")
