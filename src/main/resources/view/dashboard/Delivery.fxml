@@ -5,8 +5,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -76,20 +74,7 @@
                   </HBox>
                </children>
             </VBox>
-            <VBox style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <children>
-                  <TableView fx:id="tableViewProductsToOrder" prefHeight="200.0" prefWidth="200.0" stylesheets="@../../styles/table-view.css" tableMenuButtonVisible="true">
-                    <columns>
-                      <TableColumn fx:id="columnID" editable="false" maxWidth="100.0" minWidth="50.0" prefWidth="75.0" style="-fx-font-weight: bold; -fx-background-color: #1BA0EB;" text="#" />
-                      <TableColumn fx:id="columnProduct" editable="false" maxWidth="200.0" minWidth="50.0" prefWidth="75.0" style="-fx-background-color: #1BA0EB; -fx-font-weight: bold;" text="Product" />
-                        <TableColumn fx:id="columnQuantity" editable="false" maxWidth="200.0" minWidth="50.0" prefWidth="75.0" style="-fx-background-color: #1BA0EB; -fx-font-weight: bold;" text="Quantity" />
-                        <TableColumn fx:id="columnPrice" editable="false" maxWidth="200.0" minWidth="50.0" prefWidth="75.0" style="-fx-background-color: #1BA0EB; -fx-font-weight: bold;" text="Price" />
-                        <TableColumn fx:id="columnSubTotal" editable="false" maxWidth="200.0" minWidth="50.0" prefWidth="94.0" style="-fx-background-color: #1BA0EB; -fx-font-weight: bold;" text="Sub-Total" />
-                        <TableColumn fx:id="columnActions" editable="false" maxWidth="200.0" minWidth="50.0" prefWidth="175.0" style="-fx-background-color: #1BA0EB; -fx-font-weight: bold;" text="Actions" />
-                    </columns>
-                  </TableView>
-               </children>
-            </VBox>
+            <VBox fx:id="contentTable" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </center>

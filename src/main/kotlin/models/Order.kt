@@ -2,11 +2,14 @@ package models
 
 import javafx.scene.control.TableColumn
 
-class Order {
-    var id :Int = 0
-    lateinit var product : String
-    var quantity : Int = 0
-    var price : Double = 0.0
-    var subTotal : Double = 0.0
-    lateinit var actions :  String
+class Order(
+            val id :Int,
+            var product : String,
+            var quantity : Int,
+            var price : Double,
+            var subTotal : Double,
+            var actions :  String
+            )
+{
+
 }

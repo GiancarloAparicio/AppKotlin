@@ -2,12 +2,12 @@ package view.dashboard
 
 import javafx.scene.control.*
 import javafx.scene.layout.BorderPane
+import javafx.scene.layout.VBox
 import models.Order
 import models.Product
 import repositories.ProductRepository
-import tornadofx.View
-import tornadofx.indexInParent
-import tornadofx.selectedItem
+import tornadofx.*
+
 
 class Delivery : View() {
 
@@ -16,20 +16,18 @@ class Delivery : View() {
     private val comboBoxProduct : ComboBox<String> by fxid()
     private val inputQuantity : TextField by fxid()
 
-    private val tableViewProductsToOrder : TableView<Order> by fxid()
-    private val columnID : TableColumn<Order,Int> by fxid()
-    private val columnProduct : TableColumn<Order,String> by fxid()
-    private val columnQuantity : TableColumn<Order,Int> by fxid()
-    private val columnPrice : TableColumn<Order,Double> by fxid()
-    private val columnSubTotal : TableColumn<Order,Double> by fxid()
-    private val columnActions : TableColumn<Order,String> by fxid()
+    private val contentTable : VBox by fxid()
 
-    private val products : MutableList<Product> =ProductRepository.getAll()
+    private var orderWithoutPay = mutableListOf(
+        Order(1,"Cake1",5, 150.0,500.0,"Nothing")
+    ).asObservable()
+
+    private var tableOrderWithoutPay : TableView<Order> = initializeTableView()
 
 
     init{
         initializeComboBox()
-
+        contentTable.add( tableOrderWithoutPay )
     }
 
     fun setQuantity(){
@@ -42,29 +40,38 @@ class Delivery : View() {
     }
 
     fun addProductToOrder(){
-
         val product : String? = comboBoxProduct.selectedItem
         val quantity : Int =  if( inputQuantity.text == "" ) 0 else inputQuantity.text.toInt()
-        val price : Double = products[comboBoxProduct.indexInParent].price
-        val subTotal : Double = price * quantity
 
         if( product != null &&  0 < quantity ){
+            val unitPrice : Double = ProductRepository.getAll()[ comboBoxProduct.indexInParent ].price
+            val subTotal : Double = unitPrice * quantity
 
-            println("Quantity: $quantity")
-            println("Product: $product")
-            println("Price: $price")
-            println("SubTotal: $subTotal")
+            orderWithoutPay.add(Order( orderWithoutPay.size, product, quantity, unitPrice, subTotal,"Nothing") )
+
+        }else{
+            println("Warning") //TODO: Add a warning
         }
 
     }
 
     private fun initializeComboBox(){
+        val products : MutableList<Product> = ProductRepository.getAll()
+
         for (product in products){
             comboBoxProduct.items.add(product.name)
         }
     }
 
-    fun initializeTableView(){
-        tableViewProductsToOrder.items.addAll()
+    private fun initializeTableView(): TableView<Order> {
+        return tableview(orderWithoutPay){
+            readonlyColumn("ID",Order::id)
+            readonlyColumn("Name", Order::product)
+            readonlyColumn("Quantity", Order::quantity)
+            readonlyColumn("Price",Order::price)
+            readonlyColumn("Sub-Total", Order::subTotal)
+            readonlyColumn("Actions",Order::actions)
+        }
     }
+
 }
