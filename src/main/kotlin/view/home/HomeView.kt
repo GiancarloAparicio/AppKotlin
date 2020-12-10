@@ -1,4 +1,4 @@
-package view
+package view.home
 
 import javafx.event.Event
 import javafx.fxml.FXML
@@ -6,7 +6,7 @@ import javafx.scene.control.Label
 import javafx.scene.layout.BorderPane
 import models.User
 import tornadofx.*
-import view.dashboard.*
+import view.home.dashboard.*
 
 class HomeView() : View(){
 

@@ -1,4 +1,4 @@
-package view
+package view.login
 
 import services.Auth
 import javafx.scene.control.Label
@@ -10,6 +10,7 @@ import services.Session
 import tornadofx.View
 import tornadofx.ViewTransition
 import tornadofx.seconds
+import view.home.HomeView
 
 class LoginView: View(){
     override val root : BorderPane by fxml()

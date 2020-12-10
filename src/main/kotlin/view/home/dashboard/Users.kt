@@ -1,4 +1,4 @@
-package view.dashboard
+package view.home.dashboard
 
 import javafx.scene.layout.BorderPane
 import tornadofx.View

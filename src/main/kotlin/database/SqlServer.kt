@@ -1,11 +1,11 @@
 package database
 
-import database.abstract.DataBase
+import database.abstract.IDataBase
 import com.microsoft.sqlserver.jdbc.SQLServerDriver;
 import java.sql.*
 
 
-class SqlServer() : DataBase() {
+class SqlServer() : IDataBase {
     override val host:String="localhost"
     override val port:Int=1433
     override val database: String="cake_delivery"
@@ -39,7 +39,7 @@ class SqlServer() : DataBase() {
         }
     }
 
-    fun execStoreProcedure(storeProcedure: String, params: Array<Any>) : ResultSet? {
+    override fun execStoreProcedure(storeProcedure: String, params: Array<Any>) : ResultSet? {
         try {
             val procedure: CallableStatement = this.getConnection().prepareCall(storeProcedure)
 
@@ -61,7 +61,7 @@ class SqlServer() : DataBase() {
     }
 
 
-    fun execStoreProcedure(storeProcedure: String) : ResultSet? {
+    override fun execStoreProcedure(storeProcedure: String) : ResultSet? {
         try {
             val procedure: CallableStatement = this.getConnection().prepareCall(storeProcedure)
 

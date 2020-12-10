@@ -1,5 +1,6 @@
 package services
 
+import database.Database
 import helpers.encrypt
 import database.SqlServer
 import models.User
@@ -8,7 +9,7 @@ import java.sql.ResultSet
 class Auth {
 
     companion object {
-        var dataBase = SqlServer()
+        var dataBase = Database.getInstance()
 
         fun verifyAndReturnUser( email: String, password:String) : User?{
             //TODO: Refactor the code into a DAO class
