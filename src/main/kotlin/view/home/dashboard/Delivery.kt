@@ -1,13 +1,13 @@
 package view.home.dashboard
 
-import database.Database
+import application.database.Database
 import javafx.scene.control.*
 import javafx.scene.layout.BorderPane
 import javafx.scene.layout.VBox
-import models.Order
-import models.Product
-import models.User
-import repositories.ProductRepository
+import application.DTO.ProductInOrderTable
+import application.models.Product
+import application.models.User
+import application.repositories.ProductRepository
 import tornadofx.*
 import view.home.components.TableOrderWithoutPay
 import java.sql.ResultSet
@@ -30,6 +30,11 @@ class Delivery : View() {
         initializeTableOrderWithoutPay()
     }
 
+
+    /*
+    * Functions GUI
+    * */
+
     fun addProductToOrder(){
         val quantityIsCorrect : Boolean = validateQuantity()
         val product : Product? = ProductRepository.getProduct( comboBoxProduct.selectedItem )
@@ -39,7 +44,7 @@ class Delivery : View() {
             val quantity : Int = inputQuantity.text.toInt()
             val subTotal : Double = unitPrice * quantity
 
-            var orderProduct : Order = Order( tableOrderWithoutPay.size, product.name, quantity, unitPrice, subTotal,"Nothing")
+            var orderProduct = ProductInOrderTable( tableOrderWithoutPay.length(), product.name, quantity, unitPrice, subTotal,"Nothing")
 
             tableOrderWithoutPay.addProduct( orderProduct )
 
@@ -60,18 +65,53 @@ class Delivery : View() {
 
     fun generateOrder(){
 
-        val storeProcedure = "{CALL createOrder(?,?)}"
-        val params = arrayOf( User.getInstance().id , "Cake Delivery" )
-        val data: ResultSet? = dataBase.execStoreProcedure( storeProcedure, params )
+        val orderID :Int = createNewOrderAndReturnID()
+        val listProducts : MutableList<ProductInOrderTable> = tableOrderWithoutPay.getList()
 
-        if (data != null )
-            while ( data.next() ){
-                println("Order success")
-            }
+        for ( item in listProducts){
+            addProductToOrderGenerate( item, orderID)
+        }
+
 
         //TODO: Elegir una opcion
         // Publicar un evento con una orden generada (Op1)
         // Limpiar todo despues de crear una orden (Op 2 no recomendada)
+    }
+
+
+    /*
+    *  Private functions helpers
+    * */
+
+    private fun createNewOrderAndReturnID() : Int {
+        val storeProcedure = "{CALL createOrder(?,?)}"
+        val params : Array<Any?> = arrayOf( User.getInstance().id , "Cake Delivery" )
+        val data: ResultSet? = dataBase.execStoreProcedure( storeProcedure, params )
+
+        if ( data != null && data.next() )
+            return  data.getInt(1)
+
+        else
+            throw Error("Error: Can not create new Order")
+
+    }
+
+
+
+    private fun addProductToOrderGenerate(item : ProductInOrderTable, orderID : Int ){
+
+        val product : Product? = ProductRepository.getProduct( item.product )
+
+        if( item.quantity is Int && product is Product ){
+            val storeProcedure = "{CALL createOrderDetails(?,?,?)}"
+            val params : Array<Any?> = arrayOf( item.quantity , orderID ,product.id  )
+            val data: ResultSet? = dataBase.execStoreProcedure( storeProcedure, params )
+        }
+
+    }
+
+    private fun initializeTableOrderWithoutPay(){
+        contentTable.add( tableOrderWithoutPay.root )
     }
 
     private fun initializeComboBox(){
@@ -81,11 +121,5 @@ class Delivery : View() {
             comboBoxProduct.items.add(product.name)
         }
     }
-
-    private fun initializeTableOrderWithoutPay(){
-        contentTable.add( tableOrderWithoutPay.root )
-    }
-
-
 
 }

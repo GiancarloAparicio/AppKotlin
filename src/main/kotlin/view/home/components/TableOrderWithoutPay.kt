@@ -1,34 +1,35 @@
 package view.home.components
 
-
-import javafx.collections.ObservableList
-import javafx.scene.paint.Color
-import models.Order
+import application.DTO.ProductInOrderTable
 import tornadofx.*
 
 class TableOrderWithoutPay : Fragment()  {
 
-    private var listOrderWithoutPay : ObservableList<Order> = mutableListOf(
-        Order(null,null,null, null,null, null)
+    private var listOrderWithoutPay = mutableListOf(
+        ProductInOrderTable(null,
+            null,
+            null,
+            null,
+            null,
+            null)
     ).asObservable()
 
-    var size : Int = listOrderWithoutPay.size
+    private var size : Int = 1
 
     private var listOrderWithoutPayIsEmpty : Boolean = true
 
 
     override val root = tableview(listOrderWithoutPay){
-        readonlyColumn("ID", Order::id).fixedWidth(80)
-        readonlyColumn("Name", Order::product).fixedWidth(150)
-        readonlyColumn("Quantity", Order::quantity).fixedWidth(100)
-        readonlyColumn("Price", Order::price).fixedWidth(100)
-        readonlyColumn("Sub-Total", Order::subTotal).fixedWidth(120)
-        readonlyColumn("Actions", Order::actions)
+        readonlyColumn("ID", ProductInOrderTable::id).fixedWidth(80)
+        readonlyColumn("Name", ProductInOrderTable::product).fixedWidth(150)
+        readonlyColumn("Quantity", ProductInOrderTable::quantity).fixedWidth(100)
+        readonlyColumn("Price", ProductInOrderTable::price).fixedWidth(100)
+        readonlyColumn("Sub-Total", ProductInOrderTable::subTotal).fixedWidth(120)
+        readonlyColumn("Actions", ProductInOrderTable::actions)
 
     }
 
-
-    fun addProduct( order : Order ){
+    fun addProduct(productInOrderTable : ProductInOrderTable){
 
         if(listOrderWithoutPayIsEmpty){
 
@@ -37,8 +38,16 @@ class TableOrderWithoutPay : Fragment()  {
         }
 
         size++
-        listOrderWithoutPay.add(order)
+        listOrderWithoutPay.add(productInOrderTable)
 
+    }
+
+    fun length() : Int {
+        return listOrderWithoutPay.size
+    }
+
+    fun getList() : MutableList<ProductInOrderTable> {
+        return listOrderWithoutPay
     }
 
 }

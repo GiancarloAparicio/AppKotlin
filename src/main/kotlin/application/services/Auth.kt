@@ -1,9 +1,8 @@
-package services
+package application.services
 
-import database.Database
-import helpers.encrypt
-import database.SqlServer
-import models.User
+import application.database.Database
+import application.helpers.encrypt
+import application.models.User
 import java.sql.ResultSet
 
 class Auth {

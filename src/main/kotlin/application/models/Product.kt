@@ -1,9 +1,9 @@
-package models
+package application.models
 
 import java.sql.Date
 import java.sql.ResultSet
 
-class Product(data: ResultSet)  {
+class Product(data : ResultSet)  {
     val id : Int = data.getInt(1)
     var name : String = data.getString(2)
     var price : Double  = data.getDouble(3)

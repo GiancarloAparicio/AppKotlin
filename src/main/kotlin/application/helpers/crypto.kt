@@ -1,9 +1,8 @@
-package helpers
+package application.helpers
 
 
 import java.math.BigInteger
 import java.security.MessageDigest
-import java.security.NoSuchAlgorithmException
 
 
 fun encrypt(message:String):String{

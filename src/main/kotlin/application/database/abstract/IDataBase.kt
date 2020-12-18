@@ -1,4 +1,4 @@
-package database.abstract
+package application.database.abstract
 
 import java.sql.Connection
 import java.sql.ResultSet
@@ -14,25 +14,25 @@ import java.sql.ResultSet
 
 
     /**
-     * Gets a connection to the database
+     * Gets a connection to the app.database
      * @return {Connection}
      */
      fun getConnection(): Connection
 
     /**
-     * Set a connection to the database
+     * Set a connection to the app.database
      * @return {Connection}
      */
      fun setConnection(connection: Connection)
 
     /**
-     * Start a connection to the database
+     * Start a connection to the app.database
      * @return {Connection}
      */
      fun connectToDatabase()
 
 
-     fun execStoreProcedure(storeProcedure: String, params: Array<Any>) : ResultSet?
+     fun execStoreProcedure(storeProcedure: String, params: Array<Any?>) : ResultSet?
 
      fun execStoreProcedure(storeProcedure: String) : ResultSet?
 

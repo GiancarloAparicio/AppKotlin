@@ -1,7 +1,6 @@
-package services
+package application.services
 
-import models.User
-import java.sql.ResultSet
+import application.models.User
 
 class Session {
 

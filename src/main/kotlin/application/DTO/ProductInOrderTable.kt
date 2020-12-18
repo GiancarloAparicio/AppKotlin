@@ -1,8 +1,9 @@
-package models
+package application.DTO
 
-import javafx.scene.control.TableColumn
-
-class Order(
+/*
+* This class Order is used by the tables, so its structure should not be changed
+* */
+class ProductInOrderTable(
             val id :Int?,
             var product : String?,
             var quantity : Int?,

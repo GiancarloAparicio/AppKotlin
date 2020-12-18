@@ -1,6 +1,6 @@
-package database
+package application.database
 
-import database.abstract.IDataBase
+import application.database.abstract.IDataBase
 import com.microsoft.sqlserver.jdbc.SQLServerDriver;
 import java.sql.*
 
@@ -33,13 +33,13 @@ class SqlServer() : IDataBase {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver")
             this.setConnection(DriverManager.getConnection(url,user,password))
 
-            println("Connect database: success" )
+            println("Connect app.database: success" )
         }catch(e:Error){
-            println("Error database: ${e.message}")
+            println("Error app.database: ${e.message}")
         }
     }
 
-    override fun execStoreProcedure(storeProcedure: String, params: Array<Any>) : ResultSet? {
+    override fun execStoreProcedure(storeProcedure: String, params: Array<Any?>) : ResultSet? {
         try {
             val procedure: CallableStatement = this.getConnection().prepareCall(storeProcedure)
 

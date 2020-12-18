@@ -1,8 +1,7 @@
-package repositories
+package application.repositories
 
-import database.Database
-import database.SqlServer
-import models.Product
+import application.database.Database
+import application.models.Product
 import java.sql.ResultSet
 
 class ProductRepository {
@@ -17,12 +16,16 @@ class ProductRepository {
             val data: ResultSet? = dataBase.execStoreProcedure( storeProcedure )
             var arrayProducts : MutableList<Product> = ArrayList();
 
-            if (data != null )
+            if (data != null ){
                 while ( data.next() ){
                     arrayProducts.add( Product(data) )
                 }
 
-            return arrayProducts
+                return arrayProducts
+            }else{
+                throw Error("Error: Can not execute store procedure")
+            }
+
         }
 
         fun getProduct( product : String? ): Product? {
@@ -40,6 +43,7 @@ class ProductRepository {
             }
 
         }
+
 
 
     }
