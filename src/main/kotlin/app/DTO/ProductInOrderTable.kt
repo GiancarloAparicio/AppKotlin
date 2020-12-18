@@ -1,4 +1,4 @@
-package application.DTO
+package app.DTO
 
 /*
 * This class Order is used by the tables, so its structure should not be changed

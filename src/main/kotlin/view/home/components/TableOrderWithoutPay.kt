@@ -1,6 +1,6 @@
 package view.home.components
 
-import application.DTO.ProductInOrderTable
+import app.DTO.ProductInOrderTable
 import tornadofx.*
 
 class TableOrderWithoutPay : Fragment()  {

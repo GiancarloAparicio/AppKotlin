@@ -4,7 +4,7 @@ import javafx.event.Event
 import javafx.fxml.FXML
 import javafx.scene.control.Label
 import javafx.scene.layout.BorderPane
-import application.models.User
+import app.models.User
 import tornadofx.*
 import view.home.dashboard.*
 

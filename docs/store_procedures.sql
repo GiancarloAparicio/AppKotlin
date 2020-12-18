@@ -34,14 +34,14 @@ AS BEGIN
     INSERT INTO users (email,password,name,last_name) 
         VALUES (@email,@password,@name,@last_name);
 
-    INSERT INTO role_user (role_id,user_id) 
+    INSERT INTO role_user (role_id,email)
         VALUES ('user',@email);
 
 END;
 
 CREATE PROC loginUser(@email VARCHAR(100), @password VARCHAR(64))
 AS BEGIN
-    SELECT TOP 1 id,email,name,last_name ,create_at ,update_at ,delete_at FROM users
+    SELECT TOP 1 email,name,last_name ,create_at ,update_at ,delete_at FROM users
     WHERE email = @email AND password = @password;
 END
 
@@ -105,11 +105,11 @@ END;
 
 /**ORDERS**/
 
-CREATE PROC createOrder(@user_id INT, @description VARCHAR(100))
+CREATE PROC createOrder(@email VARCHAR(100), @description VARCHAR(100))
 AS BEGIN
     DECLARE @identity INT;
-    INSERT INTO orders (user_id  ,description)
-        VALUES (@user_id ,@description );
+    INSERT INTO orders (email  ,description)
+        VALUES (@email ,@description );
 
     SET @identity = SCOPE_IDENTITY();
 

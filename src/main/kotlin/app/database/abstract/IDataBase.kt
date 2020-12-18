@@ -1,4 +1,4 @@
-package application.database.abstract
+package app.database.abstract
 
 import java.sql.Connection
 import java.sql.ResultSet

@@ -1,13 +1,13 @@
 package view.home.dashboard
 
-import application.database.Database
+import app.database.Database
 import javafx.scene.control.*
 import javafx.scene.layout.BorderPane
 import javafx.scene.layout.VBox
-import application.DTO.ProductInOrderTable
-import application.models.Product
-import application.models.User
-import application.repositories.ProductRepository
+import app.DTO.ProductInOrderTable
+import app.models.Product
+import app.models.User
+import app.repositories.ProductRepository
 import tornadofx.*
 import view.home.components.TableOrderWithoutPay
 import java.sql.ResultSet
@@ -85,7 +85,7 @@ class Delivery : View() {
 
     private fun createNewOrderAndReturnID() : Int {
         val storeProcedure = "{CALL createOrder(?,?)}"
-        val params : Array<Any?> = arrayOf( User.getInstance().id , "Cake Delivery" )
+        val params : Array<Any?> = arrayOf( User.getInstance().email , "Cake Delivery" )
         val data: ResultSet? = dataBase.execStoreProcedure( storeProcedure, params )
 
         if ( data != null && data.next() )

@@ -1,6 +1,6 @@
-package application.services
+package app.services
 
-import application.models.User
+import app.models.User
 
 class Session {
 

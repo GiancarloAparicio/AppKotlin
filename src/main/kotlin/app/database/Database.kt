@@ -1,6 +1,6 @@
-package application.database
+package app.database
 
-import application.database.abstract.IDataBase
+import app.database.abstract.IDataBase
 
 class Database {
 

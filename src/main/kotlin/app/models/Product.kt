@@ -1,4 +1,4 @@
-package application.models
+package app.models
 
 import java.sql.Date
 import java.sql.ResultSet

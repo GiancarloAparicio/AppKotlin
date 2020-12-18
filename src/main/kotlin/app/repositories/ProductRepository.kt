@@ -1,7 +1,7 @@
-package application.repositories
+package app.repositories
 
-import application.database.Database
-import application.models.Product
+import app.database.Database
+import app.models.Product
 import java.sql.ResultSet
 
 class ProductRepository {

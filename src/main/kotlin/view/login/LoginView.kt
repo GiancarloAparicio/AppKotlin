@@ -1,12 +1,12 @@
 package view.login
 
-import application.services.Auth
+import app.services.Auth
 import javafx.scene.control.Label
 import javafx.scene.control.PasswordField
 import javafx.scene.control.TextField
 import javafx.scene.layout.BorderPane
-import application.models.User
-import application.services.Session
+import app.models.User
+import app.services.Session
 import tornadofx.View
 import tornadofx.ViewTransition
 import tornadofx.seconds
