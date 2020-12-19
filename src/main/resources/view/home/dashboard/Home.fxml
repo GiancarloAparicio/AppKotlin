@@ -113,6 +113,9 @@
                         <TableColumn maxWidth="200.0" minWidth="50.0" prefWidth="78.0" style="-fx-background-color: #1BA0EB;" text="Date" />
                         <TableColumn maxWidth="200.0" minWidth="50.0" prefWidth="104.0" style="-fx-background-color: #1BA0EB;" text="Status" />
                     </columns>
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                     </GridPane.margin>
                   </TableView>
                   <Label text="Latest Orders:">
                      <font>
@@ -139,7 +142,7 @@
                            <children>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../pictures/images/cup-cake.png" />
+                                    <Image url="@../../../pictures/images/cup-cake.png" />
                                  </image>
                                  <HBox.margin>
                                     <Insets left="10.0" right="10.0" />
@@ -179,7 +182,7 @@
                            <children>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../pictures/images/cup-cake.png" />
+                                    <Image url="@../../../pictures/images/cup-cake.png" />
                                  </image>
                                  <HBox.margin>
                                     <Insets left="10.0" right="10.0" />
@@ -219,7 +222,7 @@
                            <children>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../pictures/images/cup-cake.png" />
+                                    <Image url="@../../../pictures/images/cup-cake.png" />
                                  </image>
                                  <HBox.margin>
                                     <Insets left="10.0" right="10.0" />
@@ -259,7 +262,7 @@
                            <children>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../pictures/images/cup-cake.png" />
+                                    <Image url="@../../../pictures/images/cup-cake.png" />
                                  </image>
                                  <HBox.margin>
                                     <Insets left="10.0" right="10.0" />

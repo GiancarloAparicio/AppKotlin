@@ -13,7 +13,7 @@ class DomainEvent : IObservable{
 
         fun getInstance() : DomainEvent{
 
-            if(instance == null){
+            if( instance == null ){
                 instance = DomainEvent()
             }
 
@@ -21,15 +21,20 @@ class DomainEvent : IObservable{
         }
     }
 
-    override fun addListener(listener: IObserver) {
+    override fun addListener( listener : IObserver ) {
+
         listListener.add(listener)
     }
 
-    override fun throwEvent(type: String, data: Any) {
+    override fun throwEvent( type : String, data : Any ) {
 
-        for (listener in listListener){
-            listener.event( type, data )
+        var iterators = listListener.iterator()
+
+        while( iterators.hasNext() ){
+
+            iterators.next().event( type, data )
         }
+
     }
 
 

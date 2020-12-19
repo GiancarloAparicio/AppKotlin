@@ -5,10 +5,13 @@ import javafx.fxml.FXML
 import javafx.scene.control.Label
 import javafx.scene.layout.BorderPane
 import app.models.User
+import app.observer.DomainEvent
+import app.observer.EventTypes
+import app.observer.interfaces.IObserver
 import tornadofx.*
 import view.home.dashboard.*
 
-class HomeView() : View(){
+class HomeView() : View(), IObserver {
 
     override val root : BorderPane by fxml()
 
@@ -19,7 +22,6 @@ class HomeView() : View(){
     private val users : Users by inject()
     private val products : Products by inject()
 
-
     @FXML
     lateinit var labelNameUser : Label
 
@@ -27,13 +29,18 @@ class HomeView() : View(){
     lateinit var dashBoard: BorderPane
     //private val dashBoard : BorderPane by fxid() /*TODO: Por alguna razon falla :(, no usar esta linea*/
 
-
     private val currentUser : User = User.getInstance()
+    private val eventBus : DomainEvent = DomainEvent.getInstance()
 
     init{
         dashBoard.center = home.root
-        initializeUserData()
+
+        eventBus.addListener(this)
     }
+
+    /**
+     * Functions GUI
+     */
 
     fun setScene(event:Event){
         val buttonPressed=event.target.toString()
@@ -53,7 +60,12 @@ class HomeView() : View(){
         }
     }
 
-    private fun initializeUserData(){
-        labelNameUser.text = currentUser.name
+    override fun event(type: String, data: Any) {
+
+        if( type == EventTypes.USER_LOGIN ){
+            labelNameUser.text = currentUser.name
+        }
+
     }
+
 }

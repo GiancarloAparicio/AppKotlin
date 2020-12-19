@@ -9,6 +9,7 @@ import app.models.Order
 import app.models.Product
 import app.DAO.ProductDAO
 import app.observer.DomainEvent
+import app.observer.EventTypes
 import app.observer.interfaces.IObserver
 import tornadofx.*
 import view.home.components.TableOrderWithoutPay
@@ -24,8 +25,8 @@ class Delivery : View(), IObserver {
 
     private var tableOrderWithoutPay : TableOrderWithoutPay = TableOrderWithoutPay()
 
-    private var dataBase = Database.getInstance()
-    private var eventBus : DomainEvent = DomainEvent.getInstance()
+    private val dataBase = Database.getInstance()
+    private val eventBus : DomainEvent = DomainEvent.getInstance()
 
     init{
         initializeComboBox()
@@ -35,10 +36,9 @@ class Delivery : View(), IObserver {
         eventBus.addListener(this)
     }
 
-
-    /*
+    /**
     * Functions GUI
-    * */
+    */
 
     fun addProductToOrder(){
         val quantityIsCorrect : Boolean = validateQuantity()
@@ -72,35 +72,37 @@ class Delivery : View(), IObserver {
 
     fun generateOrder(){
 
-        val order : Order = Order()
-
+        val order = Order()
         val listProducts = tableOrderWithoutPay.getList()
 
         for ( item in listProducts){
             order.addProductToOrder( item )
         }
 
-        eventBus.throwEvent("ORDER CREATE",order)
+        eventBus.throwEvent( EventTypes.ORDER_CREATE,order )
 
+    }
 
-        //TODO: Elegir una opcion
-        // Publicar un evento con una orden generada (Op1)
-        // Limpiar todo despues de crear una orden (Op 2 no recomendada)
+    override fun event(type: String, data: Any) {
+
+        if( type == EventTypes.ORDER_CREATE ){
+            clearProductTable()
+            clearInputAndComboBox()
+        }
     }
 
 
-    /*
+
+    /**
     *  Private functions helpers
-    * */
+    */
 
     private fun clearInputAndComboBox(){
-
+        inputQuantity.text = ""
     }
 
     private fun clearProductTable(){
         tableOrderWithoutPay.clearList()
-
-        println("Clear table")
     }
 
     private fun initializeTableOrderWithoutPay(){
@@ -115,12 +117,5 @@ class Delivery : View(), IObserver {
         }
     }
 
-    override fun event(type: String, data: Any) {
-
-        if(type == "ORDER CREATE"){
-            clearProductTable()
-            println("Se creo una nueva orden")
-        }
-    }
 
 }
