@@ -1,4 +1,4 @@
-package view.home.dashboard
+package view.home.dashboard._delivery
 
 import javafx.scene.control.*
 import javafx.scene.layout.BorderPane
@@ -11,7 +11,7 @@ import app.observer.DomainEvent
 import app.observer.EventTypes
 import app.observer.interfaces.IObserver
 import tornadofx.*
-import view.home.components.TableOrderWithoutPay
+import view.home.dashboard._delivery.components.TableOrderWithoutPay
 
 
 class Delivery : View(), IObserver {
@@ -20,7 +20,7 @@ class Delivery : View(), IObserver {
 
     private val comboBoxProduct : ComboBox<String> by fxid()
     private val inputQuantity : TextField by fxid()
-    private val contentTable : VBox by fxid()
+    private val contentTableOrderWithoutPay : VBox by fxid()
 
     private var tableOrderWithoutPay : TableOrderWithoutPay = TableOrderWithoutPay()
 
@@ -107,7 +107,7 @@ class Delivery : View(), IObserver {
     }
 
     private fun initializeTableOrderWithoutPay(){
-        contentTable.add( tableOrderWithoutPay.root )
+        contentTableOrderWithoutPay.add( tableOrderWithoutPay.root )
     }
 
     private fun initializeComboBox(){

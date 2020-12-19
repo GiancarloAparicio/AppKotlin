@@ -1,4 +1,4 @@
-package view.home.components
+package view.home.dashboard._delivery.components
 
 import app.DTO.ProductInOrderTable
 import javafx.collections.ObservableList

@@ -2,8 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -105,18 +103,6 @@
                   <Insets left="10.0" right="10.0" top="15.0" />
                </GridPane.margin>
                <children>
-                  <TableView prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
-                    <columns>
-                      <TableColumn maxWidth="100.0" minWidth="50.0" prefWidth="58.0" text="#" />
-                      <TableColumn maxWidth="200.0" minWidth="50.0" prefWidth="92.0"  text="Client" />
-                        <TableColumn maxWidth="200.0" minWidth="50.0" prefWidth="97.0"  text="Item" />
-                        <TableColumn maxWidth="200.0" minWidth="50.0" prefWidth="78.0"  text="Date" />
-                        <TableColumn maxWidth="200.0" minWidth="50.0" prefWidth="104.0" text="Status" />
-                    </columns>
-                     <GridPane.margin>
-                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-                     </GridPane.margin>
-                  </TableView>
                   <Label text="Latest Orders:">
                      <font>
                         <Font name="System Bold" size="13.0" />
@@ -142,7 +128,7 @@
                            <children>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../pictures/images/cup-cake.png" />
+                                    <Image url="@../../../../pictures/images/cup-cake.png" />
                                  </image>
                                  <HBox.margin>
                                     <Insets left="10.0" right="10.0" />
@@ -182,7 +168,7 @@
                            <children>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../pictures/images/cup-cake.png" />
+                                    <Image url="@../../../../pictures/images/cup-cake.png" />
                                  </image>
                                  <HBox.margin>
                                     <Insets left="10.0" right="10.0" />
@@ -222,7 +208,7 @@
                            <children>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../pictures/images/cup-cake.png" />
+                                    <Image url="@../../../../pictures/images/cup-cake.png" />
                                  </image>
                                  <HBox.margin>
                                     <Insets left="10.0" right="10.0" />
@@ -262,7 +248,7 @@
                            <children>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../pictures/images/cup-cake.png" />
+                                    <Image url="@../../../../pictures/images/cup-cake.png" />
                                  </image>
                                  <HBox.margin>
                                     <Insets left="10.0" right="10.0" />
@@ -300,6 +286,11 @@
                         </HBox>
                      </children>
                   </VBox>
+                  <BorderPane fx:id="contentTableLatestOrders" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                     <padding>
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                     </padding>
+                  </BorderPane>
                </children>
             </GridPane>
          </children>

@@ -9,6 +9,7 @@ class MyApp: App(MainView::class) {
 
             importStylesheet("/styles/table-view.css")
      */
+
     init{
         importStylesheet("/styles/table-view.css")
     }

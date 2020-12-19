@@ -1,9 +1,9 @@
-package view.home.dashboard
+package view.home.dashboard._products
 
 import javafx.scene.layout.BorderPane
 import tornadofx.View
 
-class History : View() {
+class Products : View() {
 
     override val root : BorderPane by fxml()
 }

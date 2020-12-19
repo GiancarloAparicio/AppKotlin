@@ -9,13 +9,18 @@ import app.observer.DomainEvent
 import app.observer.EventTypes
 import app.observer.interfaces.IObserver
 import tornadofx.*
-import view.home.dashboard.*
+import view.home.dashboard._delivery.Delivery
+import view.home.dashboard._history.History
+import view.home.dashboard._home.Home
+import view.home.dashboard._products.Products
+import view.home.dashboard._settings.Settings
+import view.home.dashboard._users.Users
 
 class HomeView() : View(), IObserver {
 
     override val root : BorderPane by fxml()
 
-    private val home:Home by inject()
+    private val home: Home by inject()
     private val delivery : Delivery by inject()
     private val history : History by inject()
     private val settings : Settings by inject()
