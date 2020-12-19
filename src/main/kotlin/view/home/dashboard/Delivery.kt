@@ -8,11 +8,13 @@ import app.DTO.ProductInOrderTable
 import app.models.Order
 import app.models.Product
 import app.DAO.ProductDAO
+import app.observer.DomainEvent
+import app.observer.interfaces.IObserver
 import tornadofx.*
 import view.home.components.TableOrderWithoutPay
 
 
-class Delivery : View() {
+class Delivery : View(), IObserver {
 
     override val root : BorderPane by fxml()
 
@@ -23,11 +25,14 @@ class Delivery : View() {
     private var tableOrderWithoutPay : TableOrderWithoutPay = TableOrderWithoutPay()
 
     private var dataBase = Database.getInstance()
+    private var eventBus : DomainEvent = DomainEvent.getInstance()
 
     init{
         initializeComboBox()
         initializeTableOrderWithoutPay()
         tableOrderWithoutPay.clearList()
+
+        eventBus.addListener(this)
     }
 
 
@@ -75,7 +80,8 @@ class Delivery : View() {
             order.addProductToOrder( item )
         }
 
-        clearProductTable()
+        eventBus.throwEvent("ORDER CREATE",order)
+
 
         //TODO: Elegir una opcion
         // Publicar un evento con una orden generada (Op1)
@@ -106,6 +112,14 @@ class Delivery : View() {
 
         for (product in products){
             comboBoxProduct.items.add(product.name)
+        }
+    }
+
+    override fun event(type: String, data: Any) {
+
+        if(type == "ORDER CREATE"){
+            clearProductTable()
+            println("Se creo una nueva orden")
         }
     }
 
