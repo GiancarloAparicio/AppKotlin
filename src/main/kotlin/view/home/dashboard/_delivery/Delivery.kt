@@ -29,7 +29,6 @@ class Delivery : View(), IObserver {
     init{
         initializeComboBox()
         initializeTableOrderWithoutPay()
-        tableOrderWithoutPay.clearList()
 
         eventBus.addListener(this)
     }
@@ -75,8 +74,10 @@ class Delivery : View(), IObserver {
         val order = Order()
         val listProducts = tableOrderWithoutPay.getList()
 
+
         for ( item in listProducts){
             order.addProductToOrder( item )
+            order._total += item.subTotal!!
         }
 
         eventBus.throwEvent( EventTypes.ORDER_CREATE,order )
@@ -108,6 +109,8 @@ class Delivery : View(), IObserver {
 
     private fun initializeTableOrderWithoutPay(){
         contentTableOrderWithoutPay.add( tableOrderWithoutPay.root )
+
+        tableOrderWithoutPay.clearList()
     }
 
     private fun initializeComboBox(){

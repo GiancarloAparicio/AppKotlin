@@ -15,6 +15,8 @@ class Order {
     var description : String
     val create_at : Date
 
+    var _total : Double = 0.0
+
     init{
         val storeProcedure = "{CALL createOrder(?,?)}"
         val params : Array<Any?> = arrayOf( User.getInstance().email , "Cake Delivery")
