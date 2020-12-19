@@ -14,10 +14,6 @@ class TableOrderWithoutPay : Fragment()  {
             null)
     ).asObservable()
 
-    private var size : Int = 1
-
-    private var listOrderWithoutPayIsEmpty : Boolean = true
-
 
     override val root = tableview(listOrderWithoutPay){
         readonlyColumn("ID", ProductInOrderTable::id).fixedWidth(80)
@@ -31,13 +27,6 @@ class TableOrderWithoutPay : Fragment()  {
 
     fun addProduct(productInOrderTable : ProductInOrderTable){
 
-        if(listOrderWithoutPayIsEmpty){
-
-            listOrderWithoutPay.removeAt(0)
-            this.listOrderWithoutPayIsEmpty = false
-        }
-
-        size++
         listOrderWithoutPay.add(productInOrderTable)
 
     }
@@ -48,6 +37,10 @@ class TableOrderWithoutPay : Fragment()  {
 
     fun getList() : MutableList<ProductInOrderTable> {
         return listOrderWithoutPay
+    }
+
+    fun clearList(){
+        listOrderWithoutPay.clear()
     }
 
 }

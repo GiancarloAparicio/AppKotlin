@@ -1,10 +1,10 @@
-package app.repositories
+package app.DAO
 
 import app.database.Database
 import app.models.Product
 import java.sql.ResultSet
 
-class ProductRepository {
+class ProductDAO {
 
     companion object {
 

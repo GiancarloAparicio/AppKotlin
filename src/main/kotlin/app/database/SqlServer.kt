@@ -49,6 +49,7 @@ class SqlServer() : IDataBase {
                     is Int    -> procedure.setInt(index+1 , param )
                     is Double -> procedure.setDouble(index+1 , param )
                     is Date   -> procedure.setDate(index+1 , param )
+                    is Boolean   -> procedure.setBoolean(index+1 , param )
                 }
             }
 

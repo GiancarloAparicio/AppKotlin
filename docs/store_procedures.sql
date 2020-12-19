@@ -5,12 +5,16 @@ AS BEGIN
     INSERT INTO permits (accion)
         VALUES (@accion);
 
+    SELECT SCOPE_IDENTITY();
+
 END;
 
 CREATE PROC createRole(@role VARCHAR(30),@description VARCHAR(100))
 AS BEGIN
      INSERT INTO roles (role,description)
         VALUES (@role,@description);
+
+     SELECT SCOPE_IDENTITY();
 
 END;
 
@@ -23,6 +27,7 @@ AS BEGIN
 
 END;
 
+
 CREATE PROC createUser(
     @email VARCHAR(100),
     @password VARCHAR(64),
@@ -31,11 +36,17 @@ CREATE PROC createUser(
     )
 AS BEGIN
 
+	DECLARE @identity INT
+
     INSERT INTO users (email,password,name,last_name) 
         VALUES (@email,@password,@name,@last_name);
 
+    SET @identity = SCOPE_IDENTITY();
+
     INSERT INTO role_user (role_id,email)
         VALUES ('user',@email);
+
+    SELECT @identity;
 
 END;
 
@@ -69,12 +80,16 @@ AS BEGIN
     INSERT INTO products_lots (expires_at, quantity, warehouse_id)
         VALUES (@expires,@quantity,@warehouse);
 
+    SELECT SCOPE_IDENTITY();
+
 END;
 
 CREATE PROC createProduct(@name VARCHAR(30), @price MONEY, @category_id INT ,@lot_id INT)
 AS BEGIN
     INSERT INTO products (name, price, category_product_id,lot_id)
         VALUES (@name,@price,@category_id,@lot_id);
+
+    SELECT SCOPE_IDENTITY();
 
 END;
 
@@ -122,6 +137,8 @@ AS BEGIN
     INSERT INTO order_product (quantity,order_id,product_id)
         VALUES (@quantity,@order_id,@product_id);
 
+    SELECT SCOPE_IDENTITY();
+
 END;
 
 
@@ -131,6 +148,9 @@ CREATE PROC createProvider(@company VARCHAR(40), @ruc VARCHAR(11))
 AS BEGIN
     INSERT INTO providers (company,ruc)
         VALUES (@company , @ruc );
+
+    SELECT SCOPE_IDENTITY();
+
 END
 
 CREATE PROC createCategorySupply(@category VARCHAR(30))
@@ -145,6 +165,9 @@ CREATE PROC createLotSupply(@expires DATE,@warehouse INT,@quantity SMALLINT)
 AS BEGIN
     INSERT INTO supplies_lots (expires_at, quantity, warehouse_id)
         VALUES (@expires,@quantity,@warehouse);
+
+    SELECT SCOPE_IDENTITY()
+
 END;
 
 CREATE PROC createSupplies(@name VARCHAR(30), @category_id INT, @lot_id INT)
@@ -174,6 +197,8 @@ CREATE PROC createPurchaseDetails(@purchase_id INT, @quantity SMALLINT, @supply_
 AS BEGIN
     INSERT INTO purchase_supply (quantity,purchase_id,supply_id)
         VALUES (@quantity,@purchase_id,@supply_id);
+
+    SELECT SCOPE_IDENTITY()
 
 END;
 
