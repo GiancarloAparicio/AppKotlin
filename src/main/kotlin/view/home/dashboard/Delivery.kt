@@ -1,6 +1,5 @@
 package view.home.dashboard
 
-import app.database.Database
 import javafx.scene.control.*
 import javafx.scene.layout.BorderPane
 import javafx.scene.layout.VBox
@@ -25,7 +24,6 @@ class Delivery : View(), IObserver {
 
     private var tableOrderWithoutPay : TableOrderWithoutPay = TableOrderWithoutPay()
 
-    private val dataBase = Database.getInstance()
     private val eventBus : DomainEvent = DomainEvent.getInstance()
 
     init{
@@ -42,9 +40,11 @@ class Delivery : View(), IObserver {
 
     fun addProductToOrder(){
         val quantityIsCorrect : Boolean = validateQuantity()
-        val product : Product? = ProductDAO.getProduct( comboBoxProduct.selectedItem )
+        val nameProduct : String? = comboBoxProduct.selectedItem
+        val product : Product? = ProductDAO.getProduct( if( nameProduct is String ) nameProduct else "" )
 
-        if( product != null  &&  quantityIsCorrect ){
+        if( product is Product  &&  quantityIsCorrect ){
+
             val unitPrice : Double = product.price
             val quantity : Int = inputQuantity.text.toInt()
             val subTotal : Double = unitPrice * quantity
@@ -98,6 +98,7 @@ class Delivery : View(), IObserver {
     */
 
     private fun clearInputAndComboBox(){
+        //TODO: Agregar funcionalidad para limpiar el comboBox
         inputQuantity.text = ""
     }
 

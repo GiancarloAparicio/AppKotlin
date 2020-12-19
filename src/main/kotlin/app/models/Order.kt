@@ -32,7 +32,8 @@ class Order {
     }
 
     fun addProductToOrder(item : ProductInOrderTable) : Boolean{
-        val product : Product? = ProductDAO.getProduct( item.product )
+        val nameProduct : String? = item.product
+        val product : Product? = ProductDAO.getProduct( if( nameProduct is String ) nameProduct else "" )
 
         if( item.quantity is Int && product is Product ){
             val storeProcedure = "{CALL createOrderDetails(?,?,?)}"

@@ -28,23 +28,18 @@ class ProductDAO {
 
         }
 
-        fun getProduct( product : String? ): Product? {
-            if(product != null){
-                val storeProcedure = "{CALL getProduct(?)}"
-                val data: ResultSet? = dataBase.execStoreProcedure( storeProcedure, arrayOf(product) )
+        fun getProduct( productName : String ): Product? {
 
-                if (data != null && data.next() ) {
-                    return Product(data)
-                }else{
-                    return null
-                }
-            }else{
-                return null
+            val storeProcedure = "{CALL getProduct(?)}"
+            val params : Array<Any?> = arrayOf(productName)
+            val data: ResultSet? = dataBase.execStoreProcedure( storeProcedure, params )
+
+            if (data != null && data.next() ) {
+                return Product(data)
             }
-
+            return null
+            
         }
-
-
 
     }
 }

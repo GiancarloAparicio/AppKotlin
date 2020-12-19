@@ -1,11 +1,13 @@
 package view.home.components
 
 import app.DTO.ProductInOrderTable
+import javafx.collections.ObservableList
 import tornadofx.*
 
 class TableOrderWithoutPay : Fragment()  {
 
-    private var listOrderWithoutPay = mutableListOf(
+
+    private var listOrderWithoutPay : ObservableList<ProductInOrderTable> = mutableListOf(
         ProductInOrderTable(null,
             null,
             null,

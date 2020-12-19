@@ -105,13 +105,13 @@
                   <Insets left="10.0" right="10.0" top="15.0" />
                </GridPane.margin>
                <children>
-                  <TableView prefHeight="200.0" prefWidth="200.0" stylesheets="@../../styles/table-view.css" GridPane.rowIndex="1">
+                  <TableView prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                     <columns>
-                      <TableColumn maxWidth="100.0" minWidth="50.0" prefWidth="58.0" style="-fx-background-color: #1BA0EB;" text="#" />
-                      <TableColumn maxWidth="200.0" minWidth="50.0" prefWidth="92.0" style="-fx-background-color: #1BA0EB;" text="Client" />
-                        <TableColumn maxWidth="200.0" minWidth="50.0" prefWidth="97.0" style="-fx-background-color: #1BA0EB;" text="Item" />
-                        <TableColumn maxWidth="200.0" minWidth="50.0" prefWidth="78.0" style="-fx-background-color: #1BA0EB;" text="Date" />
-                        <TableColumn maxWidth="200.0" minWidth="50.0" prefWidth="104.0" style="-fx-background-color: #1BA0EB;" text="Status" />
+                      <TableColumn maxWidth="100.0" minWidth="50.0" prefWidth="58.0" text="#" />
+                      <TableColumn maxWidth="200.0" minWidth="50.0" prefWidth="92.0"  text="Client" />
+                        <TableColumn maxWidth="200.0" minWidth="50.0" prefWidth="97.0"  text="Item" />
+                        <TableColumn maxWidth="200.0" minWidth="50.0" prefWidth="78.0"  text="Date" />
+                        <TableColumn maxWidth="200.0" minWidth="50.0" prefWidth="104.0" text="Status" />
                     </columns>
                      <GridPane.margin>
                         <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />

@@ -63,9 +63,13 @@ class HomeView() : View(), IObserver {
     override fun event(type: String, data: Any) {
 
         if( type == EventTypes.USER_LOGIN ){
-            labelNameUser.text = currentUser.name
+            initialiseDataUser()
         }
 
+    }
+
+    private fun initialiseDataUser(){
+        labelNameUser.text = currentUser.name
     }
 
 }
