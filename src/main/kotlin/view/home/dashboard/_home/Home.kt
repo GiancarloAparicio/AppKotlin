@@ -6,7 +6,9 @@ import app.observer.DomainEvent
 import app.observer.EventTypes
 import app.observer.interfaces.IObserver
 import javafx.scene.layout.BorderPane
+import javafx.scene.layout.VBox
 import tornadofx.View
+import view.home.dashboard._home.components.LastProductAdded
 import view.home.dashboard._home.components.TableLatestOrders
 
 class Home: View(), IObserver {
@@ -16,10 +18,13 @@ class Home: View(), IObserver {
     private val contentTableLatestOrders : BorderPane by fxid()
     private var tableLatestOrders : TableLatestOrders = TableLatestOrders()
 
+
+    private val contentLatestProduct : VBox by fxid()
     private val eventBus : DomainEvent = DomainEvent.getInstance()
 
     init{
         initializeTableLatestOrders()
+        initializeLatestProductsAdded()
 
         eventBus.addListener(this)
     }
@@ -45,6 +50,10 @@ class Home: View(), IObserver {
     private fun initializeTableLatestOrders(){
         contentTableLatestOrders.center = tableLatestOrders.root
         tableLatestOrders.clearList()
+    }
+
+    private fun initializeLatestProductsAdded(){
+        contentLatestProduct.add( LastProductAdded().root )
     }
 
 }
