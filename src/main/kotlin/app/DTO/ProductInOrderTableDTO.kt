@@ -3,7 +3,7 @@ package app.DTO
 /*
 * This class Order is used by the tables, so its structure should not be changed
 * */
-class ProductInOrderTable(
+class ProductInOrderTableDTO(
             val id :Int?,
             var product : String?,
             var quantity : Int?,

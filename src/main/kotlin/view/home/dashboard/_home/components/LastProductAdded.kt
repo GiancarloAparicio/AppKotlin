@@ -1,15 +1,30 @@
 package view.home.dashboard._home.components
 
-import javafx.scene.paint.Color
+import app.models.Product
 import javafx.scene.text.FontWeight
 import tornadofx.*
 
-class LastProductAdded : Fragment() {
+class LastProductAdded ( data : Product ) : Fragment() {
 
-     var product : String = "cake"
-     var url : String = "@/../pictures/images/cup-cake.png"
-     var price: Double = 0.0
+     var url : String = data.url
+     var product : String = data.name
+     var price: Double = data.price
      var description : String = "Description"
+
+    //TODO: Agregar el campo description en la tabla products, actualizar los store procedures tambien
+
+    companion object{
+        fun convertListToComponents( list :MutableList<Product> ) : MutableList<LastProductAdded> {
+
+            var componentsLatestProducts : MutableList<LastProductAdded> = mutableListOf();
+
+            for( product in list){
+                componentsLatestProducts.add( LastProductAdded( product ) )
+            }
+
+            return componentsLatestProducts
+        }
+    }
 
     override val root = hbox {
 

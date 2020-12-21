@@ -84,34 +84,43 @@ AS BEGIN
 
 END;
 
-/*TODO: Mejorar el store procedure y que devuelva todos los datos, si no existe la url devuelva default */
-CREATE PROC createProduct(@name VARCHAR(30), @price MONEY, @category_id INT ,@lot_id INT)
+CREATE PROC createProduct(@name VARCHAR(30), @price MONEY, @category_id INT ,@lot_id INT, @url VARCHAR(100) = NULL )
 AS BEGIN
+
+    DECLARE @identity INT;
     INSERT INTO products (name, price, category_product_id,lot_id)
         VALUES (@name,@price,@category_id,@lot_id);
 
-    SELECT SCOPE_IDENTITY();
+    SET @identity = SCOPE_IDENTITY();
+
+    IF @url IS NULL
+
+        INSERT INTO images (image_able_id, image_able_type, url, name)
+            VALUES (@identity,'product','@/../pictures/images/cup-cake.png','default')
+    ELSE
+        INSERT INTO images (image_able_id, image_able_type, url, name)
+                    VALUES (@identity,'product',@url ,'product-image-'+@identity)
+
+    SELECT @identity
 
 END;
 
-/*TODO: Mejorar el store procedure y que devuelva todos los datos, si no existe la url devuelva default */
 CREATE PROC getAllProducts
 AS BEGIN
     SELECT products.id,
-           images.url,
-           products.name,
-           products.price,
-           categories_products.category_product,
-           products_lots.quantity,
-           products_lots.expires_at
-    	FROM products JOIN categories_products ON products.category_product_id = categories_products.id
-    	              JOIN products_lots ON products_lots.id = products.lot_id
-    	              JOIN images ON products.id = images.image_able_id
-    	              WHERE images.image_able_type = 'product';
+               images.url,
+               products.name,
+               products.price,
+               categories_products.category_product,
+               products_lots.quantity,
+               products_lots.expires_at
+        	FROM products JOIN categories_products ON products.category_product_id = categories_products.id
+        	              JOIN products_lots ON products_lots.id = products.lot_id
+        	              LEFT JOIN images ON products.id = images.image_able_id
+        	              WHERE images.image_able_type = 'product'
 END;
 
-/*TODO: Mejorar el store procedure y que devuelva todos los datos, si no existe la url devuelva default */
-CREATE PROC getProduct(@product VARCHAR(30))
+CREATE PROC getProduct(@nameProduct VARCHAR(30))
 AS BEGIN
     SELECT products.id,
            images.url,
@@ -122,8 +131,8 @@ AS BEGIN
            products_lots.expires_at
     	FROM products JOIN categories_products ON products.category_product_id = categories_products.id
     	              JOIN products_lots ON products_lots.id = products.lot_id
-    	              JOIN images ON products.id = images.image_able_id
-    	              WHERE products.name = @product AND images.image_able_type = 'product';
+    	              LEFT JOIN images ON products.id = images.image_able_id
+    	              WHERE products.name = @nameProduct AND images.image_able_type = 'product';
 END;
 
 CREATE PROC getLatestProductsAdded
@@ -137,8 +146,9 @@ AS BEGIN
            products_lots.expires_at
     	FROM products JOIN categories_products ON products.category_product_id = categories_products.id
             	      JOIN products_lots ON products_lots.id = products.lot_id
-            	      JOIN images ON products.id = images.image_able_id
-            	      WHERE images.image_able_type = 'product';
+            	      LEFT JOIN images ON products.id = images.image_able_id
+            	      WHERE images.image_able_type = 'product'
+            	      ORDER BY products.id DESC
 END;
 
 

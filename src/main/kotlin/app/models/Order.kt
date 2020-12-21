@@ -1,6 +1,6 @@
 package app.models
 
-import app.DTO.ProductInOrderTable
+import app.DTO.ProductInOrderTableDTO
 import app.database.Database
 import app.DAO.ProductDAO
 import java.sql.Date
@@ -15,6 +15,8 @@ class Order {
     var description : String
     val create_at : Date
 
+
+    // Computed property, should not be saved in the database
     var _total : Double = 0.0
 
     init{
@@ -33,7 +35,7 @@ class Order {
 
     }
 
-    fun addProductToOrder(item : ProductInOrderTable) : Boolean{
+    fun addProductToOrder(item : ProductInOrderTableDTO) : Boolean{
         val nameProduct : String? = item.product
         val product : Product? = ProductDAO.getProduct( if( nameProduct is String ) nameProduct else "" )
 

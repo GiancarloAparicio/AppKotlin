@@ -2,7 +2,6 @@ package app.DAO
 
 import app.database.Database
 import app.models.Product
-import view.home.dashboard._home.components.LastProductAdded
 import java.sql.ResultSet
 
 class ProductDAO {
@@ -15,14 +14,14 @@ class ProductDAO {
         fun getAll() : MutableList<Product>  {
             val storeProcedure = "{CALL getAllProducts()}"
             val data: ResultSet? = dataBase.execStoreProcedure( storeProcedure )
-            var arrayProducts : MutableList<Product> = ArrayList();
+            var listProducts : MutableList<Product> = ArrayList();
 
             if (data != null ){
                 while ( data.next() ){
-                    arrayProducts.add( Product(data) )
+                    listProducts.add( Product(data) )
                 }
 
-                return arrayProducts
+                return listProducts
             }else{
                 throw Error("Error: Can not execute store procedure")
             }
@@ -42,22 +41,19 @@ class ProductDAO {
             
         }
 
-        //TODO: Crear el Store Procedure getLatestProductsAdded
-        fun getLatestProductsAdded() : MutableList<LastProductAdded> {
+        fun getLatestProductsAdded() : MutableList<Product> {
             val storeProcedure = "{CALL getLatestProductsAdded()}"
             val data: ResultSet? = dataBase.execStoreProcedure( storeProcedure )
 
-            var listLatestProducts : MutableList<LastProductAdded> = mutableListOf();
+            var listLatestProducts : MutableList<Product> = mutableListOf();
 
             if (data != null ) {
                 while (data.next()){
-                    listLatestProducts.add( LastProductAdded() )
+                    listLatestProducts.add( Product( data ) )
                 }
-
             }
 
             return listLatestProducts
-
         }
 
     }

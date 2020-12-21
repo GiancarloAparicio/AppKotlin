@@ -3,7 +3,7 @@ package view.home.dashboard._delivery
 import javafx.scene.control.*
 import javafx.scene.layout.BorderPane
 import javafx.scene.layout.VBox
-import app.DTO.ProductInOrderTable
+import app.DTO.ProductInOrderTableDTO
 import app.models.Order
 import app.models.Product
 import app.DAO.ProductDAO
@@ -48,7 +48,7 @@ class Delivery : View(), IObserver {
             val quantity : Int = inputQuantity.text.toInt()
             val subTotal : Double = unitPrice * quantity
 
-            var orderProduct = ProductInOrderTable( tableOrderWithoutPay.length(), product.name, quantity, unitPrice, subTotal,"Nothing")
+            var orderProduct = ProductInOrderTableDTO( tableOrderWithoutPay.length(), product.name, quantity, unitPrice, subTotal,"Nothing")
 
             tableOrderWithoutPay.addProduct( orderProduct )
 

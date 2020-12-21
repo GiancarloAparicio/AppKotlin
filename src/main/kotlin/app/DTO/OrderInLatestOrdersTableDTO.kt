@@ -1,6 +1,6 @@
 package app.DTO
 
-class OrderInLatestOrdersTable (
+class OrderInLatestOrdersTableDTO (
     val id :Int?,
     var user : String?,
     var total : Double?,

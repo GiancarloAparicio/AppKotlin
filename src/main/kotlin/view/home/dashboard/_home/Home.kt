@@ -1,7 +1,7 @@
 package view.home.dashboard._home
 
 import app.DAO.ProductDAO
-import app.DTO.OrderInLatestOrdersTable
+import app.DTO.OrderInLatestOrdersTableDTO
 import app.models.Order
 import app.observer.DomainEvent
 import app.observer.EventTypes
@@ -34,12 +34,11 @@ class Home: View(), IObserver {
      * Functions GUI
      */
 
+    override fun event(type: String, order: Any) {
+        if( type == EventTypes.ORDER_CREATE && order is Order ){
 
-    override fun event(type: String, data: Any) {
-        if( type == EventTypes.ORDER_CREATE && data is Order ){
-
-            var lastOrder = OrderInLatestOrdersTable(data.id, data.email, data._total, "Nothing")
-            tableLatestOrders.add( lastOrder )
+            var lastOrderDTO = OrderInLatestOrdersTableDTO( order.id, order.email, order._total, "Nothing")
+            tableLatestOrders.add( lastOrderDTO )
 
         }
     }
@@ -55,9 +54,10 @@ class Home: View(), IObserver {
 
     private fun initializeLatestProductsAdded(){
         val listLatestProductAdded = ProductDAO.getLatestProductsAdded()
+        val listComponents = LastProductAdded.convertListToComponents(listLatestProductAdded)
 
-        for ( product in listLatestProductAdded ){
-            contentLatestProduct.add( product.root )
+        for ( componentProduct in listComponents ){
+            contentLatestProduct.add( componentProduct.root )
         }
 
     }

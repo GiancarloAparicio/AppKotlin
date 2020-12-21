@@ -1,14 +1,14 @@
 package view.home.dashboard._delivery.components
 
-import app.DTO.ProductInOrderTable
+import app.DTO.ProductInOrderTableDTO
 import javafx.collections.ObservableList
 import tornadofx.*
 
 class TableOrderWithoutPay : Fragment()  {
 
 
-    private var listOrderWithoutPay : ObservableList<ProductInOrderTable> = mutableListOf(
-        ProductInOrderTable(null,
+    private var listOrderWithoutPayDTO : ObservableList<ProductInOrderTableDTO> = mutableListOf(
+        ProductInOrderTableDTO(null,
             null,
             null,
             null,
@@ -17,32 +17,32 @@ class TableOrderWithoutPay : Fragment()  {
     ).asObservable()
 
 
-    override val root = tableview(listOrderWithoutPay){
-        readonlyColumn("ID", ProductInOrderTable::id).fixedWidth(80)
-        readonlyColumn("Name", ProductInOrderTable::product).fixedWidth(150)
-        readonlyColumn("Quantity", ProductInOrderTable::quantity).fixedWidth(100)
-        readonlyColumn("Price", ProductInOrderTable::price).fixedWidth(100)
-        readonlyColumn("Sub-Total", ProductInOrderTable::subTotal).fixedWidth(120)
-        readonlyColumn("Actions", ProductInOrderTable::actions)
+    override val root = tableview(listOrderWithoutPayDTO){
+        readonlyColumn("ID", ProductInOrderTableDTO::id).fixedWidth(80)
+        readonlyColumn("Name", ProductInOrderTableDTO::product).fixedWidth(150)
+        readonlyColumn("Quantity", ProductInOrderTableDTO::quantity).fixedWidth(100)
+        readonlyColumn("Price", ProductInOrderTableDTO::price).fixedWidth(100)
+        readonlyColumn("Sub-Total", ProductInOrderTableDTO::subTotal).fixedWidth(120)
+        readonlyColumn("Actions", ProductInOrderTableDTO::actions)
 
     }
 
-    fun addProduct(productInOrderTable : ProductInOrderTable){
+    fun addProduct(productInOrderTableDTO : ProductInOrderTableDTO){
 
-        listOrderWithoutPay.add(productInOrderTable)
+        listOrderWithoutPayDTO.add(productInOrderTableDTO)
 
     }
 
     fun length() : Int {
-        return listOrderWithoutPay.size
+        return listOrderWithoutPayDTO.size
     }
 
-    fun getList() : MutableList<ProductInOrderTable> {
-        return listOrderWithoutPay
+    fun getList() : MutableList<ProductInOrderTableDTO> {
+        return listOrderWithoutPayDTO
     }
 
     fun clearList(){
-        listOrderWithoutPay.clear()
+        listOrderWithoutPayDTO.clear()
     }
 
 }

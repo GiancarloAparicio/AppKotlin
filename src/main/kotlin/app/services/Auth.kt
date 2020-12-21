@@ -14,7 +14,7 @@ class Auth {
             //TODO: Refactor the code into a DAO class
             val storeProcedure="{CALL loginUser(?,?)}"
 
-            val params : Array<Any?> = arrayOf(email,encrypt(password))
+            val params : Array<Any?> = arrayOf( email, encrypt(password) )
             val data:ResultSet?= dataBase.execStoreProcedure( storeProcedure , params )
 
             if (data != null && data.next()) {
