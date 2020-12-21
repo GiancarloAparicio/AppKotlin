@@ -2,6 +2,7 @@ package app.DAO
 
 import app.database.Database
 import app.models.Product
+import view.home.dashboard._home.components.LastProductAdded
 import java.sql.ResultSet
 
 class ProductDAO {
@@ -39,6 +40,24 @@ class ProductDAO {
             }
             return null
             
+        }
+
+        //TODO: Crear el Store Procedure getLatestProductsAdded
+        fun getLatestProductsAdded() : MutableList<LastProductAdded> {
+            val storeProcedure = "{CALL getLatestProductsAdded()}"
+            val data: ResultSet? = dataBase.execStoreProcedure( storeProcedure )
+
+            var listLatestProducts : MutableList<LastProductAdded> = mutableListOf();
+
+            if (data != null ) {
+                while (data.next()){
+                    listLatestProducts.add( LastProductAdded() )
+                }
+
+            }
+
+            return listLatestProducts
+
         }
 
     }

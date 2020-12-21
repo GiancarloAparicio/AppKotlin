@@ -1,5 +1,6 @@
 package view.home.dashboard._home
 
+import app.DAO.ProductDAO
 import app.DTO.OrderInLatestOrdersTable
 import app.models.Order
 import app.observer.DomainEvent
@@ -53,7 +54,12 @@ class Home: View(), IObserver {
     }
 
     private fun initializeLatestProductsAdded(){
-        contentLatestProduct.add( LastProductAdded().root )
+        val listLatestProductAdded = ProductDAO.getLatestProductsAdded()
+
+        for ( product in listLatestProductAdded ){
+            contentLatestProduct.add( product.root )
+        }
+
     }
 
 }

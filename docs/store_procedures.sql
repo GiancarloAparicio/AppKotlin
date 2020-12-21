@@ -84,6 +84,7 @@ AS BEGIN
 
 END;
 
+/*TODO: Mejorar el store procedure y que devuelva todos los datos, si no existe la url devuelva default */
 CREATE PROC createProduct(@name VARCHAR(30), @price MONEY, @category_id INT ,@lot_id INT)
 AS BEGIN
     INSERT INTO products (name, price, category_product_id,lot_id)
@@ -93,28 +94,51 @@ AS BEGIN
 
 END;
 
+/*TODO: Mejorar el store procedure y que devuelva todos los datos, si no existe la url devuelva default */
 CREATE PROC getAllProducts
 AS BEGIN
     SELECT products.id,
+           images.url,
            products.name,
            products.price,
            categories_products.category_product,
            products_lots.quantity,
            products_lots.expires_at
     	FROM products JOIN categories_products ON products.category_product_id = categories_products.id
-    	              JOIN products_lots ON products_lots.id = products.lot_id;
+    	              JOIN products_lots ON products_lots.id = products.lot_id
+    	              JOIN images ON products.id = images.image_able_id
+    	              WHERE images.image_able_type = 'product';
 END;
 
+/*TODO: Mejorar el store procedure y que devuelva todos los datos, si no existe la url devuelva default */
 CREATE PROC getProduct(@product VARCHAR(30))
 AS BEGIN
     SELECT products.id,
+           images.url,
            products.name,
            products.price,
            categories_products.category_product,
            products_lots.quantity,
            products_lots.expires_at
     	FROM products JOIN categories_products ON products.category_product_id = categories_products.id
-    	              JOIN products_lots ON products_lots.id = products.lot_id WHERE products.name = @product;
+    	              JOIN products_lots ON products_lots.id = products.lot_id
+    	              JOIN images ON products.id = images.image_able_id
+    	              WHERE products.name = @product AND images.image_able_type = 'product';
+END;
+
+CREATE PROC getLatestProductsAdded
+AS BEGIN
+    SELECT TOP 5 products.id,
+           images.url,
+           products.name,
+           products.price,
+           categories_products.category_product,
+           products_lots.quantity,
+           products_lots.expires_at
+    	FROM products JOIN categories_products ON products.category_product_id = categories_products.id
+            	      JOIN products_lots ON products_lots.id = products.lot_id
+            	      JOIN images ON products.id = images.image_able_id
+            	      WHERE images.image_able_type = 'product';
 END;
 
 
