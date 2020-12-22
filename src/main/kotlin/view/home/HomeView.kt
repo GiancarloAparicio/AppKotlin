@@ -5,9 +5,8 @@ import javafx.fxml.FXML
 import javafx.scene.control.Label
 import javafx.scene.layout.BorderPane
 import app.models.User
-import app.observer.DomainEvent
-import app.observer.EventTypes
-import app.observer.interfaces.IObserver
+import app.events.UserLoginEvent
+import app.events.interfaces.IObserver
 import tornadofx.*
 import view.home.dashboard._delivery.Delivery
 import view.home.dashboard._history.History
@@ -32,15 +31,16 @@ class HomeView() : View(), IObserver {
 
     @FXML
     lateinit var dashBoard: BorderPane
-    //private val dashBoard : BorderPane by fxid() /*TODO: Por alguna razon falla :(, no usar esta linea*/
 
-    private val currentUser : User = User.getInstance()
-    private val eventBus : DomainEvent = DomainEvent.getInstance()
+    /*TODO: Por alguna razon falla :(, no usar esta linea*/
+    //private val dashBoard : BorderPane by fxid()
+
+
+    private val userLoginEvent = UserLoginEvent.getInstance()
 
     init{
-        dashBoard.center = home.root
-
-        eventBus.addListener(this)
+        initializeFirstScene()
+        userLoginEvent.addListener(this)
     }
 
     /**
@@ -49,7 +49,7 @@ class HomeView() : View(), IObserver {
 
     fun setScene(event:Event){
         val buttonPressed=event.target.toString()
-        val buttonName:String= buttonPressed.substring(buttonPressed.indexOf("'")+1,buttonPressed.length-1)
+        val buttonName : String = buttonPressed.substring( buttonPressed.indexOf("'")+1, buttonPressed.length-1)
 
         when (buttonName) {
             "Home"-> dashBoard.center = home.root
@@ -65,16 +65,20 @@ class HomeView() : View(), IObserver {
         }
     }
 
-    override fun event(type: String, data: Any) {
+    override fun event( data: Any) {
+        initialiseDataUser()
+    }
 
-        if( type == EventTypes.USER_LOGIN ){
-            initialiseDataUser()
-        }
+    /**
+     * Functions helpers
+     */
 
+    private fun initializeFirstScene(){
+        dashBoard.center = home.root
     }
 
     private fun initialiseDataUser(){
-        labelNameUser.text = currentUser.name
+        labelNameUser.text = User.getInstance().name
     }
 
 }

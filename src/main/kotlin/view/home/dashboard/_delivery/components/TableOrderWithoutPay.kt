@@ -1,20 +1,11 @@
 package view.home.dashboard._delivery.components
 
 import app.DTO.ProductInOrderTableDTO
-import javafx.collections.ObservableList
 import tornadofx.*
 
 class TableOrderWithoutPay : Fragment()  {
 
-
-    private var listOrderWithoutPayDTO : ObservableList<ProductInOrderTableDTO> = mutableListOf(
-        ProductInOrderTableDTO(null,
-            null,
-            null,
-            null,
-            null,
-            null)
-    ).asObservable()
+    private var listOrderWithoutPayDTO = mutableListOf<ProductInOrderTableDTO>().asObservable()
 
 
     override val root = tableview(listOrderWithoutPayDTO){
@@ -23,13 +14,19 @@ class TableOrderWithoutPay : Fragment()  {
         readonlyColumn("Quantity", ProductInOrderTableDTO::quantity).fixedWidth(100)
         readonlyColumn("Price", ProductInOrderTableDTO::price).fixedWidth(100)
         readonlyColumn("Sub-Total", ProductInOrderTableDTO::subTotal).fixedWidth(120)
-        readonlyColumn("Actions", ProductInOrderTableDTO::actions)
+        readonlyColumn("Actions", ProductInOrderTableDTO::actions).fixedWidth(150)
 
     }
 
-    fun addProduct(productInOrderTableDTO : ProductInOrderTableDTO){
 
-        listOrderWithoutPayDTO.add(productInOrderTableDTO)
+    fun addProduct(productInOrderTableDTO : ProductInOrderTableDTO){
+        listOrderWithoutPayDTO.add( productInOrderTableDTO )
+    }
+
+    fun removeProduct( id : String ){
+        var auxList  = mutableListOf<ProductInOrderTableDTO>();
+
+        println( root.indexInParent )
 
     }
 

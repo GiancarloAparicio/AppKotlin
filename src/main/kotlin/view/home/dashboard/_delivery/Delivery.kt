@@ -7,9 +7,8 @@ import app.DTO.ProductInOrderTableDTO
 import app.models.Order
 import app.models.Product
 import app.DAO.ProductDAO
-import app.observer.DomainEvent
-import app.observer.EventTypes
-import app.observer.interfaces.IObserver
+import app.events.OrderCreateEvent
+import app.events.interfaces.IObserver
 import tornadofx.*
 import view.home.dashboard._delivery.components.TableOrderWithoutPay
 
@@ -24,13 +23,13 @@ class Delivery : View(), IObserver {
 
     private var tableOrderWithoutPay : TableOrderWithoutPay = TableOrderWithoutPay()
 
-    private val eventBus : DomainEvent = DomainEvent.getInstance()
+    private val orderCreateEvent : OrderCreateEvent = OrderCreateEvent.getInstance()
 
     init{
         initializeComboBox()
         initializeTableOrderWithoutPay()
 
-        eventBus.addListener(this)
+        orderCreateEvent.addListener(this)
     }
 
     /**
@@ -48,7 +47,7 @@ class Delivery : View(), IObserver {
             val quantity : Int = inputQuantity.text.toInt()
             val subTotal : Double = unitPrice * quantity
 
-            var orderProduct = ProductInOrderTableDTO( tableOrderWithoutPay.length(), product.name, quantity, unitPrice, subTotal,"Nothing")
+            var orderProduct = ProductInOrderTableDTO( tableOrderWithoutPay.length(), product.name, quantity, unitPrice, subTotal)
 
             tableOrderWithoutPay.addProduct( orderProduct )
 
@@ -75,21 +74,18 @@ class Delivery : View(), IObserver {
         val listProducts = tableOrderWithoutPay.getList()
 
 
-        for ( item in listProducts){
-            order.addProductToOrder( item )
-            order._total += item.subTotal!!
+        for ( product in listProducts){
+            order.addProductToOrder( product )
+            order._total += product.subTotal!!
         }
 
-        eventBus.throwEvent( EventTypes.ORDER_CREATE,order )
+        orderCreateEvent.throwEvent( order )
 
     }
 
-    override fun event(type: String, data: Any) {
-
-        if( type == EventTypes.ORDER_CREATE ){
-            clearProductTable()
-            clearInputAndComboBox()
-        }
+    override fun event(data: Any) {
+        clearProductTable()
+        clearInputAndComboBox()
     }
 
 
@@ -109,8 +105,6 @@ class Delivery : View(), IObserver {
 
     private fun initializeTableOrderWithoutPay(){
         contentTableOrderWithoutPay.add( tableOrderWithoutPay.root )
-
-        tableOrderWithoutPay.clearList()
     }
 
     private fun initializeComboBox(){

@@ -3,9 +3,8 @@ package view.home.dashboard._home
 import app.DAO.ProductDAO
 import app.DTO.OrderInLatestOrdersTableDTO
 import app.models.Order
-import app.observer.DomainEvent
-import app.observer.EventTypes
-import app.observer.interfaces.IObserver
+import app.events.OrderCreateEvent
+import app.events.interfaces.IObserver
 import javafx.scene.layout.BorderPane
 import javafx.scene.layout.VBox
 import tornadofx.View
@@ -19,23 +18,22 @@ class Home: View(), IObserver {
     private val contentTableLatestOrders : BorderPane by fxid()
     private var tableLatestOrders : TableLatestOrders = TableLatestOrders()
 
-
     private val contentLatestProduct : VBox by fxid()
-    private val eventBus : DomainEvent = DomainEvent.getInstance()
+    private val orderCreateEvent : OrderCreateEvent = OrderCreateEvent.getInstance()
 
     init{
         initializeTableLatestOrders()
         initializeLatestProductsAdded()
 
-        eventBus.addListener(this)
+        orderCreateEvent.addListener(this)
     }
 
     /**
      * Functions GUI
      */
 
-    override fun event(type: String, order: Any) {
-        if( type == EventTypes.ORDER_CREATE && order is Order ){
+    override fun event( order: Any) {
+        if( order is Order ){
 
             var lastOrderDTO = OrderInLatestOrdersTableDTO( order.id, order.email, order._total, "Nothing")
             tableLatestOrders.add( lastOrderDTO )
@@ -49,7 +47,6 @@ class Home: View(), IObserver {
 
     private fun initializeTableLatestOrders(){
         contentTableLatestOrders.center = tableLatestOrders.root
-        tableLatestOrders.clearList()
     }
 
     private fun initializeLatestProductsAdded(){

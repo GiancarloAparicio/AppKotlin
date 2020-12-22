@@ -6,9 +6,8 @@ import javafx.scene.control.PasswordField
 import javafx.scene.control.TextField
 import javafx.scene.layout.BorderPane
 import app.models.User
-import app.observer.DomainEvent
-import app.observer.EventTypes
-import app.observer.interfaces.IObserver
+import app.events.UserLoginEvent
+import app.events.interfaces.IObserver
 import app.services.Session
 import tornadofx.View
 import tornadofx.ViewTransition
@@ -24,10 +23,10 @@ class LoginView: View(), IObserver {
     private val labelEmailError : Label by fxid()
     private val labelPasswordError : Label by fxid()
 
-    private val eventBus : DomainEvent = DomainEvent.getInstance()
+    private val userLoginEvent : UserLoginEvent = UserLoginEvent.getInstance()
 
     init{
-        eventBus.addListener(this)
+        userLoginEvent.addListener(this)
     }
 
     /**
@@ -46,7 +45,7 @@ class LoginView: View(), IObserver {
 
             if(currentUser is User){
                 changeSceneToHome()
-                eventBus.throwEvent( EventTypes.USER_LOGIN, currentUser )
+                userLoginEvent.throwEvent( currentUser )
 
             }else{
                 labelEmailError.text =  "Email or password invalid"
@@ -55,8 +54,8 @@ class LoginView: View(), IObserver {
 
     }
 
-    override fun event(type: String, data: Any) {
-        if( type == EventTypes.USER_LOGIN && data is User ){
+    override fun event( data: Any) {
+        if( data is User ){
             Session.start( data )
         }
 

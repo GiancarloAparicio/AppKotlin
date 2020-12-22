@@ -5,13 +5,7 @@ import javafx.collections.ObservableList
 import tornadofx.*
 
 class TableLatestOrders : Fragment()  {
-    private var listLatestOrderDTOS : ObservableList<OrderInLatestOrdersTableDTO> = mutableListOf(
-        OrderInLatestOrdersTableDTO(
-            null,
-            null,
-            null,
-            null)
-    ).asObservable()
+    private var listLatestOrderDTOS = mutableListOf<OrderInLatestOrdersTableDTO>().asObservable()
 
 
     override val root = tableview(listLatestOrderDTOS){
