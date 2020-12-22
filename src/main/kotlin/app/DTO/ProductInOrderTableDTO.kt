@@ -1,24 +1,26 @@
 package app.DTO
 
+import app.events.ProductAddedToOrderEvent
 import javafx.scene.control.Button
 import javafx.scene.layout.HBox
 import tornadofx.action
 import tornadofx.add
 
 
-/*
+/**
 * This class Order is used by the tables, so its structure should not be changed
-* */
+*/
 class ProductInOrderTableDTO(
-            val id :Int?,
-            var product : String?,
-            var quantity : Int?,
-            var price : Double?,
-            var subTotal : Double?,
+            val id :Int,
+            var product : String,
+            var quantity : Int,
+            var price : Double,
+            var subTotal : Double,
             var actions: HBox = HBox()
             )
 {
 
+    private val productAddedToOrderEvent = ProductAddedToOrderEvent.getInstance()
 
     init{
         actions.add( createButtonDelete() )
@@ -26,15 +28,16 @@ class ProductInOrderTableDTO(
     }
 
 
-    private fun createButtonDelete() : Button{
+    private fun createButtonDelete() : Button {
         var button : Button = Button("Delete")
 
         button.action {
-            println("Delete the row $id")
-            println("Delete: $product - $quantity")
+            if (id != null) {
+                productAddedToOrderEvent.throwEvent( id )
+            }
         }
 
-        return Button("Delete")
+        return button
     }
 
     private fun createButtonUpdate() : Button{

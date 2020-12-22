@@ -39,8 +39,7 @@ class SqlServer : IDataBase {
         }
     }
 
-    override fun execStoreProcedure(storeProcedure: String, params: Array<Any?>) : ResultSet? {
-        try {
+    override fun execStoreProcedure(storeProcedure: String, params: Array<Any?>) : ResultSet {
             val procedure: CallableStatement = this.getConnection().prepareCall( storeProcedure )
 
             for ( (index,param) in params.withIndex() ){
@@ -52,26 +51,13 @@ class SqlServer : IDataBase {
                     is Boolean -> procedure.setBoolean(index+1 , param )
                 }
             }
-
             return procedure.executeQuery()
-
-        }catch (e:Error){
-            println( "Error storeProcedure: ${e.message}" )
-            return null
-        }
     }
 
+    override fun execStoreProcedure(storeProcedure: String): ResultSet {
 
-    override fun execStoreProcedure(storeProcedure: String) : ResultSet? {
-        try {
             val procedure: CallableStatement = this.getConnection().prepareCall(storeProcedure)
-
             return procedure.executeQuery()
-
-        }catch (e:Error){
-            println("Error storeProcedure: ${e.message}")
-            return null
-        }
     }
 
 }

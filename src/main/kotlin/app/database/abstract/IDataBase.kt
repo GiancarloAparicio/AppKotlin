@@ -32,8 +32,8 @@ import java.sql.ResultSet
      fun connectToDatabase()
 
 
-     fun execStoreProcedure(storeProcedure: String, params: Array<Any?>) : ResultSet?
+     fun execStoreProcedure(storeProcedure: String, params: Array<Any?>) : ResultSet
 
-     fun execStoreProcedure(storeProcedure: String) : ResultSet?
+     fun execStoreProcedure(storeProcedure: String) : ResultSet
 
 }

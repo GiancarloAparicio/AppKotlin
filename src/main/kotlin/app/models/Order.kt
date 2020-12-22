@@ -22,9 +22,9 @@ class Order {
     init{
         val storeProcedure = "{CALL createOrder(?,?)}"
         val params : Array<Any?> = arrayOf( User.getInstance().email , "Cake Delivery")
-        val data: ResultSet? = dataBase.execStoreProcedure( storeProcedure, params )
+        val data: ResultSet = dataBase.execStoreProcedure( storeProcedure, params )
 
-        if (data != null && data.next()){
+        if ( data.next()){
             id =  data.getInt(1)
             email = data.getString(2)
             description = data.getString(3)

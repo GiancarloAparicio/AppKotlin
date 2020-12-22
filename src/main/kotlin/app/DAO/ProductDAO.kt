@@ -13,28 +13,23 @@ class ProductDAO {
 
         fun getAll() : MutableList<Product>  {
             val storeProcedure = "{CALL getAllProducts()}"
-            val data: ResultSet? = dataBase.execStoreProcedure( storeProcedure )
+            val data: ResultSet = dataBase.execStoreProcedure( storeProcedure )
             var listProducts : MutableList<Product> = ArrayList();
 
-            if (data != null ){
-                while ( data.next() ){
-                    listProducts.add( Product(data) )
-                }
-
-                return listProducts
-            }else{
-                throw Error("Error: Can not execute store procedure")
+            while ( data.next() ){
+                listProducts.add( Product(data) )
             }
 
+            return listProducts
         }
 
         fun getProduct( productName : String ): Product? {
 
             val storeProcedure = "{CALL getProduct(?)}"
             val params : Array<Any?> = arrayOf(productName)
-            val data: ResultSet? = dataBase.execStoreProcedure( storeProcedure, params )
+            val data: ResultSet = dataBase.execStoreProcedure( storeProcedure, params )
 
-            if (data != null && data.next() ) {
+            if ( data.next() ) {
                 return Product(data)
             }
             return null
@@ -43,14 +38,12 @@ class ProductDAO {
 
         fun getLatestProductsAdded() : MutableList<Product> {
             val storeProcedure = "{CALL getLatestProductsAdded()}"
-            val data: ResultSet? = dataBase.execStoreProcedure( storeProcedure )
+            val data: ResultSet = dataBase.execStoreProcedure( storeProcedure )
 
             var listLatestProducts : MutableList<Product> = mutableListOf();
 
-            if (data != null ) {
-                while (data.next()){
-                    listLatestProducts.add( Product( data ) )
-                }
+            while (data.next()){
+                listLatestProducts.add( Product( data ) )
             }
 
             return listLatestProducts

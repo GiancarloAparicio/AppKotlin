@@ -1,11 +1,14 @@
 package view.home.dashboard._delivery.components
 
 import app.DTO.ProductInOrderTableDTO
+import app.events.ProductAddedToOrderEvent
+import app.events.interfaces.IObserver
 import tornadofx.*
 
-class TableOrderWithoutPay : Fragment()  {
+class TableOrderWithoutPay : Fragment(), IObserver {
 
     private var listOrderWithoutPayDTO = mutableListOf<ProductInOrderTableDTO>().asObservable()
+    private var size : Int =0
 
 
     override val root = tableview(listOrderWithoutPayDTO){
@@ -18,20 +21,38 @@ class TableOrderWithoutPay : Fragment()  {
 
     }
 
+    private val productAddedToOrderEvent = ProductAddedToOrderEvent.getInstance()
+
+    init {
+        productAddedToOrderEvent.addListener(this)
+    }
+
 
     fun addProduct(productInOrderTableDTO : ProductInOrderTableDTO){
         listOrderWithoutPayDTO.add( productInOrderTableDTO )
+        size++
     }
 
-    fun removeProduct( id : String ){
-        var auxList  = mutableListOf<ProductInOrderTableDTO>();
+    fun removeProduct( id : Int ){
 
-        println( root.indexInParent )
+        var band : Int? = null
+        for ( (index, element) in listOrderWithoutPayDTO.withIndex()){
+            if( element.id == id ){
+                band = index
+                break
+            }
+        }
+
+        if( band is Int){
+            listOrderWithoutPayDTO.removeAt( band )
+        }else{
+            println("Error: element not exist")
+        }
 
     }
 
     fun length() : Int {
-        return listOrderWithoutPayDTO.size
+        return size
     }
 
     fun getList() : MutableList<ProductInOrderTableDTO> {
@@ -40,6 +61,12 @@ class TableOrderWithoutPay : Fragment()  {
 
     fun clearList(){
         listOrderWithoutPayDTO.clear()
+    }
+
+    override fun event(id: Any) {
+        if( id is Int){
+            removeProduct( id )
+        }
     }
 
 }

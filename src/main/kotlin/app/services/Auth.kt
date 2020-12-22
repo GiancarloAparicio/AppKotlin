@@ -15,9 +15,9 @@ class Auth {
             val storeProcedure="{CALL loginUser(?,?)}"
 
             val params : Array<Any?> = arrayOf( email, encrypt(password) )
-            val data:ResultSet?= dataBase.execStoreProcedure( storeProcedure , params )
+            val data:ResultSet = dataBase.execStoreProcedure( storeProcedure , params )
 
-            if (data != null && data.next()) {
+            if ( data.next() ) {
 
                 User.setInstance(data)
                 return User.getInstance()
