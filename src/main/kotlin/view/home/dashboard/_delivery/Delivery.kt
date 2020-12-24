@@ -47,7 +47,7 @@ class Delivery : View(), IObserver {
             val quantity : Int = inputQuantity.text.toInt()
             val subTotal : Double = unitPrice * quantity
 
-            var orderProduct = ProductInOrderTableDTO( tableOrderWithoutPay.length(), product.name, quantity, unitPrice, subTotal)
+            var orderProduct = ProductInOrderTableDTO( tableOrderWithoutPay.index(), product.name, quantity, unitPrice, subTotal)
 
             tableOrderWithoutPay.addProduct( orderProduct )
 
@@ -60,7 +60,7 @@ class Delivery : View(), IObserver {
 
     fun validateQuantity(): Boolean {
         val quantity : String = inputQuantity.text
-        val regex : Regex = Regex(pattern = "^[0-9]+$")
+        val regex = Regex(pattern = "^[0-9]+$")
         val quantityIsNumber : Boolean = regex.containsMatchIn(quantity) && quantity != "0"
 
         inputQuantity.style = if(quantityIsNumber ) "-fx-text-inner-color : #2FA14C;" //Green
@@ -69,17 +69,22 @@ class Delivery : View(), IObserver {
     }
 
     fun generateOrder(){
+        var productListSize = tableOrderWithoutPay.length()
 
-        val order = Order()
-        val listProducts = tableOrderWithoutPay.getList()
+        if( 0 < productListSize ){
+            val order = Order()
+            val listProducts = tableOrderWithoutPay.getList()
 
+            for ( product in listProducts){
+                order.addProductToOrder( product )
+                order._total += product.subTotal
+            }
 
-        for ( product in listProducts){
-            order.addProductToOrder( product )
-            order._total += product.subTotal!!
+            orderCreateEvent.throwEvent( order )
+
+        }else{
+            println("Order empty")
         }
-
-        orderCreateEvent.throwEvent( order )
 
     }
 

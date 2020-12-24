@@ -1,7 +1,8 @@
 package app.DTO
 
-import app.events.ProductAddedToOrderEvent
-import javafx.scene.control.Button
+import app.events.ProductRemovedToOrderEvent
+import com.jfoenix.controls.JFXButton
+import javafx.scene.Cursor
 import javafx.scene.layout.HBox
 import tornadofx.action
 import tornadofx.add
@@ -20,29 +21,51 @@ class ProductInOrderTableDTO(
             )
 {
 
-    private val productAddedToOrderEvent = ProductAddedToOrderEvent.getInstance()
+    private val productRemovedToOrderEvent = ProductRemovedToOrderEvent.getInstance()
 
     init{
         actions.add( createButtonDelete() )
         actions.add( createButtonUpdate() )
+        actions.spacing = 5.0
     }
 
+    /**
+     * Functions helpers
+     */
 
-    private fun createButtonDelete() : Button {
-        var button : Button = Button("Delete")
+    private fun createButtonDelete() : JFXButton {
+        val button = JFXButton("Delete")
 
         button.action {
-            if (id != null) {
-                productAddedToOrderEvent.throwEvent( id )
-            }
+            productRemovedToOrderEvent.throwEvent( id )
         }
+
+        button.style = "-fx-background-color: #EE254F;" +
+                       "-fx-text-fill: white;" +
+                       "-fx-padding: 0.3em;" +
+                       "-fx-font-weight: bold;"
+
+        button.cursor = Cursor.HAND
+
 
         return button
     }
 
-    private fun createButtonUpdate() : Button{
+    private fun createButtonUpdate() : JFXButton {
+        val button = JFXButton("Update")
 
-        return Button("Update")
+        button.action {
+          println("Update list")
+        }
+
+        button.style = "-fx-background-color: #F6A000;" +
+                       "-fx-text-fill: white; " +
+                       "-fx-padding: 0.3em; " +
+                       "-fx-font-weight: bold;"
+
+        button.cursor = Cursor.HAND
+
+        return button
     }
 
 }

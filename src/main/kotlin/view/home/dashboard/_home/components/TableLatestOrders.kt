@@ -1,7 +1,6 @@
 package view.home.dashboard._home.components
 
 import app.DTO.OrderInLatestOrdersTableDTO
-import javafx.collections.ObservableList
 import tornadofx.*
 
 class TableLatestOrders : Fragment()  {
@@ -9,17 +8,15 @@ class TableLatestOrders : Fragment()  {
 
 
     override val root = tableview(listLatestOrderDTOS){
-        readonlyColumn("#", OrderInLatestOrdersTableDTO::id).fixedWidth(70)
-        readonlyColumn("User", OrderInLatestOrdersTableDTO::user).fixedWidth(130)
-        readonlyColumn("Total", OrderInLatestOrdersTableDTO::total).fixedWidth(100)
-        readonlyColumn("Actions", OrderInLatestOrdersTableDTO::actions)
+        readonlyColumn("ID", OrderInLatestOrdersTableDTO::id).prefWidth(70)
+        readonlyColumn("User", OrderInLatestOrdersTableDTO::user).prefWidth(130)
+        readonlyColumn("Total", OrderInLatestOrdersTableDTO::total).prefWidth(100)
+        readonlyColumn("Actions", OrderInLatestOrdersTableDTO::actions).prefWidth(110)
 
     }
 
     fun add(orderInLatestOrdersTableDTO : OrderInLatestOrdersTableDTO ){
-
         listLatestOrderDTOS.add( orderInLatestOrdersTableDTO )
-
     }
 
     fun length() : Int {

@@ -35,7 +35,7 @@ class Home: View(), IObserver {
     override fun event( order: Any) {
         if( order is Order ){
 
-            var lastOrderDTO = OrderInLatestOrdersTableDTO( order.id, order.email, order._total, "Nothing")
+            var lastOrderDTO = OrderInLatestOrdersTableDTO( order.id, order.email, order._total )
             tableLatestOrders.add( lastOrderDTO )
 
         }

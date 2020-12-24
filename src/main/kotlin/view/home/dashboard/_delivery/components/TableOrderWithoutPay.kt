@@ -1,7 +1,7 @@
 package view.home.dashboard._delivery.components
 
 import app.DTO.ProductInOrderTableDTO
-import app.events.ProductAddedToOrderEvent
+import app.events.ProductRemovedToOrderEvent
 import app.events.interfaces.IObserver
 import tornadofx.*
 
@@ -12,20 +12,24 @@ class TableOrderWithoutPay : Fragment(), IObserver {
 
 
     override val root = tableview(listOrderWithoutPayDTO){
-        readonlyColumn("ID", ProductInOrderTableDTO::id).fixedWidth(80)
-        readonlyColumn("Name", ProductInOrderTableDTO::product).fixedWidth(150)
-        readonlyColumn("Quantity", ProductInOrderTableDTO::quantity).fixedWidth(100)
-        readonlyColumn("Price", ProductInOrderTableDTO::price).fixedWidth(100)
-        readonlyColumn("Sub-Total", ProductInOrderTableDTO::subTotal).fixedWidth(120)
-        readonlyColumn("Actions", ProductInOrderTableDTO::actions).fixedWidth(150)
+        readonlyColumn("#", ProductInOrderTableDTO::id).prefWidth(80)
+        readonlyColumn("Name", ProductInOrderTableDTO::product).prefWidth(150)
+        readonlyColumn("Quantity", ProductInOrderTableDTO::quantity).prefWidth(100)
+        readonlyColumn("Price", ProductInOrderTableDTO::price).prefWidth(100)
+        readonlyColumn("Sub-Total", ProductInOrderTableDTO::subTotal).prefWidth(120)
+        readonlyColumn("Actions", ProductInOrderTableDTO::actions).prefWidth(150)
 
     }
 
-    private val productAddedToOrderEvent = ProductAddedToOrderEvent.getInstance()
+    private val productRemovedToOrderEvent = ProductRemovedToOrderEvent.getInstance()
 
     init {
-        productAddedToOrderEvent.addListener(this)
+        productRemovedToOrderEvent.addListener(this)
     }
+
+    /**
+     * Functions GUI
+     */
 
 
     fun addProduct(productInOrderTableDTO : ProductInOrderTableDTO){
@@ -35,24 +39,17 @@ class TableOrderWithoutPay : Fragment(), IObserver {
 
     fun removeProduct( id : Int ){
 
-        var band : Int? = null
-        for ( (index, element) in listOrderWithoutPayDTO.withIndex()){
-            if( element.id == id ){
-                band = index
-                break
-            }
-        }
-
-        if( band is Int){
-            listOrderWithoutPayDTO.removeAt( band )
-        }else{
-            println("Error: element not exist")
-        }
+        var index : Int = getItemIndexToDelete( id )
+        listOrderWithoutPayDTO.removeAt( index )
 
     }
 
-    fun length() : Int {
+    fun index() : Int {
         return size
+    }
+
+    fun length() : Int {
+        return listOrderWithoutPayDTO.size
     }
 
     fun getList() : MutableList<ProductInOrderTableDTO> {
@@ -67,6 +64,22 @@ class TableOrderWithoutPay : Fragment(), IObserver {
         if( id is Int){
             removeProduct( id )
         }
+    }
+
+    /**
+     * Functions helpers
+     */
+
+    private fun getItemIndexToDelete( id : Int) : Int {
+        var item : Int? = null
+        for ( (index, element) in listOrderWithoutPayDTO.withIndex()){
+            if( element.id == id ){
+                item = index
+                break
+            }
+        }
+
+        return item as Int
     }
 
 }
