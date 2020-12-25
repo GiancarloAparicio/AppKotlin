@@ -41,7 +41,9 @@ class LastProductAdded ( data : Product ) : Fragment() {
                     style {
                         fontWeight = FontWeight.EXTRA_BOLD
                         textFill = c("#1ba0eb")
+                        fontSize = 12.px
                     }
+
                 }
 
                 label ("$${price.toString()}") {
@@ -50,6 +52,7 @@ class LastProductAdded ( data : Product ) : Fragment() {
                         textFill = c("#ffffff")
                         backgroundColor += c("#2FA14C")
                         padding = box(2.px)
+                        fontSize = 10.px
                     }
                 }
 
@@ -59,6 +62,7 @@ class LastProductAdded ( data : Product ) : Fragment() {
             label ( description ) {
                 style {
                     textFill = c("#a1a1a1")
+                    fontSize = 8.px
                 }
             }
 

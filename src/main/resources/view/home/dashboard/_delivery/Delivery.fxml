@@ -44,7 +44,7 @@
                   </Label>
                   <HBox alignment="CENTER" prefHeight="157.0" prefWidth="570.0">
                      <children>
-                        <ComboBox fx:id="comboBoxProduct" maxWidth="250.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="150.0" promptText="Product" style="-fx-background-color: #1BA0EB; -fx-font-weight: bold;">
+                        <ComboBox fx:id="comboBoxProduct" maxWidth="250.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="150.0" promptText="Product" >
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor></ComboBox>

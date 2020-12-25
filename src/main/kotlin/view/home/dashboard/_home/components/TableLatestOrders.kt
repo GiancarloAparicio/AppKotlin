@@ -11,6 +11,7 @@ class TableLatestOrders : Fragment()  {
         readonlyColumn("ID", OrderInLatestOrdersTableDTO::id).prefWidth(70)
         readonlyColumn("User", OrderInLatestOrdersTableDTO::user).prefWidth(130)
         readonlyColumn("Total", OrderInLatestOrdersTableDTO::total).prefWidth(100)
+        readonlyColumn("Created", OrderInLatestOrdersTableDTO::created).prefWidth(100)
         readonlyColumn("Actions", OrderInLatestOrdersTableDTO::actions).prefWidth(110)
 
     }

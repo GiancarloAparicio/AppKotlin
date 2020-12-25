@@ -94,7 +94,6 @@ class Delivery : View(), IObserver {
     }
 
 
-
     /**
     *  Private functions helpers
     */

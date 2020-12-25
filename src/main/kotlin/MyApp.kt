@@ -12,6 +12,7 @@ class MyApp: App(MainView::class) {
 
     init{
         importStylesheet("/styles/table-view.css")
+        importStylesheet("/styles/combo-box.css")
     }
 
 

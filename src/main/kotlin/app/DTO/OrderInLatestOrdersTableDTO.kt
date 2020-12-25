@@ -5,12 +5,14 @@ import javafx.scene.Cursor
 import javafx.scene.layout.HBox
 import tornadofx.action
 import tornadofx.add
+import java.util.*
 
 
 class OrderInLatestOrdersTableDTO (
     val id :Int,
     var user : String,
     var total : Double,
+    var created : Date,
     var actions : HBox = HBox()
 )
 {

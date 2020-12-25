@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.SplitPane?>
@@ -17,6 +16,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
 <BorderPane minHeight="400.0" minWidth="768.0" prefHeight="400.0" prefWidth="768.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <center>
         <GridPane BorderPane.alignment="CENTER">
@@ -62,7 +64,7 @@
                                 <Insets top="5.0" />
                             </VBox.margin>
                         </ImageView>
-                        <TextField fx:id="inputEmail" promptText="Email" style="-fx-max-width: 200px;">
+                        <JFXTextField fx:id="inputEmail" promptText="Email" style="-fx-max-width: 200px;">
                             <opaqueInsets>
                                 <Insets />
                             </opaqueInsets>
@@ -75,13 +77,13 @@
                             <padding>
                                 <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                             </padding>
-                        </TextField>
+                        </JFXTextField>
                         <Label fx:id="labelEmailError" prefHeight="16.0" prefWidth="180.0" textFill="RED">
                             <font>
                                 <Font size="12.0" />
                             </font>
                         </Label>
-                        <PasswordField fx:id="inputPassword" promptText="Password" style="-fx-max-width: 200px;">
+                        <JFXPasswordField fx:id="inputPassword" promptText="Password" style="-fx-max-width: 200px;">
                             <cursor>
                                 <Cursor fx:constant="TEXT" />
                             </cursor>
@@ -91,13 +93,13 @@
                             <padding>
                                 <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                             </padding>
-                        </PasswordField>
+                        </JFXPasswordField>
                         <Label fx:id="labelPasswordError" prefHeight="16.0" prefWidth="176.0" textFill="RED">
                             <font>
                                 <Font size="12.0" />
                             </font>
                         </Label>
-                        <Button mnemonicParsing="false" onAction="#login" prefHeight="33.0" prefWidth="112.0" style="-fx-background-color: #EE254F;" text="Login" textFill="WHITE">
+                        <JFXButton mnemonicParsing="false" onAction="#login" prefHeight="33.0" prefWidth="112.0" style="-fx-background-color: #EE254F;" text="Login" textFill="WHITE">
                             <font>
                                 <Font name="Carlito Bold" size="17.0" />
                             </font>
@@ -107,7 +109,7 @@
                             <cursor>
                                 <Cursor fx:constant="HAND" />
                             </cursor>
-                        </Button>
+                        </JFXButton>
                         <Label text="OR" textFill="#c8c8c8">
                             <VBox.margin>
                                 <Insets bottom="5.0" left="15.0" right="5.0" top="15.0" />

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -73,12 +74,12 @@
                   </VBox>
                   <VBox alignment="CENTER" maxHeight="80.0" minHeight="50.0" minWidth="160.0" prefHeight="68.0" prefWidth="160.0">
                      <children>
-                        <Label alignment="CENTER" prefHeight="15.0" prefWidth="72.0" text="▼ 5%" textFill="#d94f1e">
+                        <Label alignment="CENTER" prefHeight="15.0" prefWidth="72.0" text="▼ -5%" textFill="#d94f1e">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" prefHeight="16.0" prefWidth="124.0" text="1200">
+                        <Label fx:id="labelGoalCompletions" alignment="CENTER" prefHeight="16.0" prefWidth="124.0" text="1200">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
@@ -94,21 +95,30 @@
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="50.0" prefWidth="275.0" />
               </columnConstraints>
               <rowConstraints>
-                  <RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="35.0" minHeight="35.0" prefHeight="35.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <GridPane.margin>
                   <Insets left="10.0" right="10.0" top="15.0" />
                </GridPane.margin>
                <children>
-                  <Label text="Latest Orders:">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
+                  <HBox alignment="CENTER_LEFT">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
-                  </Label>
+                     <children>
+                        <Label text="Latest Orders:">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="comboBoxOrderBy" prefWidth="150.0" promptText="Order By">
+                           <HBox.margin>
+                              <Insets left="40.0" />
+                           </HBox.margin>
+                        </ComboBox>
+                     </children>
+                  </HBox>
                   <Label text="Recently Added Products:" GridPane.columnIndex="1">
                      <font>
                         <Font name="System Bold" size="13.0" />
