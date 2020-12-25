@@ -29,8 +29,8 @@ class LastProductAdded ( data : Product ) : Fragment() {
     override val root = hbox {
 
         imageview( url, lazyload = false  ) {
-            fitHeight = 50.0
-            fitWidth = 50.0
+            fitHeight = 40.0
+            fitWidth = 40.0
 
         }
 

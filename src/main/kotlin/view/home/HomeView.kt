@@ -8,6 +8,7 @@ import app.models.User
 import app.events.UserLoginEvent
 import app.events.interfaces.IObserver
 import tornadofx.*
+import view.home.dashboard._delivery.ConfirmDelivery
 import view.home.dashboard._delivery.Delivery
 import view.home.dashboard._history.History
 import view.home.dashboard._home.Home

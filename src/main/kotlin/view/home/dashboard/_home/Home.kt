@@ -82,7 +82,7 @@ class Home: View(), IObserver {
     }
 
     private fun initializeLabelsInfo(){
-        labelGoalCompletions.text = "12001"
+        labelGoalCompletions.text = "1211"
         labelTotalProfit.text = "$ 21,000"
         labelTotalCost.text = "$ 10,000"
         labelTotalRevenue.text = "$ 35,000"

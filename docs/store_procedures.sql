@@ -120,6 +120,13 @@ AS BEGIN
         	              WHERE images.image_able_type = 'product'
 END;
 
+
+CREATE PROC getAllProductsCategories
+AS BEGIN
+    SELECT * FROM categories_products;
+END;
+
+
 CREATE PROC getProduct(@nameProduct VARCHAR(30))
 AS BEGIN
     SELECT products.id,

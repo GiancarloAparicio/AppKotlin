@@ -23,6 +23,18 @@ class ProductDAO {
             return listProducts
         }
 
+        fun getCategories() : MutableList<String>  {
+            val storeProcedure = "{CALL getAllProductsCategories()}"
+            val data: ResultSet = dataBase.execStoreProcedure( storeProcedure )
+            var listCategories : MutableList<String> = mutableListOf();
+
+            while ( data.next() ){
+                listCategories.add( data.getString(2) )
+            }
+
+            return listCategories
+        }
+
         fun getProduct( productName : String ): Product? {
 
             val storeProcedure = "{CALL getProduct(?)}"

@@ -40,7 +40,7 @@
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </Label>
-                        <Label fx:id="labelTotalRevenue" alignment="CENTER" prefHeight="16.0" prefWidth="135.0" text="TOTAL REVENUE" />
+                        <Label alignment="CENTER" prefHeight="16.0" prefWidth="135.0" text="TOTAL REVENUE" />
                      </children></VBox>
                   <VBox alignment="CENTER" maxHeight="80.0" minHeight="50.0" minWidth="160.0" prefHeight="68.0" prefWidth="160.0" style="-fx-border-color: white #EEF1FB white white;">
                      <children>
@@ -54,7 +54,7 @@
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </Label>
-                        <Label fx:id="labelTotalCost" alignment="CENTER" prefHeight="16.0" prefWidth="135.0" text="TOTAL COST" />
+                        <Label alignment="CENTER" prefHeight="16.0" prefWidth="135.0" text="TOTAL COST" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" maxHeight="80.0" minHeight="50.0" minWidth="160.0" prefHeight="68.0" prefWidth="160.0" style="-fx-border-color: white #EEF1FB white white;">
@@ -69,7 +69,7 @@
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </Label>
-                        <Label fx:id="labelTotalProfit" alignment="CENTER" prefHeight="16.0" prefWidth="135.0" text="TOTAL PROFIT" />
+                        <Label alignment="CENTER" prefHeight="16.0" prefWidth="135.0" text="TOTAL PROFIT" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" maxHeight="80.0" minHeight="50.0" minWidth="160.0" prefHeight="68.0" prefWidth="160.0">
@@ -84,7 +84,7 @@
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </Label>
-                        <Label fx:id="labelGoalCompletions" alignment="CENTER" prefHeight="16.0" prefWidth="135.0" text="GOAL COMPLETIONS" />
+                        <Label alignment="CENTER" prefHeight="16.0" prefWidth="135.0" text="GOAL COMPLETIONS" />
                      </children>
                   </VBox>
                </children>
@@ -112,7 +112,7 @@
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="comboBoxOrderBy" prefWidth="150.0" promptText="Order By">
+                        <ComboBox fx:id="comboBoxOrderBy" prefWidth="170.0" promptText="Order By">
                            <HBox.margin>
                               <Insets left="40.0" />
                            </HBox.margin>
