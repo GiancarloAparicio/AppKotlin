@@ -1,7 +1,9 @@
 package view.home.dashboard._delivery.components
 
+import app.events.FilterProductsEvent
 import app.events.OrderCreateEvent
 import app.events.interfaces.IObserver
+import app.events.types.EventsTypes
 import app.models.Product
 import javafx.scene.Cursor
 import javafx.scene.control.Button
@@ -24,9 +26,10 @@ class ProductComponent( data : Product) : Fragment(), IObserver {
 
     //Events
     var orderCreateEvent = OrderCreateEvent.getInstance()
+    var filterProductsEvent = FilterProductsEvent.getInstance()
 
     //Views
-    private val delivery: Delivery by inject()
+    private val delivery : Delivery by inject()
 
     //Components
     private lateinit var buttonProduct : Button
@@ -36,6 +39,7 @@ class ProductComponent( data : Product) : Fragment(), IObserver {
 
     init {
         orderCreateEvent.addListener(this)
+        filterProductsEvent.addListener(this)
     }
 
 
@@ -52,13 +56,28 @@ class ProductComponent( data : Product) : Fragment(), IObserver {
     }
 
     override fun event(typeEvent: String, data: Any) {
-        restartInitialState()
+        if( typeEvent == EventsTypes.ORDER_CREATE ){
+            restartInitialState()
+        }
+
+        if( typeEvent == EventsTypes.FILTER_PRODUCTS && data is String){
+            showIfCategoryIsEqualsTo( data )
+        }
     }
+
 
 
     /**
      * Functions helpers
      */
+
+    private fun showIfCategoryIsEqualsTo( category : String){
+        delivery.masonryProductsLayout.root.children.remove( this.root )
+
+        if( category == product.category ){
+            delivery.masonryProductsLayout.root.children.add( this.root )
+        }
+    }
 
     private fun changeStatusButton() : String {
         addedStatus = !addedStatus
@@ -77,7 +96,6 @@ class ProductComponent( data : Product) : Fragment(), IObserver {
             imageview( imageUrl, lazyload = false  ) {
                 fitHeight = 40.0
                 fitWidth = 40.0
-
             }
 
             vbox {
@@ -147,14 +165,13 @@ class ProductComponent( data : Product) : Fragment(), IObserver {
 
                 style{
                     padding = box(
-                        top = 5.px,
-                        right = 5.px,
-                        left = 5.px,
-                        bottom = 5.px
+                        top = 4.px,
+                        right = 2.px,
+                        left = 2.px,
+                        bottom = 4.px
                     )
                 }
             }
-
 
             maxHeight = 55.0
             minHeight = 55.0

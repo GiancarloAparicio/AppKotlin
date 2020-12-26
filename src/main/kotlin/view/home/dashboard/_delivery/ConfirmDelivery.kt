@@ -45,7 +45,6 @@ class ConfirmDelivery : View(), IObserver {
     */
 
     fun updatedProduct(){
-
         var quantityIsCorrect = validateQuantity()
 
         if(quantityIsCorrect){
@@ -100,7 +99,6 @@ class ConfirmDelivery : View(), IObserver {
     /**
     *  Private functions helpers
     */
-
 
     private fun clearProductTable(){
         tableOrderWithoutPay.clearList()

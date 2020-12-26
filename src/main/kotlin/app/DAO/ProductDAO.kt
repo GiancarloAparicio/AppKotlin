@@ -35,6 +35,7 @@ class ProductDAO {
             return listCategories
         }
 
+
         fun getProduct( productName : String ): Product? {
 
             val storeProcedure = "{CALL getProduct(?)}"
@@ -46,6 +47,22 @@ class ProductDAO {
             }
             return null
             
+        }
+
+        fun getFilteredProducts( category : String ): MutableList<Product> {
+
+            val storeProcedure = "{CALL getFilteredProducts(?)}"
+            val params : Array<Any?> = arrayOf(category)
+            val data: ResultSet = dataBase.execStoreProcedure( storeProcedure, params )
+
+            var listProducts : MutableList<Product> = mutableListOf();
+
+            while ( data.next() ){
+                listProducts.add( Product(data) )
+            }
+
+            return listProducts
+
         }
 
         fun getLatestProductsAdded() : MutableList<Product> {

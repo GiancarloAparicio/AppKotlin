@@ -120,6 +120,21 @@ AS BEGIN
         	              WHERE images.image_able_type = 'product'
 END;
 
+CREATE PROC getFilteredProducts( @category VARCHAR(30) )
+AS BEGIN
+    SELECT products.id,
+        images.url,
+        products.name,
+        products.price,
+        categories_products.category_product,
+        products_lots.quantity,
+        products_lots.expires_at
+     FROM products JOIN categories_products ON products.category_product_id = categories_products.id
+            	   JOIN products_lots ON products_lots.id = products.lot_id
+            	   LEFT JOIN images ON products.id = images.image_able_id
+            	   WHERE images.image_able_type = 'product' AND categories_products.category_product = @category;
+END;
+
 
 CREATE PROC getAllProductsCategories
 AS BEGIN

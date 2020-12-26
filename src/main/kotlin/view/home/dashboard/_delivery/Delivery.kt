@@ -2,6 +2,8 @@ package view.home.dashboard._delivery
 
 import app.DAO.ProductDAO
 import app.DTO.ProductInOrderTableDTO
+import app.events.FilterProductsEvent
+import app.events.types.EventsTypes
 import app.models.Product
 import javafx.scene.control.ComboBox
 import javafx.scene.layout.BorderPane
@@ -23,8 +25,14 @@ class Delivery : View() {
     private val comboBoxOrderBy : ComboBox<String> by fxid()
     private val comboBoxFilterBy : ComboBox<String> by fxid()
 
+    //Components
+    val masonryProductsLayout = MasonryProductsList()
+
     //Shared
     var productListForOrder = mutableListOf<ProductInOrderTableDTO>()
+
+    //Events
+    var filterProductsEvent = FilterProductsEvent.getInstance()
 
     //Aux
     var index : Int = 0
@@ -54,11 +62,14 @@ class Delivery : View() {
     }
 
     fun changeComboBoxFilterBy(){
-        println( comboBoxFilterBy.selectedItem )
+        var category = comboBoxFilterBy.selectedItem.toString()
+        //masonryProductsLayout.filterComponentsBy( category as String )
+        filterProductsEvent.throwEvent( EventsTypes.FILTER_PRODUCTS, category )
     }
 
     fun changeComboBoxOrderBy(){
-        println( comboBoxOrderBy.selectedItem )
+        var category = comboBoxOrderBy.selectedItem
+        masonryProductsLayout.orderComponentsBy( category as String )
     }
 
     fun addProductToList( product : Product){
@@ -82,7 +93,7 @@ class Delivery : View() {
     }
 
     private fun initializeMasonryLayoutToProducts(){
-        masonryListProducts.add( MasonryProductsList().root )
+        masonryListProducts.add( masonryProductsLayout.root )
     }
 
     private fun initializeComboBoxOrderBy(){
