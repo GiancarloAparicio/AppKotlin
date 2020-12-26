@@ -1,6 +1,7 @@
 package app.DTO
 
 import app.events.DeleteOrderEvent
+import app.events.ProductRemovedToOrderEvent
 import app.events.types.EventsTypes
 import com.jfoenix.controls.JFXButton
 import javafx.geometry.Pos
@@ -31,7 +32,7 @@ class ProductInOrderTableDTO(
     var subTotal : Double =  quantity * price
 
     //Events
-    private val deleteOrderEvent = DeleteOrderEvent.getInstance()
+    private val productRemovedToOrderEvent = ProductRemovedToOrderEvent.getInstance()
 
     init{
         initializeActions()
@@ -45,7 +46,7 @@ class ProductInOrderTableDTO(
         val button = JFXButton("Delete")
 
         button.action {
-            deleteOrderEvent.throwEvent( EventsTypes.DELETE_ORDER, id )
+            productRemovedToOrderEvent.throwEvent( EventsTypes.PRODUCT_REMOVED_TO_ORDER, id )
         }
 
         button.style = "-fx-background-color: #EE254F;" +

@@ -1,9 +1,9 @@
 package app.DAO
 
-import app.DTO.OrderInLatestOrdersTableDTO
 import app.database.Database
 import app.models.Order
 import java.sql.ResultSet
+import java.time.LocalDate
 
 class OrderDAO {
 
@@ -33,6 +33,20 @@ class OrderDAO {
                return Order(data , true)
             }
             return null
+        }
+
+        fun filterBy( date : String ): MutableList<Order> {
+            var storeProcedure = "{CALL filterOrdersByDate(?)}"
+            var params : Array<Any?> = arrayOf( date )
+            var data : ResultSet = dataBase.execStoreProcedure( storeProcedure, params )
+
+            var listProducts : MutableList<Order> = mutableListOf();
+
+            while ( data.next() ){
+                listProducts.add( Order( data ) )
+            }
+
+            return listProducts
         }
     }
 }

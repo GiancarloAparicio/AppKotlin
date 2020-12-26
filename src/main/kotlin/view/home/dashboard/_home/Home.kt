@@ -1,21 +1,21 @@
 package view.home.dashboard._home
 
+import app.DAO.OrderDAO
 import app.DAO.ProductDAO
 import app.DTO.OrderInLatestOrdersTableDTO
 import app.models.Order
 import app.events.OrderCreateEvent
 import app.events.interfaces.IObserver
 import app.events.types.EventsTypes
-import javafx.scene.control.ComboBox
+import javafx.scene.control.DatePicker
 import javafx.scene.control.Label
 import javafx.scene.layout.BorderPane
 import javafx.scene.layout.VBox
 import tornadofx.View
-import tornadofx.selectedItem
 import view.home.dashboard._home.components.LastProductAdded
 import view.home.dashboard._home.components.TableLatestOrders
-import java.util.*
-import java.util.Calendar
+import java.time.LocalDate
+import javafx.scene.control.DateCell
 
 
 class Home: View(), IObserver {
@@ -28,7 +28,7 @@ class Home: View(), IObserver {
 
     //Components GUI
     private val contentTableLatestOrders : BorderPane by fxid()
-    private val comboBoxOrderBy : ComboBox<String> by fxid()
+    private val datePickerFilterBy : DatePicker by fxid()
     private val labelGoalCompletions : Label by fxid()
     private val contentLatestProduct : VBox by fxid()
     private val labelTotalRevenue : Label by fxid()
@@ -42,7 +42,7 @@ class Home: View(), IObserver {
         initializeLatestProductsAdded()
         initializeTableLatestOrders()
         initializeLabelsInfo()
-        initializeComboBox()
+        initializeDataPicker()
 
         orderCreateEvent.addListener(this)
     }
@@ -51,8 +51,12 @@ class Home: View(), IObserver {
      * Functions GUI
      */
 
-    fun sortOrdersBy(){
-        var category = comboBoxOrderBy.selectedItem.toString()
+    fun filterOrdersBy(){
+        var dateSelected : String = datePickerFilterBy.value.toString()
+        var listOrders = OrderDAO.filterBy( dateSelected )
+
+        tableLatestOrders.clearList()
+        tableLatestOrders.addAll(listOrders)
     }
 
     override fun event( typeEvent : String, order : Any) {
@@ -62,6 +66,7 @@ class Home: View(), IObserver {
             tableLatestOrders.add( lastOrderDTO )
 
         }
+
     }
 
     /**
@@ -72,17 +77,19 @@ class Home: View(), IObserver {
         contentTableLatestOrders.center = tableLatestOrders.root
     }
 
-    private fun initializeComboBox(){
+    private fun initializeDataPicker(){
 
-        val cal = Calendar.getInstance()
-        cal.time = Date()
-
-        val yearCurrent : Int = cal[Calendar.YEAR]
-
-        for ( item in 0..10 ){
-            var year = yearCurrent - item
-            comboBoxOrderBy.items.add( year.toString() )
+        var minDate = LocalDate.of(2000, 1, 1)
+        var maxDate = LocalDate.now()
+        datePickerFilterBy.setDayCellFactory { d ->
+            object : DateCell() {
+                override fun updateItem(item: LocalDate, empty: Boolean) {
+                    super.updateItem(item, empty)
+                    isDisable = item.isAfter(maxDate) || item.isBefore(minDate)
+                }
+            }
         }
+
     }
 
     private fun initializeLatestProductsAdded(){
@@ -95,6 +102,7 @@ class Home: View(), IObserver {
 
     }
 
+    //TODO: Crear eventos para que los labels reaccionen
     private fun initializeLabelsInfo(){
         labelGoalCompletions.text = "1211"
         labelTotalProfit.text = "$ 21,000"

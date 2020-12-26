@@ -201,21 +201,22 @@ CREATE PROC getAllOrders
 AS BEGIN
 
     SELECT orders.id,
-    		orders.email,
-    		SUM( order_product.quantity * products.price ) AS total,
-    		orders.create_at,
-    		orders.update_at,
-    		orders.description,
-    		orders.delete_at
-    		FROM orders JOIN order_product ON orders.id = order_product.order_id
-    					JOIN products ON products.id = order_product.product_id
-    					WHERE orders.delete_at IS NULL
-    					GROUP BY orders.id,
-    							 orders.email,
-    							 orders.description,
-    							 orders.create_at,
-    							 orders.update_at,
-    							 orders.delete_at
+       		orders.email,
+       		SUM( order_product.quantity * products.price ) AS total,
+       		orders.create_at,
+       		orders.update_at,
+       		orders.description,
+       		orders.delete_at
+       		FROM orders JOIN order_product ON orders.id = order_product.order_id
+       					JOIN products ON products.id = order_product.product_id
+       					WHERE orders.delete_at IS NULL
+       					GROUP BY orders.id,
+       							 orders.email,
+       							 orders.description,
+       							 orders.create_at,
+       							 orders.update_at,
+       							 orders.delete_at
+       				    ORDER BY orders.id ASC
 END;
 
 CREATE PROC softDeleteOrder(@id INT)
@@ -228,6 +229,27 @@ AS BEGIN
     SELECT * from orders WHERE id = @id;
 END;
 
+CREATE PROC filterOrdersByDate( @date VARCHAR(30) )
+AS BEGIN
+     SELECT orders.id,
+           		orders.email,
+           		SUM( order_product.quantity * products.price ) AS total,
+           		orders.create_at,
+           		orders.update_at,
+           		orders.description,
+           		orders.delete_at
+           		FROM orders JOIN order_product ON orders.id = order_product.order_id
+           					JOIN products ON products.id = order_product.product_id
+           					WHERE orders.delete_at IS NULL AND
+           					orders.create_at BETWEEN @date AND GETDATE()
+           					GROUP BY orders.id,
+           							 orders.email,
+           							 orders.description,
+           							 orders.create_at,
+           							 orders.update_at,
+           							 orders.delete_at
+           				    ORDER BY orders.id ASC;
+END;
 
 /**PURCHASES**/
 

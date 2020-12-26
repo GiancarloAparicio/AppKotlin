@@ -2,14 +2,12 @@ package view.home.dashboard._home.components
 
 import app.DAO.OrderDAO
 import app.DTO.OrderInLatestOrdersTableDTO
-import app.database.Database
 import app.events.DeleteOrderEvent
 import app.events.interfaces.IObserver
 import app.events.types.EventsTypes
 import app.models.Order
 import javafx.scene.control.TableView
 import tornadofx.*
-import java.sql.ResultSet
 
 class TableLatestOrders : Fragment(), IObserver  {
 
@@ -31,7 +29,15 @@ class TableLatestOrders : Fragment(), IObserver  {
      * Function GUI
      */
     fun add(orderInLatestOrdersTableDTO : OrderInLatestOrdersTableDTO ){
-        listLatestOrderDTOS.add( orderInLatestOrdersTableDTO )
+        listLatestOrderDTOS.add( 0, orderInLatestOrdersTableDTO )
+    }
+
+    fun addAll(ordersList : List<Order> ){
+
+        for(order in ordersList){
+            var orderDTO = OrderInLatestOrdersTableDTO( order.id, order.email, order._total, order.create_at )
+            listLatestOrderDTOS.add( orderDTO )
+        }
     }
 
     fun length() : Int {

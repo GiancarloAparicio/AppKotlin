@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -112,11 +113,15 @@
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="comboBoxOrderBy" onAction="#sortOrdersBy" prefWidth="200.0" promptText="Order By">
+                        <DatePicker fx:id="datePickerFilterBy" onAction="#filterOrdersBy" promptText="Filter By:" style="-fx-background-color: #1BA0EB;">
                            <HBox.margin>
                               <Insets left="40.0" />
                            </HBox.margin>
-                        </ComboBox>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </DatePicker>
+                        
                      </children>
                   </HBox>
                   <Label text="Recently Added Products:" GridPane.columnIndex="1">
