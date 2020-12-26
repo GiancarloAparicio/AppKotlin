@@ -16,15 +16,18 @@ import tornadofx.seconds
 import view.home.HomeView
 
 class LoginView: View(), IObserver {
-    override val root : BorderPane by fxml()
 
+    //Components GUI
     private val inputEmail : TextField by fxid()
     private val inputPassword : PasswordField by fxid()
-
     private val labelEmailError : Label by fxid()
     private val labelPasswordError : Label by fxid()
 
+    //Events
     private val userLoginEvent : UserLoginEvent = UserLoginEvent.getInstance()
+
+    //Root
+    override val root : BorderPane by fxml()
 
     init{
         userLoginEvent.addListener(this)

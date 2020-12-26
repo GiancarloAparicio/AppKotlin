@@ -52,9 +52,7 @@ class ProductComponent( data : Product) : Fragment(), IObserver {
     }
 
     override fun event(typeEvent: String, data: Any) {
-        if( addedStatus ){
-            buttonProduct.fire()
-        }
+        restartInitialState()
     }
 
 
@@ -65,6 +63,12 @@ class ProductComponent( data : Product) : Fragment(), IObserver {
     private fun changeStatusButton() : String {
         addedStatus = !addedStatus
         return if( addedStatus ) "Remove" else "Add"
+    }
+
+    private fun restartInitialState(){
+        if( addedStatus ){
+            buttonProduct.fire()
+        }
     }
 
     private fun initializeComponent(): HBox {
@@ -85,7 +89,6 @@ class ProductComponent( data : Product) : Fragment(), IObserver {
                             textFill = c("#1ba0eb")
                             fontSize = 12.px
                         }
-
                     }
 
                     label ("$${price.toString()}") {

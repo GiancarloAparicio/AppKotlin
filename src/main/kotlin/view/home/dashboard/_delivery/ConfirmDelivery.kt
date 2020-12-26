@@ -35,8 +35,9 @@ class ConfirmDelivery : View(), IObserver {
     override val root : BorderPane by fxml()
 
     init{
-        orderCreateEvent.addListener(this)
         productAddedToOrderEvent.addListener(this)
+        orderCreateEvent.addListener(this)
+        initializeTableOrderWithoutPay()
     }
 
     /**
@@ -109,9 +110,8 @@ class ConfirmDelivery : View(), IObserver {
         inputQuantity.text = ""
     }
 
-    fun initializeTableOrderWithoutPay(){
+    private fun initializeTableOrderWithoutPay(){
         contentTableOrderWithoutPay.add( tableOrderWithoutPay.root )
-        tableOrderWithoutPay.clearList()
 
         for ( productDTO in delivery.productListForOrder){
             tableOrderWithoutPay.addProduct( productDTO )
@@ -119,7 +119,7 @@ class ConfirmDelivery : View(), IObserver {
 
     }
 
-    private fun restartTableOrderWithoutPay(){
+    fun restartTableOrderWithoutPay(){
         tableOrderWithoutPay.clearList()
 
         for ( productDTO in delivery.productListForOrder){

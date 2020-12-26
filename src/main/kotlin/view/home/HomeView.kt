@@ -8,7 +8,6 @@ import app.models.User
 import app.events.UserLoginEvent
 import app.events.interfaces.IObserver
 import tornadofx.*
-import view.home.dashboard._delivery.ConfirmDelivery
 import view.home.dashboard._delivery.Delivery
 import view.home.dashboard._history.History
 import view.home.dashboard._home.Home
@@ -18,8 +17,7 @@ import view.home.dashboard._users.Users
 
 class HomeView() : View(), IObserver {
 
-    override val root : BorderPane by fxml()
-
+    //Views
     private val home: Home by inject()
     private val delivery : Delivery by inject()
     private val history : History by inject()
@@ -27,17 +25,20 @@ class HomeView() : View(), IObserver {
     private val users : Users by inject()
     private val products : Products by inject()
 
+    //Components GUI
+    /*TODO: Por alguna razon falla :(, no usar esta linea*/
+    //private val dashBoard : BorderPane by fxid()
     @FXML
     lateinit var labelNameUser : Label
-
     @FXML
     lateinit var dashBoard: BorderPane
 
-    /*TODO: Por alguna razon falla :(, no usar esta linea*/
-    //private val dashBoard : BorderPane by fxid()
 
-
+    //Events
     private val userLoginEvent = UserLoginEvent.getInstance()
+
+    //Root
+    override val root : BorderPane by fxml()
 
     init{
         initializeFirstScene()
@@ -49,7 +50,7 @@ class HomeView() : View(), IObserver {
      */
 
     fun setScene(event:Event){
-        val buttonPressed=event.target.toString()
+        val buttonPressed = event.target.toString()
         val buttonName : String = buttonPressed.substring( buttonPressed.indexOf("'")+1, buttonPressed.length-1)
 
         when (buttonName) {

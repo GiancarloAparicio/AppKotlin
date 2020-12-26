@@ -78,8 +78,7 @@ class Delivery : View() {
 
     private fun changeSceneToConfirmOrder(){
         homeView.dashBoard.center = confirmDelivery.root
-
-        confirmDelivery.initializeTableOrderWithoutPay()
+        confirmDelivery.restartTableOrderWithoutPay()
     }
 
     private fun initializeMasonryLayoutToProducts(){

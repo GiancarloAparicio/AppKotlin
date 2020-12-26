@@ -9,14 +9,14 @@ class MasonryProductsList : Fragment() {
     override val root = JFXMasonryPane()
 
     init{
-        addProductComponentList()
+        addProductsComponentsList()
     }
 
-    private fun addProductComponentList(){
+    private fun addProductsComponentsList(){
         var productsLists = ProductDAO.getAll()
 
         for( product in productsLists ){
-            root.add(ProductComponent( product ))
+            root.add( ProductComponent( product ) )
         }
     }
 
