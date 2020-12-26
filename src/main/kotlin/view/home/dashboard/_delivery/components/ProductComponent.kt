@@ -63,6 +63,8 @@ class ProductComponent( data : Product) : Fragment(), IObserver {
         if( typeEvent == EventsTypes.FILTER_PRODUCTS && data is String){
             showIfCategoryIsEqualsTo( data )
         }
+
+
     }
 
 

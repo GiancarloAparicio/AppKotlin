@@ -6,33 +6,51 @@ import app.DAO.ProductDAO
 import java.sql.Date
 import java.sql.ResultSet
 
-class Order {
+class Order( data : ResultSet, isNewOrder : Boolean = false) {
 
     private var dataBase = Database.getInstance()
 
+    //Properties
     val id : Int
     val email : String
-    var description : String
     val create_at : Date
-
+    var description : String = "Description"
 
     // Computed property, should not be saved in the database
     var _total : Double = 0.0
 
-    init{
-        val storeProcedure = "{CALL createOrder(?,?)}"
-        val params : Array<Any?> = arrayOf( User.getInstance().email , "Cake Delivery")
-        val data: ResultSet = dataBase.execStoreProcedure( storeProcedure, params )
+    init {
+        if( isNewOrder ){
+            this.id = data.getInt(1)
+            this.email  = data.getString(2)
+            this.description  = data.getString(3)
+            this.create_at  = data.getDate(4)
 
-        if ( data.next()){
-            id =  data.getInt(1)
-            email = data.getString(2)
-            description = data.getString(3)
-            create_at = data.getDate(4)
+        }else{
+            this.id = data.getInt(1)
+            this.email  = data.getString(2)
+            this.create_at  = data.getDate(4)
+            this.description  = data.getString(6)
+
+            // Computed property, should not be saved in the database
+            this._total  = data.getDouble(3)
         }
-        else
-            throw Error("Error: Can not create new Order")
+    }
 
+
+    companion object{
+        fun createNewInstance(): Order {
+            val storeProcedure = "{CALL createOrder(?,?)}"
+            val params : Array<Any?> = arrayOf( User.getInstance().email , "Cake Delivery")
+            val data: ResultSet = Database.getInstance().execStoreProcedure( storeProcedure, params )
+
+            var order : Order? = null
+            if ( data.next()){
+                order = Order( data, true )
+            }
+
+            return order as Order
+        }
     }
 
     fun addProductToOrder(item : ProductInOrderTableDTO) : Boolean{
@@ -50,6 +68,7 @@ class Order {
         return false
 
     }
+
 
 
 }

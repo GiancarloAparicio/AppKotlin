@@ -197,6 +197,19 @@ AS BEGIN
 
 END;
 
+CREATE PROC getAllOrders
+AS BEGIN
+    SELECT orders.id,
+    		orders.email,
+    		SUM( order_product.quantity * products.price ) AS total,
+    		orders.create_at,
+    		orders.update_at,
+    		orders.description
+    		FROM orders JOIN order_product ON orders.id = order_product.order_id
+    					JOIN products ON products.id = order_product.product_id
+    					GROUP BY orders.id, orders.email, orders.description, orders.create_at, orders.update_at;
+END;
+
 
 /**PURCHASES**/
 

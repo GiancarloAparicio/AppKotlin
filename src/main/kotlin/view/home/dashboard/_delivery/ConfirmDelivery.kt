@@ -61,7 +61,7 @@ class ConfirmDelivery : View(), IObserver {
 
         if( 0 < productListSize){
 
-            val order = Order()
+            val order = Order.createNewInstance()
             val listProducts = tableOrderWithoutPay.getList()
 
             for ( product in listProducts){

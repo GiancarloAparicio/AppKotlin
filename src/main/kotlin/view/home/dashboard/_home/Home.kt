@@ -6,33 +6,37 @@ import app.models.Order
 import app.events.OrderCreateEvent
 import app.events.interfaces.IObserver
 import app.events.types.EventsTypes
-import app.models.Product
 import javafx.scene.control.ComboBox
 import javafx.scene.control.Label
 import javafx.scene.layout.BorderPane
 import javafx.scene.layout.VBox
 import tornadofx.View
+import tornadofx.selectedItem
 import view.home.dashboard._home.components.LastProductAdded
 import view.home.dashboard._home.components.TableLatestOrders
+import java.util.*
+import java.util.Calendar
+
 
 class Home: View(), IObserver {
 
-    override val root : BorderPane by fxml()
-
-    private val contentTableLatestOrders : BorderPane by fxid()
+    //Components
     private var tableLatestOrders : TableLatestOrders = TableLatestOrders()
 
-    private val contentLatestProduct : VBox by fxid()
-    private val comboBoxOrderBy : ComboBox<String> by fxid()
+    //Events
     private val orderCreateEvent : OrderCreateEvent = OrderCreateEvent.getInstance()
 
-    /**
-     * Labels
-     */
-    private val labelTotalRevenue : Label by fxid()
-    private val labelTotalCost : Label by fxid()
-    private val labelTotalProfit : Label by fxid()
+    //Components GUI
+    private val contentTableLatestOrders : BorderPane by fxid()
+    private val comboBoxOrderBy : ComboBox<String> by fxid()
     private val labelGoalCompletions : Label by fxid()
+    private val contentLatestProduct : VBox by fxid()
+    private val labelTotalRevenue : Label by fxid()
+    private val labelTotalProfit : Label by fxid()
+    private val labelTotalCost : Label by fxid()
+
+    //Root
+    override val root : BorderPane by fxml()
 
     init{
         initializeLatestProductsAdded()
@@ -46,6 +50,12 @@ class Home: View(), IObserver {
     /**
      * Functions GUI
      */
+
+    fun sortOrdersBy(){
+        var category = comboBoxOrderBy.selectedItem.toString()
+
+        println( category )
+    }
 
     override fun event( typeEvent : String, order : Any) {
         if( typeEvent == EventsTypes.ORDER_CREATE && order is Order ){
@@ -65,10 +75,15 @@ class Home: View(), IObserver {
     }
 
     private fun initializeComboBox(){
-        val products : MutableList<Product> = ProductDAO.getAll()
 
-        for (product in products){
-            comboBoxOrderBy.items.add(product.name)
+        val cal = Calendar.getInstance()
+        cal.time = Date()
+
+        val yearCurrent : Int = cal[Calendar.YEAR]
+
+        for ( item in 0..10 ){
+            var year = yearCurrent - item
+            comboBoxOrderBy.items.add( year.toString() )
         }
     }
 

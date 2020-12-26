@@ -68,8 +68,9 @@ class Delivery : View() {
     }
 
     fun changeComboBoxOrderBy(){
-        var category = comboBoxOrderBy.selectedItem
-        masonryProductsLayout.orderComponentsBy( category as String )
+        var order = comboBoxOrderBy.selectedItem
+        masonryProductsLayout.orderComponentsBy( order as String )
+
     }
 
     fun addProductToList( product : Product){

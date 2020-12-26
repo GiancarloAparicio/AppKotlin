@@ -112,7 +112,7 @@
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="comboBoxOrderBy" prefWidth="170.0" promptText="Order By">
+                        <ComboBox fx:id="comboBoxOrderBy" onAction="#sortOrdersBy" prefWidth="200.0" promptText="Order By">
                            <HBox.margin>
                               <Insets left="40.0" />
                            </HBox.margin>
