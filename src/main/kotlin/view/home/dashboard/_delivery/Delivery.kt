@@ -10,7 +10,6 @@ import tornadofx.View
 import tornadofx.selectedItem
 import view.home.HomeView
 import view.home.dashboard._delivery.components.MasonryProductsList
-import view.home.dashboard._delivery.components.TableOrderWithoutPay
 
 
 class Delivery : View() {
@@ -44,7 +43,14 @@ class Delivery : View() {
      */
 
     fun generateOrder(){
-        changeSceneToConfirmOrder()
+        var existsSelectedItems : Boolean = 0 < productListForOrder.size
+
+        if( existsSelectedItems ){
+            changeSceneToConfirmOrder()
+        }else{
+            println("Not selected items")
+        }
+
     }
 
     fun changeComboBoxFilterBy(){

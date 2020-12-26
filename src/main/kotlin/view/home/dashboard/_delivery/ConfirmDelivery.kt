@@ -3,8 +3,6 @@ package view.home.dashboard._delivery
 import javafx.scene.control.*
 import javafx.scene.layout.BorderPane
 import javafx.scene.layout.VBox
-import app.DTO.ProductInOrderTableDTO
-import app.models.Product
 import app.events.OrderCreateEvent
 import app.events.ProductAddedToOrderEvent
 import app.events.interfaces.IObserver
@@ -59,10 +57,9 @@ class ConfirmDelivery : View(), IObserver {
     }
 
     fun generateOrder(){
-        var quantityIsCorrect = validateQuantity()
         var productListSize = tableOrderWithoutPay.length()
 
-        if(quantityIsCorrect && 0 < productListSize){
+        if( 0 < productListSize){
 
             val order = Order()
             val listProducts = tableOrderWithoutPay.getList()

@@ -7,7 +7,6 @@ import app.events.ProductRemovedToOrderEvent
 import app.events.interfaces.IObserver
 import app.events.types.EventsTypes
 import javafx.scene.control.TableView
-import javafx.scene.paint.Color
 import tornadofx.*
 
 class TableOrderWithoutPay : Fragment(), IObserver {
@@ -32,7 +31,6 @@ class TableOrderWithoutPay : Fragment(), IObserver {
     /**
      * Functions GUI
      */
-
 
     fun addProduct(productInOrderTableDTO : ProductInOrderTableDTO){
         listOrderWithoutPayDTO.add( productInOrderTableDTO )
