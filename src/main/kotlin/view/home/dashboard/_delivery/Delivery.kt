@@ -3,6 +3,7 @@ package view.home.dashboard._delivery
 import app.DAO.ProductDAO
 import app.DTO.ProductInOrderTableDTO
 import app.events.FilterProductsEvent
+import app.events.SortProductsEvent
 import app.events.types.EventsTypes
 import app.models.Product
 import javafx.scene.control.ComboBox
@@ -33,6 +34,7 @@ class Delivery : View() {
 
     //Events
     var filterProductsEvent = FilterProductsEvent.getInstance()
+    var sortProductsEvent = SortProductsEvent.getInstance()
 
     //Aux
     var index : Int = 0
@@ -68,9 +70,9 @@ class Delivery : View() {
     }
 
     fun changeComboBoxOrderBy(){
-        var order = comboBoxOrderBy.selectedItem
-        masonryProductsLayout.orderComponentsBy( order as String )
-
+        var sort = comboBoxOrderBy.selectedItem.toString()
+        sortProductsEvent.throwEvent( EventsTypes.SORT_PRODUCTS, sort )
+        masonryProductsLayout.orderComponentsBy( sort  )
     }
 
     fun addProductToList( product : Product){

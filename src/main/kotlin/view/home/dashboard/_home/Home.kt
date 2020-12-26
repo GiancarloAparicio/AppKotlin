@@ -53,8 +53,6 @@ class Home: View(), IObserver {
 
     fun sortOrdersBy(){
         var category = comboBoxOrderBy.selectedItem.toString()
-
-        println( category )
     }
 
     override fun event( typeEvent : String, order : Any) {

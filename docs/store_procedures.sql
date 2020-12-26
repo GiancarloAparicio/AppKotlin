@@ -199,15 +199,33 @@ END;
 
 CREATE PROC getAllOrders
 AS BEGIN
+
     SELECT orders.id,
     		orders.email,
     		SUM( order_product.quantity * products.price ) AS total,
     		orders.create_at,
     		orders.update_at,
-    		orders.description
+    		orders.description,
+    		orders.delete_at
     		FROM orders JOIN order_product ON orders.id = order_product.order_id
     					JOIN products ON products.id = order_product.product_id
-    					GROUP BY orders.id, orders.email, orders.description, orders.create_at, orders.update_at;
+    					WHERE orders.delete_at IS NULL
+    					GROUP BY orders.id,
+    							 orders.email,
+    							 orders.description,
+    							 orders.create_at,
+    							 orders.update_at,
+    							 orders.delete_at
+END;
+
+CREATE PROC softDeleteOrder(@id INT)
+AS BEGIN
+
+    UPDATE orders
+        SET delete_at = GETDATE()
+        WHERE id = @id;
+
+    SELECT * from orders WHERE id = @id;
 END;
 
 

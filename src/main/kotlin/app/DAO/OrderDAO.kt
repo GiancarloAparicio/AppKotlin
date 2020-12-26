@@ -8,6 +8,8 @@ import java.sql.ResultSet
 class OrderDAO {
 
     companion object{
+
+
         private var dataBase = Database.getInstance()
 
         fun getAll() : MutableList<Order>  {
@@ -20,6 +22,17 @@ class OrderDAO {
             }
 
             return listProducts
+        }
+
+        fun deleteOrder( id : Int): Order? {
+            var storeProcedure = "{CALL softDeleteOrder(?)}"
+            var params : Array<Any?> = arrayOf( id )
+            var data : ResultSet = dataBase.execStoreProcedure( storeProcedure, params )
+
+            if( data.next() ){
+               return Order(data , true)
+            }
+            return null
         }
     }
 }

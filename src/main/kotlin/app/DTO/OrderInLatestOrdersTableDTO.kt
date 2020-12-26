@@ -1,5 +1,8 @@
 package app.DTO
 
+import app.events.DeleteOrderEvent
+import app.events.interfaces.IObserver
+import app.events.types.EventsTypes
 import com.jfoenix.controls.JFXButton
 import javafx.scene.Cursor
 import javafx.scene.layout.HBox
@@ -17,11 +20,14 @@ class OrderInLatestOrdersTableDTO (
 )
 {
 
+    //Events
+    var deleteOrderEvent = DeleteOrderEvent.getInstance()
+
     init{
-        actions.add( createButtonDelete() )
-        actions.add( createButtonUpdate() )
-        actions.spacing = 5.0
+        initializeActions()
     }
+
+
 
     /**
      * Functions helpers
@@ -31,7 +37,7 @@ class OrderInLatestOrdersTableDTO (
         val button = JFXButton("Delete")
 
         button.action {
-            println("Delete order")
+            deleteOrderEvent.throwEvent( EventsTypes.DELETE_ORDER, id)
         }
 
         button.style = "-fx-background-color: #EE254F;" +
@@ -61,5 +67,13 @@ class OrderInLatestOrdersTableDTO (
 
         return button
     }
+
+    private fun initializeActions(){
+        actions.add( createButtonDelete() )
+        actions.add( createButtonUpdate() )
+        actions.spacing = 5.0
+    }
+
+
 
 }

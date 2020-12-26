@@ -20,4 +20,8 @@ abstract class Observable {
         }
     }
 
+    fun removeListener( listener : IObserver ){
+        listListeners.remove( listener )
+    }
+
 }

@@ -17,14 +17,14 @@ class MasonryProductsList : Fragment() {
         addProductsComponentsList()
     }
 
-    private fun addProductsComponentsList(){
-        for( product in productsLists ){
-            root.add( ProductComponent( product ) )
-        }
-    }
+    /**
+     * Functions GUI
+     */
 
     fun orderComponentsBy( category : String){
+
         var orderedList = sortListToProductsBy( category )
+
         removeChildren()
 
         for( product in orderedList ){
@@ -32,6 +32,7 @@ class MasonryProductsList : Fragment() {
         }
     }
 
+    /*
     fun filterComponentsBy( category : String){
 
         var filteredList = filterListToProductsBy( category )
@@ -41,16 +42,24 @@ class MasonryProductsList : Fragment() {
             root.add( ProductComponent( product ) )
         }
     }
+    */
 
     /**
      * Functions helpers
      */
+
+    private fun addProductsComponentsList(){
+        for( product in productsLists ){
+            root.add( ProductComponent( product ) )
+        }
+    }
 
     private fun removeChildren(){
         root.children.clear()
     }
 
     private fun sortListToProductsBy( category : String ): MutableList<Product> {
+
         var auxList : List<Product>
 
         when (category) {
@@ -64,10 +73,13 @@ class MasonryProductsList : Fragment() {
         }
 
         return auxList as MutableList<Product>
+
     }
 
+    /*
     private fun filterListToProductsBy( category : String ): MutableList<Product> {
         return ProductDAO.getFilteredProducts( category )
     }
+     */
 
 }

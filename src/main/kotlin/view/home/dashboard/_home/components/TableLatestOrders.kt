@@ -2,18 +2,28 @@ package view.home.dashboard._home.components
 
 import app.DAO.OrderDAO
 import app.DTO.OrderInLatestOrdersTableDTO
+import app.database.Database
+import app.events.DeleteOrderEvent
+import app.events.interfaces.IObserver
+import app.events.types.EventsTypes
+import app.models.Order
 import javafx.scene.control.TableView
 import tornadofx.*
+import java.sql.ResultSet
 
-class TableLatestOrders : Fragment()  {
+class TableLatestOrders : Fragment(), IObserver  {
 
     //Properties
     private var listLatestOrderDTOS = mutableListOf<OrderInLatestOrdersTableDTO>().asObservable()
+
+    //Events
+    private val deleteOrderEvent = DeleteOrderEvent.getInstance()
 
     //Root
     override val root = initializeRootComponent()
 
     init {
+        deleteOrderEvent.addListener(this)
         initializeTable()
     }
 
@@ -34,6 +44,16 @@ class TableLatestOrders : Fragment()  {
 
     fun clearList(){
         listLatestOrderDTOS.clear()
+    }
+
+    override fun event(typeEvent: String, data: Any) {
+
+        if( typeEvent == EventsTypes.DELETE_ORDER && data is Int ){
+            var index = getItemIndexToDelete( data )
+            listLatestOrderDTOS.removeAt( index )
+
+            softDeleteID( data )
+        }
     }
 
     /**
@@ -60,4 +80,22 @@ class TableLatestOrders : Fragment()  {
 
         }
     }
+
+    private fun getItemIndexToDelete( id : Int) : Int {
+        var item : Int? = null
+        for ( (index, element) in listLatestOrderDTOS.withIndex()){
+            if( element.id == id ){
+                item = index
+                break
+            }
+        }
+
+        return item as Int
+    }
+
+    private fun softDeleteID(  id : Int): Order {
+        return OrderDAO.deleteOrder( id ) as Order
+    }
+
+
 }

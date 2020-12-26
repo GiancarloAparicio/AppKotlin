@@ -2,6 +2,7 @@ package view.home.dashboard._delivery.components
 
 import app.events.FilterProductsEvent
 import app.events.OrderCreateEvent
+import app.events.SortProductsEvent
 import app.events.interfaces.IObserver
 import app.events.types.EventsTypes
 import app.models.Product
@@ -22,11 +23,12 @@ class ProductComponent( data : Product) : Fragment(), IObserver {
 
     //Aux
     var addedStatus : Boolean = false
-    private var product = data
+    var product = data
 
     //Events
     var orderCreateEvent = OrderCreateEvent.getInstance()
     var filterProductsEvent = FilterProductsEvent.getInstance()
+    var sortProductsEvent = SortProductsEvent.getInstance()
 
     //Views
     private val delivery : Delivery by inject()
@@ -40,6 +42,7 @@ class ProductComponent( data : Product) : Fragment(), IObserver {
     init {
         orderCreateEvent.addListener(this)
         filterProductsEvent.addListener(this)
+        sortProductsEvent.addListener(this)
     }
 
 
@@ -62,6 +65,11 @@ class ProductComponent( data : Product) : Fragment(), IObserver {
 
         if( typeEvent == EventsTypes.FILTER_PRODUCTS && data is String){
             showIfCategoryIsEqualsTo( data )
+        }
+
+        if( typeEvent == EventsTypes.SORT_PRODUCTS ){
+            filterProductsEvent.removeListener( this )
+            orderCreateEvent.removeListener( this )
         }
 
 

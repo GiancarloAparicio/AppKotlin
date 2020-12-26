@@ -55,7 +55,6 @@ class SqlServer : IDataBase {
     }
 
     override fun execStoreProcedure(storeProcedure: String): ResultSet {
-
             val procedure: CallableStatement = this.getConnection().prepareCall(storeProcedure)
             return procedure.executeQuery()
     }
