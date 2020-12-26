@@ -11,12 +11,12 @@ abstract class Observable {
         listListeners.add( listener )
     }
 
-    fun throwEvent( data: Any ){
+    fun throwEvent( eventType : String, data: Any ){
         var iterators = listListeners.iterator()
 
         while( iterators.hasNext() ){
 
-            iterators.next().event( data )
+            iterators.next().event( eventType , data )
         }
     }
 

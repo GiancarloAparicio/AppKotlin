@@ -1,29 +1,71 @@
 package view.home.dashboard._delivery.components
 
+import app.events.OrderCreateEvent
+import app.events.interfaces.IObserver
 import app.models.Product
 import javafx.scene.Cursor
+import javafx.scene.control.Button
 import javafx.scene.layout.HBox
 import javafx.scene.text.FontWeight
 import tornadofx.*
+import view.home.dashboard._delivery.Delivery
 
-class ProductComponent( data : Product) : Fragment() {
+class ProductComponent( data : Product) : Fragment(), IObserver {
 
+    //Properties
     var imageUrl : String = data.url
     var productName : String = data.name
     var price: Double = data.price
     var description : String = "Description"
 
+    //Aux
+    var addedStatus : Boolean = false
+    private var product = data
+
+    //Events
+    var orderCreateEvent = OrderCreateEvent.getInstance()
+
+    //Views
+    private val delivery: Delivery by inject()
+
+    //Components
+    private lateinit var buttonProduct : Button
+
+    //Root
     override val root = initializeComponent()
 
+    init {
+        orderCreateEvent.addListener(this)
+    }
+
+
+    /**
+     * Functions GUI
+     */
 
     private fun action(){
-        println("Product add. :)")
+        if( addedStatus ){
+            delivery.removeProductToList( product )
+        }else{
+            delivery.addProductToList( product )
+        }
+    }
+
+    override fun event(typeEvent: String, data: Any) {
+        if( addedStatus ){
+            buttonProduct.fire()
+        }
     }
 
 
     /**
      * Functions helpers
      */
+
+    private fun changeStatusButton() : String {
+        addedStatus = !addedStatus
+        return if( addedStatus ) "Remove" else "Add"
+    }
 
     private fun initializeComponent(): HBox {
         return hbox {
@@ -67,7 +109,8 @@ class ProductComponent( data : Product) : Fragment() {
                             fontSize = 8.px
                         }
                     }
-                    button("Add") {
+                    buttonProduct = button ("Add"){
+
                         style {
                             backgroundColor += c("#F6A000")
                             textFill = c("white")
@@ -80,6 +123,21 @@ class ProductComponent( data : Product) : Fragment() {
 
                         action {
                             action()
+                            text = changeStatusButton()
+
+                            style{
+                                if( addedStatus ){
+                                    backgroundColor += c("#EE254F")
+                                }else{
+                                    backgroundColor += c("#F6A000")
+                                }
+
+                                textFill = c("white")
+                                fontWeight = FontWeight.EXTRA_BOLD
+                                fontSize = 10.px
+                                padding =  box( 0.5.px )
+                                cursor = Cursor.HAND
+                            }
                         }
                     }
                 }
@@ -110,4 +168,6 @@ class ProductComponent( data : Product) : Fragment() {
             }
         }
     }
+
+
 }

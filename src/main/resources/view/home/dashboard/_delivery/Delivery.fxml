@@ -43,7 +43,7 @@
                         </Label>
                         <HBox alignment="CENTER" prefHeight="157.0" prefWidth="570.0">
                             <children>
-                                <ComboBox fx:id="comboBoxFilterBy" maxWidth="180.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="180.0" promptText="Filter by">
+                                <ComboBox fx:id="comboBoxFilterBy" maxWidth="180.0" nodeOrientation="LEFT_TO_RIGHT" onAction="#changeComboBoxFilterBy" prefWidth="180.0" promptText="Filter by">
                                     <cursor>
                                         <Cursor fx:constant="HAND" />
                                     </cursor>
@@ -51,7 +51,7 @@
                                         <Insets left="15.0" right="15.0" />
                                     </HBox.margin>
                                 </ComboBox>
-                                <ComboBox fx:id="comboBoxOrderBy" maxWidth="180.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="180.0" promptText="Order by">
+                                <ComboBox fx:id="comboBoxOrderBy" maxWidth="180.0" nodeOrientation="LEFT_TO_RIGHT" onAction="#changeComboBoxOrderBy" prefWidth="180.0" promptText="Order by">
                                     <cursor>
                                         <Cursor fx:constant="HAND" />
                                     </cursor>

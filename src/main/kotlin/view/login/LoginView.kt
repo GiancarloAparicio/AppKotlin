@@ -8,6 +8,7 @@ import javafx.scene.layout.BorderPane
 import app.models.User
 import app.events.UserLoginEvent
 import app.events.interfaces.IObserver
+import app.events.types.EventsTypes
 import app.services.Session
 import tornadofx.View
 import tornadofx.ViewTransition
@@ -45,7 +46,7 @@ class LoginView: View(), IObserver {
 
             if(currentUser is User){
                 changeSceneToHome()
-                userLoginEvent.throwEvent( currentUser )
+                userLoginEvent.throwEvent( EventsTypes.USER_LOGIN, currentUser )
 
             }else{
                 labelEmailError.text =  "Email or password invalid"
@@ -54,8 +55,8 @@ class LoginView: View(), IObserver {
 
     }
 
-    override fun event( data: Any) {
-        if( data is User ){
+    override fun event( typeEvent : String, data : Any) {
+        if( typeEvent == EventsTypes.USER_LOGIN && data is User ){
             Session.start( data )
         }
 

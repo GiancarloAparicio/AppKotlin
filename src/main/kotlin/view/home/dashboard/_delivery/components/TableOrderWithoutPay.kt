@@ -1,31 +1,33 @@
 package view.home.dashboard._delivery.components
 
 import app.DTO.ProductInOrderTableDTO
+import app.events.OrderCreateEvent
+import app.events.ProductAddedToOrderEvent
 import app.events.ProductRemovedToOrderEvent
 import app.events.interfaces.IObserver
+import app.events.types.EventsTypes
+import javafx.scene.control.TableView
+import javafx.scene.paint.Color
 import tornadofx.*
 
 class TableOrderWithoutPay : Fragment(), IObserver {
 
-    private var listOrderWithoutPayDTO = mutableListOf<ProductInOrderTableDTO>().asObservable()
-    private var size : Int =0
+    var listOrderWithoutPayDTO = mutableListOf<ProductInOrderTableDTO>().asObservable()
 
-
-    override val root = tableview(listOrderWithoutPayDTO){
-        readonlyColumn("#", ProductInOrderTableDTO::id).prefWidth(80)
-        readonlyColumn("Name", ProductInOrderTableDTO::product).prefWidth(150)
-        readonlyColumn("Quantity", ProductInOrderTableDTO::quantity).prefWidth(100)
-        readonlyColumn("Price", ProductInOrderTableDTO::price).prefWidth(100)
-        readonlyColumn("Sub-Total", ProductInOrderTableDTO::subTotal).prefWidth(120)
-        readonlyColumn("Actions", ProductInOrderTableDTO::actions).prefWidth(150)
-
-    }
-
+    // Events
     private val productRemovedToOrderEvent = ProductRemovedToOrderEvent.getInstance()
+    private val productAddedToOrderEvent = ProductAddedToOrderEvent.getInstance()
+    private val orderCreateEvent = OrderCreateEvent.getInstance()
+
+    // Root
+    override val root = initializeTable()
 
     init {
         productRemovedToOrderEvent.addListener(this)
+        productAddedToOrderEvent.addListener(this)
+        orderCreateEvent.addListener(this)
     }
+
 
     /**
      * Functions GUI
@@ -34,7 +36,6 @@ class TableOrderWithoutPay : Fragment(), IObserver {
 
     fun addProduct(productInOrderTableDTO : ProductInOrderTableDTO){
         listOrderWithoutPayDTO.add( productInOrderTableDTO )
-        size++
     }
 
     fun removeProduct( id : Int ){
@@ -42,10 +43,6 @@ class TableOrderWithoutPay : Fragment(), IObserver {
         var index : Int = getItemIndexToDelete( id )
         listOrderWithoutPayDTO.removeAt( index )
 
-    }
-
-    fun index() : Int {
-        return size
     }
 
     fun length() : Int {
@@ -60,9 +57,9 @@ class TableOrderWithoutPay : Fragment(), IObserver {
         listOrderWithoutPayDTO.clear()
     }
 
-    override fun event(id: Any) {
-        if( id is Int){
-            removeProduct( id )
+    override fun event(typeEvent: String, data : Any) {
+        if( typeEvent == EventsTypes.PRODUCT_REMOVED_TO_ORDER && data is Int){
+            removeProduct( data )
         }
     }
 
@@ -80,6 +77,19 @@ class TableOrderWithoutPay : Fragment(), IObserver {
         }
 
         return item as Int
+    }
+
+    private fun initializeTable(): TableView<ProductInOrderTableDTO> {
+        return tableview(listOrderWithoutPayDTO){
+
+            readonlyColumn("#", ProductInOrderTableDTO::id).prefWidth(80)
+            readonlyColumn("Name", ProductInOrderTableDTO::product).prefWidth(150)
+            readonlyColumn("Quantity", ProductInOrderTableDTO::quantity).prefWidth(100)
+            readonlyColumn("Price", ProductInOrderTableDTO::price).prefWidth(100)
+            readonlyColumn("Sub-Total", ProductInOrderTableDTO::subTotal).prefWidth(120)
+            readonlyColumn("Actions", ProductInOrderTableDTO::actions).prefWidth(120)
+
+        }
     }
 
 }

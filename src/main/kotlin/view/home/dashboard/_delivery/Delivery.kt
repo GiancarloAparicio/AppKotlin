@@ -1,23 +1,36 @@
 package view.home.dashboard._delivery
 
 import app.DAO.ProductDAO
+import app.DTO.ProductInOrderTableDTO
 import app.models.Product
 import javafx.scene.control.ComboBox
 import javafx.scene.layout.BorderPane
 import javafx.scene.layout.VBox
 import tornadofx.View
+import tornadofx.selectedItem
 import view.home.HomeView
 import view.home.dashboard._delivery.components.MasonryProductsList
+import view.home.dashboard._delivery.components.TableOrderWithoutPay
+
 
 class Delivery : View() {
 
+    //Views
     private val homeView: HomeView by inject()
     private val confirmDelivery: ConfirmDelivery by inject()
 
+    //Items to GUI
     private val masonryListProducts : VBox by fxid()
     private val comboBoxOrderBy : ComboBox<String> by fxid()
     private val comboBoxFilterBy : ComboBox<String> by fxid()
 
+    //Shared
+    var productListForOrder = mutableListOf<ProductInOrderTableDTO>()
+
+    //Aux
+    var index : Int = 0
+
+    //Root
     override val root : BorderPane by fxml()
 
     init {
@@ -30,9 +43,27 @@ class Delivery : View() {
      * Functions GUI
      */
 
-
     fun generateOrder(){
         changeSceneToConfirmOrder()
+    }
+
+    fun changeComboBoxFilterBy(){
+        println( comboBoxFilterBy.selectedItem )
+    }
+
+    fun changeComboBoxOrderBy(){
+        println( comboBoxOrderBy.selectedItem )
+    }
+
+    fun addProductToList( product : Product){
+        var productDTO = ProductInOrderTableDTO( index ,product.name, 1, product.price)
+        productListForOrder.add( productDTO )
+        index++
+    }
+
+    fun removeProductToList( product : Product ){
+        var index = getItemIndexToDelete( product.name )
+        productListForOrder.removeAt( index )
     }
 
     /**
@@ -41,6 +72,8 @@ class Delivery : View() {
 
     private fun changeSceneToConfirmOrder(){
         homeView.dashBoard.center = confirmDelivery.root
+
+        confirmDelivery.initializeTableOrderWithoutPay()
     }
 
     private fun initializeMasonryLayoutToProducts(){
@@ -61,6 +94,18 @@ class Delivery : View() {
         for ( category in categories ){
             comboBoxFilterBy.items.add( category )
         }
+    }
+
+    private fun getItemIndexToDelete( name : String) : Int {
+        var item : Int? = null
+        for ( (index, element) in productListForOrder.withIndex()){
+            if( element.product == name ){
+                item = index
+                break
+            }
+        }
+
+        return item as Int
     }
 
 }

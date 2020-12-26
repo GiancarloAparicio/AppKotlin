@@ -5,6 +5,7 @@ import app.DTO.OrderInLatestOrdersTableDTO
 import app.models.Order
 import app.events.OrderCreateEvent
 import app.events.interfaces.IObserver
+import app.events.types.EventsTypes
 import app.models.Product
 import javafx.scene.control.ComboBox
 import javafx.scene.control.Label
@@ -46,8 +47,8 @@ class Home: View(), IObserver {
      * Functions GUI
      */
 
-    override fun event( order: Any) {
-        if( order is Order ){
+    override fun event( typeEvent : String, order : Any) {
+        if( typeEvent == EventsTypes.ORDER_CREATE && order is Order ){
 
             var lastOrderDTO = OrderInLatestOrdersTableDTO( order.id, order.email, order._total, order.create_at )
             tableLatestOrders.add( lastOrderDTO )

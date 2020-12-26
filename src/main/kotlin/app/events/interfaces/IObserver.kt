@@ -2,5 +2,5 @@ package app.events.interfaces
 
 interface IObserver {
 
-    fun event( data: Any )
+    fun event( typeEvent : String, data: Any )
 }

@@ -66,7 +66,7 @@ class HomeView() : View(), IObserver {
         }
     }
 
-    override fun event( data: Any) {
+    override fun event(typeEvent: String, data: Any) {
         initialiseDataUser()
     }
 

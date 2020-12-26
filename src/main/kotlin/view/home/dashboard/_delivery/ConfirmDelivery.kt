@@ -4,59 +4,81 @@ import javafx.scene.control.*
 import javafx.scene.layout.BorderPane
 import javafx.scene.layout.VBox
 import app.DTO.ProductInOrderTableDTO
-import app.models.Order
 import app.models.Product
-import app.DAO.ProductDAO
 import app.events.OrderCreateEvent
+import app.events.ProductAddedToOrderEvent
 import app.events.interfaces.IObserver
+import app.events.types.EventsTypes
+import app.models.Order
 import tornadofx.*
-import view.home.dashboard._delivery.components.MasonryProductsList
 import view.home.dashboard._delivery.components.TableOrderWithoutPay
 
 
 class ConfirmDelivery : View(), IObserver {
 
-    override val root : BorderPane by fxml()
-
-    private val comboBoxProduct : ComboBox<String> by fxid()
+    //Items to GUI
     private val inputQuantity : TextField by fxid()
     private val contentTableOrderWithoutPay : VBox by fxid()
 
+    //Components
     private var tableOrderWithoutPay : TableOrderWithoutPay = TableOrderWithoutPay()
 
-    private val orderCreateEvent : OrderCreateEvent = OrderCreateEvent.getInstance()
+    //Views
+    private val delivery: Delivery by inject()
+
+    //Events
+    private val orderCreateEvent  = OrderCreateEvent.getInstance()
+    private val productAddedToOrderEvent = ProductAddedToOrderEvent.getInstance()
+
+    //Aux
+    var index : Int = 0
+
+    //Root
+    override val root : BorderPane by fxml()
 
     init{
-        initializeComboBox()
-        initializeTableOrderWithoutPay()
-
         orderCreateEvent.addListener(this)
+        productAddedToOrderEvent.addListener(this)
     }
 
     /**
     * Functions GUI
     */
 
-    fun addProductToOrder(){
-        val quantityIsCorrect : Boolean = validateQuantity()
-        val nameProduct : String? = comboBoxProduct.selectedItem
-        val product : Product? = ProductDAO.getProduct( if( nameProduct is String ) nameProduct else "" )
+    fun updatedProduct(){
 
-        if( product is Product  &&  quantityIsCorrect ){
+        var quantityIsCorrect = validateQuantity()
 
-            val unitPrice : Double = product.price
-            val quantity : Int = inputQuantity.text.toInt()
-            val subTotal : Double = unitPrice * quantity
+        if(quantityIsCorrect){
+            var quantity = inputQuantity.text.toInt()
+            tableOrderWithoutPay.root?.selectionModel?.selectedItem?.quantity = quantity
 
-            var orderProduct = ProductInOrderTableDTO( tableOrderWithoutPay.index(), product.name, quantity, unitPrice, subTotal)
+            restartTableOrderWithoutPay()
+            clearInputQuantity()
+        }
+    }
 
-            tableOrderWithoutPay.addProduct( orderProduct )
+    fun generateOrder(){
+        var quantityIsCorrect = validateQuantity()
+        var productListSize = tableOrderWithoutPay.length()
+
+        if(quantityIsCorrect && 0 < productListSize){
+
+            val order = Order()
+            val listProducts = tableOrderWithoutPay.getList()
+
+            for ( product in listProducts){
+                order.addProductToOrder( product )
+                order._total += product.subTotal
+            }
+
+            orderCreateEvent.throwEvent( EventsTypes.ORDER_CREATE, order )
 
         }else{
-            println("Warning") //TODO: Add a warning
+            println("Order empty")
         }
 
-        clearInputAndComboBox()
+
     }
 
     fun validateQuantity(): Boolean {
@@ -69,29 +91,11 @@ class ConfirmDelivery : View(), IObserver {
         return quantityIsNumber
     }
 
-    fun generateOrder(){
-        var productListSize = tableOrderWithoutPay.length()
-
-        if( 0 < productListSize ){
-            val order = Order()
-            val listProducts = tableOrderWithoutPay.getList()
-
-            for ( product in listProducts){
-                order.addProductToOrder( product )
-                order._total += product.subTotal
-            }
-
-            orderCreateEvent.throwEvent( order )
-
-        }else{
-            println("Order empty")
+    override fun event( typeEvent : String, data : Any ) {
+        if( typeEvent == EventsTypes.ORDER_CREATE ){
+            clearProductTable()
         }
 
-    }
-
-    override fun event(data: Any) {
-        clearProductTable()
-        clearInputAndComboBox()
     }
 
 
@@ -99,24 +103,32 @@ class ConfirmDelivery : View(), IObserver {
     *  Private functions helpers
     */
 
-    private fun clearInputAndComboBox(){
-        //TODO: Agregar funcionalidad para limpiar el comboBox
-        inputQuantity.text = ""
-    }
 
     private fun clearProductTable(){
         tableOrderWithoutPay.clearList()
     }
 
-    private fun initializeTableOrderWithoutPay(){
-        contentTableOrderWithoutPay.add( tableOrderWithoutPay.root )
+    private fun clearInputQuantity(){
+        inputQuantity.text = ""
     }
 
-    private fun initializeComboBox(){
-        val products : MutableList<Product> = ProductDAO.getAll()
+    fun initializeTableOrderWithoutPay(){
+        contentTableOrderWithoutPay.add( tableOrderWithoutPay.root )
+        tableOrderWithoutPay.clearList()
 
-        for (product in products){
-            comboBoxProduct.items.add(product.name)
+        for ( productDTO in delivery.productListForOrder){
+            tableOrderWithoutPay.addProduct( productDTO )
+        }
+
+    }
+
+    private fun restartTableOrderWithoutPay(){
+        tableOrderWithoutPay.clearList()
+
+        for ( productDTO in delivery.productListForOrder){
+            productDTO.subTotal = productDTO.quantity * productDTO.price
+
+            tableOrderWithoutPay.addProduct( productDTO )
         }
     }
 
