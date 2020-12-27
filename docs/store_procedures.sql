@@ -46,15 +46,84 @@ AS BEGIN
     INSERT INTO role_user (role_id,email)
         VALUES ('user',@email);
 
-    SELECT @identity;
 
+   SELECT users.email,
+       		users.name,
+       		users.last_name,
+       		users.create_at,
+       		users.update_at,
+       		users.create_at,
+       		string_agg( role_id , ',' ) AS roles
+       		FROM users JOIN role_user ON users.email = role_user.email
+       		WHERE users.email = @email
+       		GROUP BY users.email,
+       				users.name,
+       				users.last_name,
+       				users.create_at,
+       				users.update_at,
+       				users.create_at
 END;
+
+CREATE PROC assignRoleToUser(@email VARCHAR(100), @role VARCHAR(30))
+AS BEGIN
+    INSERT INTO role_user (role_id,email)
+            VALUES (@role,@email);
+
+      SELECT users.email,
+          		users.name,
+          		users.last_name,
+          		users.create_at,
+          		users.update_at,
+          		users.create_at,
+          		string_agg( role_id , ',' ) AS roles
+          		FROM users JOIN role_user ON users.email = role_user.email
+          		WHERE users.email = @email
+          		GROUP BY users.email,
+          				users.name,
+          				users.last_name,
+          				users.create_at,
+          				users.update_at,
+          				users.create_at
+END
 
 CREATE PROC loginUser(@email VARCHAR(100), @password VARCHAR(64))
 AS BEGIN
-    SELECT TOP 1 email,name,last_name ,create_at ,update_at ,delete_at FROM users
-    WHERE email = @email AND password = @password;
-END
+       SELECT users.email,
+           		users.name,
+           		users.last_name,
+           		users.create_at,
+           		users.update_at,
+           		users.create_at,
+           		string_agg( role_id , ',' ) AS roles
+           		FROM users JOIN role_user ON users.email = role_user.email
+           		WHERE users.email = @email AND users.password = @password
+           		GROUP BY users.email,
+           				users.name,
+           				users.last_name,
+           				users.create_at,
+           				users.update_at,
+           				users.create_at
+
+END;
+
+CREATE PROC getAllUsers
+AS BEGIN
+
+   SELECT users.email,
+       		users.name,
+       		users.last_name,
+       		users.create_at,
+       		users.update_at,
+       		users.create_at,
+       		string_agg( role_id , ',' ) AS roles
+       		FROM users JOIN role_user ON users.email = role_user.email
+       		GROUP BY users.email,
+       				users.name,
+       				users.last_name,
+       				users.create_at,
+       				users.update_at,
+       				users.create_at
+END;
 
 
 /**PRODUCT**/
@@ -101,7 +170,17 @@ AS BEGIN
         INSERT INTO images (image_able_id, image_able_type, url, name)
                     VALUES (@identity,'product',@url ,'product-image-'+@identity)
 
-    SELECT @identity
+    SELECT products.id,
+                   images.url,
+                   products.name,
+                   products.price,
+                   categories_products.category_product,
+                   products_lots.quantity,
+                   products_lots.expires_at
+            	FROM products JOIN categories_products ON products.category_product_id = categories_products.id
+            	              JOIN products_lots ON products_lots.id = products.lot_id
+            	              LEFT JOIN images ON products.id = images.image_able_id
+            	              WHERE images.image_able_type = 'product' AND products.id = @identity
 
 END;
 
@@ -159,7 +238,7 @@ END;
 
 CREATE PROC getLatestProductsAdded
 AS BEGIN
-    SELECT TOP 5 products.id,
+    SELECT TOP 7 products.id,
            images.url,
            products.name,
            products.price,
@@ -188,12 +267,40 @@ AS BEGIN
 END;
 
 
+CREATE PROC createOrderTest(@email VARCHAR(100), @description VARCHAR(100), @created DATE)
+AS BEGIN
+    DECLARE @identity INT;
+    INSERT INTO orders (email  ,description, create_at)
+        VALUES (@email ,@description, @created );
+
+    SET @identity = SCOPE_IDENTITY();
+
+    SELECT * from orders WHERE id = @identity;
+END;
+
+
 CREATE PROC createOrderDetails(@product_id INT, @quantity SMALLINT, @order_id INT)
 AS BEGIN
     INSERT INTO order_product (quantity,order_id,product_id)
         VALUES (@quantity,@order_id,@product_id);
 
-    SELECT SCOPE_IDENTITY();
+    SELECT orders.id,
+           		orders.email,
+           		SUM( order_product.quantity * products.price ) AS total,
+           		orders.create_at,
+           		orders.update_at,
+           		orders.description,
+           		orders.delete_at
+           		FROM orders JOIN order_product ON orders.id = order_product.order_id
+           					JOIN products ON products.id = order_product.product_id
+           					WHERE orders.delete_at IS NULL AND orders.id = @order_id
+           					GROUP BY orders.id,
+           							 orders.email,
+           							 orders.description,
+           							 orders.create_at,
+           							 orders.update_at,
+           							 orders.delete_at
+           				    ORDER BY orders.id ASC
 
 END;
 
@@ -232,23 +339,23 @@ END;
 CREATE PROC filterOrdersByDate( @date VARCHAR(30) )
 AS BEGIN
      SELECT orders.id,
-           		orders.email,
-           		SUM( order_product.quantity * products.price ) AS total,
-           		orders.create_at,
-           		orders.update_at,
-           		orders.description,
-           		orders.delete_at
-           		FROM orders JOIN order_product ON orders.id = order_product.order_id
-           					JOIN products ON products.id = order_product.product_id
-           					WHERE orders.delete_at IS NULL AND
-           					orders.create_at BETWEEN @date AND GETDATE()
-           					GROUP BY orders.id,
-           							 orders.email,
-           							 orders.description,
-           							 orders.create_at,
-           							 orders.update_at,
-           							 orders.delete_at
-           				    ORDER BY orders.id ASC;
+                		orders.email,
+                		SUM( order_product.quantity * products.price ) AS total,
+                		orders.create_at,
+                		orders.update_at,
+                		orders.description,
+                		orders.delete_at
+                		FROM orders JOIN order_product ON orders.id = order_product.order_id
+                					JOIN products ON products.id = order_product.product_id
+                					WHERE orders.delete_at IS NULL AND
+                					orders.create_at BETWEEN @date AND GETDATE()
+                					GROUP BY orders.id,
+                							 orders.email,
+                							 orders.description,
+                							 orders.create_at,
+                							 orders.update_at,
+                							 orders.delete_at
+                				    ORDER BY orders.create_at ASC;
 END;
 
 /**PURCHASES**/

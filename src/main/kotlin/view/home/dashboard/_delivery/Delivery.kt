@@ -46,6 +46,7 @@ class Delivery : View() {
         initializeComboBoxOrderBy()
         initializeComboBoxFilterBy()
         initializeMasonryLayoutToProducts()
+
     }
 
     /**

@@ -41,6 +41,7 @@ class SqlServer : IDataBase {
     }
 
     override fun execStoreProcedure(storeProcedure: String, params: Array<Any?>) : ResultSet {
+        try {
             val procedure: CallableStatement = this.getConnection().prepareCall( storeProcedure )
 
             for ( (index,param) in params.withIndex() ){
@@ -52,7 +53,10 @@ class SqlServer : IDataBase {
                     is Boolean -> procedure.setBoolean(index+1 , param )
                 }
             }
-            return procedure.executeQuery()
+                return procedure.executeQuery()
+            }catch (e:Error){
+                throw Error("Error: UNIQUE ")
+            }
     }
 
     override fun execStoreProcedure(storeProcedure: String): ResultSet {

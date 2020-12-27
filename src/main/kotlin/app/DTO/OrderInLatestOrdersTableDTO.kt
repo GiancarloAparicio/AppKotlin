@@ -4,6 +4,7 @@ import app.events.DeleteOrderEvent
 import app.events.interfaces.IObserver
 import app.events.types.EventsTypes
 import com.jfoenix.controls.JFXButton
+import javafx.geometry.Pos
 import javafx.scene.Cursor
 import javafx.scene.layout.HBox
 import tornadofx.action
@@ -72,6 +73,7 @@ class OrderInLatestOrdersTableDTO (
         actions.add( createButtonDelete() )
         actions.add( createButtonUpdate() )
         actions.spacing = 5.0
+        actions.alignment = Pos.CENTER
     }
 
 

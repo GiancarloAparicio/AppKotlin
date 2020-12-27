@@ -11,7 +11,6 @@ class Auth {
         var dataBase = Database.getInstance()
 
         fun verifyAndReturnUser( email: String, password:String) : User?{
-            //TODO: Refactor the code into a DAO class
             val storeProcedure="{CALL loginUser(?,?)}"
 
             val params : Array<Any?> = arrayOf( email, encrypt(password) )
