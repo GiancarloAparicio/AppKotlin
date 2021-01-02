@@ -3,17 +3,17 @@ package app.database.factories
 
 fun main(){
 
-    //Create 25 products
+    //Create 50 products
     var productFactory = ProductFactory()
     productFactory.create( 50 )
 
-    //Create 20 users
+    //Create 40 users
     var userFactory = UserFactory()
     userFactory.create( 40 )
 
-    //Create 3000 orders
+    //Create 6000 orders
     var orderFactory = OrderFactory()
-    orderFactory.create( 3000 )
+    orderFactory.create( 6000 )
     orderFactory.assignOrderDetails()
 
 }

@@ -73,7 +73,7 @@ class Delivery : View() {
     fun changeComboBoxOrderBy(){
         var sort = comboBoxOrderBy.selectedItem.toString()
         sortProductsEvent.throwEvent( EventsTypes.SORT_PRODUCTS, sort )
-        masonryProductsLayout.orderComponentsBy( sort  )
+        masonryProductsLayout.orderComponentsBy( sort )
     }
 
     fun addProductToList( product : Product){

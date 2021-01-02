@@ -1,0 +1,14 @@
+version: '3'
+services:
+    database:
+        container_name: sql-server-kotlin
+        image: mcr.microsoft.com/mssql/server:2017-latest 
+        volumes:
+            - $PWD/docs/sql:/var/opt/mssql
+        environment:
+            ACCEPT_EULA: Y 
+            SA_PASSWORD: 123456789segura 
+            MSSQL_PID: Express
+        ports:
+            - '9999:1433'
+        restart: unless-stopped

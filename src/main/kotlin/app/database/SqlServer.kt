@@ -8,7 +8,7 @@ import java.time.LocalDate
 
 class SqlServer : IDataBase {
     override val host : String = "localhost"
-    override val port : Int = 1433
+    override val port : Int = 9999
     override val database : String = "cake_delivery"
     override val user : String = "SA"
     override val password : String = "123456789segura"
