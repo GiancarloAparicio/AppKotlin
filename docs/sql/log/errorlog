@@ -53,3 +53,12 @@
 2021-01-02 04:38:18.84 spid52      Starting up database 'cake_delivery'.
 2021-01-02 04:38:19.12 spid52      Parallel redo is started for database 'cake_delivery' with worker pool size [2].
 2021-01-02 04:38:19.18 spid52      Parallel redo is shutdown for database 'cake_delivery' with worker pool size [2].
+2021-01-02 05:33:27.76 spid52      Starting up database 'cake_delivery'.
+2021-01-02 05:33:28.06 spid52      Parallel redo is started for database 'cake_delivery' with worker pool size [2].
+2021-01-02 05:33:28.13 spid52      Parallel redo is shutdown for database 'cake_delivery' with worker pool size [2].
+2021-01-02 05:34:40.99 spid52      Starting up database 'cake_delivery'.
+2021-01-02 05:34:41.29 spid52      Parallel redo is started for database 'cake_delivery' with worker pool size [2].
+2021-01-02 05:34:41.35 spid52      Parallel redo is shutdown for database 'cake_delivery' with worker pool size [2].
+2021-01-02 05:57:19.95 spid52      Starting up database 'cake_delivery'.
+2021-01-02 05:57:20.37 spid52      Parallel redo is started for database 'cake_delivery' with worker pool size [2].
+2021-01-02 05:57:20.44 spid52      Parallel redo is shutdown for database 'cake_delivery' with worker pool size [2].

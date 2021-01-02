@@ -16,7 +16,7 @@ class ProductFactory : Factory() {
                var productName = faker.food().dish()
                var price : Double = faker.commerce().price().toDouble()
                var category : Int= faker.number().numberBetween( 1 ,5 )
-               var lot : Int = faker.number().numberBetween( 1 ,4 )
+               var lot : Int = faker.number().numberBetween( 1 ,2 )
 
 
                var storeProcedure = "{CALL createProduct(?,?,?,?)}"
