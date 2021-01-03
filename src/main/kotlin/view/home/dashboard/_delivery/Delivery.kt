@@ -54,7 +54,7 @@ class Delivery : View() {
      */
 
     fun generateOrder(){
-        var existsSelectedItems : Boolean = 0 < productListForOrder.size
+        val existsSelectedItems : Boolean = 0 < productListForOrder.size
 
         if( existsSelectedItems ){
             changeSceneToConfirmOrder()
@@ -65,25 +65,25 @@ class Delivery : View() {
     }
 
     fun changeComboBoxFilterBy(){
-        var category = comboBoxFilterBy.selectedItem.toString()
-        //masonryProductsLayout.filterComponentsBy( category as String )
+        val category = comboBoxFilterBy.selectedItem.toString()
         filterProductsEvent.throwEvent( EventsTypes.FILTER_PRODUCTS, category )
     }
 
     fun changeComboBoxOrderBy(){
-        var sort = comboBoxOrderBy.selectedItem.toString()
+        val sort = comboBoxOrderBy.selectedItem.toString()
+
         sortProductsEvent.throwEvent( EventsTypes.SORT_PRODUCTS, sort )
-        masonryProductsLayout.orderComponentsBy( sort )
+        masonryProductsLayout.sortComponentsBy( sort )
     }
 
     fun addProductToList( product : Product){
-        var productDTO = ProductInOrderTableDTO( index ,product.name, 1, product.price)
+        val productDTO = ProductInOrderTableDTO( index ,product.name, 1, product.price)
         productListForOrder.add( productDTO )
         index++
     }
 
     fun removeProductToList( product : Product ){
-        var index = getItemIndexToDelete( product.name )
+        val index = getItemIndexToDelete( product.name )
         productListForOrder.removeAt( index )
     }
 

@@ -21,7 +21,7 @@ class MasonryProductsList : Fragment() {
      * Functions GUI
      */
 
-    fun orderComponentsBy( category : String){
+    fun sortComponentsBy(category : String){
 
         var orderedList = sortListToProductsBy( category )
 

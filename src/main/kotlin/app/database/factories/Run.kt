@@ -13,7 +13,7 @@ fun main(){
 
     //Create 6000 orders
     var orderFactory = OrderFactory()
-    orderFactory.create( 6000 )
+    orderFactory.create( 5024 )
     orderFactory.assignOrderDetails()
 
 }

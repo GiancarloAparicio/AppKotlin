@@ -6,7 +6,7 @@ import java.sql.ResultSet
 
 class ProductFactory : Factory() {
 
-    override fun create(quantity : Int ): Any {
+    override fun create( quantity : Int ): Any {
 
         var listProducts = mutableListOf<Product>()
 

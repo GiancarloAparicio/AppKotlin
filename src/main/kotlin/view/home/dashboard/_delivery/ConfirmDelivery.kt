@@ -45,10 +45,10 @@ class ConfirmDelivery : View(), IObserver {
     */
 
     fun updatedProduct(){
-        var quantityIsCorrect = validateQuantity()
+        val quantityIsCorrect = validateQuantity()
 
         if(quantityIsCorrect){
-            var quantity = inputQuantity.text.toInt()
+            val quantity = inputQuantity.text.toInt()
             tableOrderWithoutPay.root?.selectionModel?.selectedItem?.quantity = quantity
 
             restartTableOrderWithoutPay()
@@ -57,15 +57,14 @@ class ConfirmDelivery : View(), IObserver {
     }
 
     fun generateOrder(){
-        var productListSize = tableOrderWithoutPay.length()
+        val productListSize = tableOrderWithoutPay.length()
 
         if( 0 < productListSize){
-
             val order = Order.createNewInstance()
             val listProducts = tableOrderWithoutPay.getList()
 
             for ( product in listProducts){
-                order.addProductToOrder( product )
+                order.addProduct( product )
                 order._total += product.subTotal
             }
 
@@ -74,7 +73,6 @@ class ConfirmDelivery : View(), IObserver {
         }else{
             println("Order empty")
         }
-
 
     }
 

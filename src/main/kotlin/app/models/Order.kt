@@ -53,7 +53,7 @@ class Order( data : ResultSet, isNewOrder : Boolean = false) {
         }
     }
 
-    fun addProductToOrder(item : ProductInOrderTableDTO) : Boolean{
+    fun addProduct(item : ProductInOrderTableDTO) : Boolean{
         val nameProduct : String? = item.product
         val product : Product? = ProductDAO.getProduct( if( nameProduct is String ) nameProduct else "" )
 

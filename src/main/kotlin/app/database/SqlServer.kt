@@ -3,7 +3,6 @@ package app.database
 import app.database.abstract.IDataBase
 import com.microsoft.sqlserver.jdbc.SQLServerDriver;
 import java.sql.*
-import java.time.LocalDate
 
 
 class SqlServer : IDataBase {
@@ -63,5 +62,4 @@ class SqlServer : IDataBase {
             val procedure: CallableStatement = this.getConnection().prepareCall(storeProcedure)
             return procedure.executeQuery()
     }
-
 }

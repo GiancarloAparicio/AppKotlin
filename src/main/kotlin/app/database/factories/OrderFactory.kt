@@ -59,7 +59,7 @@ class OrderFactory : Factory() {
         var newListOrder = mutableListOf<Order>()
 
         for ( order in listOrder ){
-            var indexProduct : Int= faker.number().numberBetween( 1, 42 )
+            var indexProduct : Int= faker.number().numberBetween( 1, listProduct.size )
 
             var product : Product = listProduct.get( indexProduct )
             var quantity : Int= faker.number().numberBetween( 1, 10 )
